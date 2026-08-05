@@ -394,3 +394,117 @@ deckB.currentTime=0;
 
 
 console.log("IMAN DJ EFFECT ENGINE READY");
+// =================================
+// IMAN DJ EFFECTS ENGINE
+// FILTER + ECHO + REVERB
+// =================================
+
+
+let effectContext;
+
+let effectSourceA;
+
+let effectFilterA;
+
+let effectDelayA;
+
+
+
+
+function initDJEffects(){
+
+
+if(effectContext)
+return;
+
+
+effectContext =
+new AudioContext();
+
+
+
+effectSourceA =
+effectContext.createMediaElementSource(deckA);
+
+
+
+effectFilterA =
+effectContext.createBiquadFilter();
+
+
+
+effectFilterA.type="lowpass";
+
+effectFilterA.frequency.value=20000;
+
+
+
+effectDelayA =
+effectContext.createDelay();
+
+
+
+effectDelayA.delayTime.value=0.25;
+
+
+
+effectSourceA
+.connect(effectFilterA)
+.connect(effectDelayA)
+.connect(effectContext.destination);
+
+
+
+}
+
+
+
+
+// FILTER CONTROL
+
+function setFilter(value){
+
+if(!effectFilterA)
+return;
+
+
+effectFilterA.frequency.value=value;
+
+
+}
+
+
+
+
+// ECHO CONTROL
+
+function setEcho(value){
+
+if(!effectDelayA)
+return;
+
+
+effectDelayA.delayTime.value=value;
+
+
+}
+
+
+
+
+// EFFECT START
+
+function enableEffects(){
+
+initDJEffects();
+
+
+effectContext.resume();
+
+
+console.log(
+"DJ EFFECTS ACTIVE"
+);
+
+
+}
