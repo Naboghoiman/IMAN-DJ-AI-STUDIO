@@ -1,25 +1,30 @@
-/* =================================
+/* =====================================
 IMAN DJ AI STUDIO
-RCF STYLE INTERFACE
-================================= */
+RCF INSPIRED PROFESSIONAL INTERFACE
+===================================== */
 
 
 *{
 box-sizing:border-box;
-font-family:Arial, sans-serif;
+font-family:Arial, Helvetica, sans-serif;
 }
-
 
 
 body{
 
 margin:0;
 
-background:#080808;
+background:
+linear-gradient(
+135deg,
+#050505,
+#151515
+);
 
-color:white;
+color:#eee;
 
 }
+
 
 
 
@@ -27,20 +32,21 @@ header{
 
 text-align:center;
 
-padding:20px;
+padding:25px;
 
-background:#111;
+background:#090909;
 
 border-bottom:2px solid #333;
 
 }
 
 
+
 header h1{
 
-margin:0;
-
 font-size:32px;
+
+letter-spacing:2px;
 
 }
 
@@ -56,21 +62,21 @@ color:#aaa;
 
 
 
+/* TOP CONTROL BAR */
 
-/* TOP MENU */
 
-
-.top-menu{
+.top-menu,
+nav{
 
 display:flex;
 
-gap:10px;
+justify-content:center;
+
+gap:12px;
 
 padding:15px;
 
-background:#151515;
-
-justify-content:center;
+background:#111;
 
 flex-wrap:wrap;
 
@@ -80,17 +86,17 @@ flex-wrap:wrap;
 
 button{
 
-background:#222;
+background:#202020;
 
 color:white;
 
 border:1px solid #555;
 
-padding:10px 18px;
+border-radius:8px;
 
-border-radius:5px;
+padding:12px 20px;
 
-cursor:pointer;
+font-weight:bold;
 
 }
 
@@ -98,29 +104,30 @@ cursor:pointer;
 
 button:hover{
 
-background:#444;
+background:#333;
 
 }
 
 
 
 
-
-
-/* PANELS */
+/* MAIN PANELS */
 
 
 .panel{
 
-background:#121212;
+background:#101010;
 
 margin:15px;
 
 padding:20px;
 
-border-radius:10px;
+border-radius:15px;
 
 border:1px solid #333;
+
+box-shadow:
+0 0 15px #000;
 
 }
 
@@ -139,6 +146,8 @@ gap:20px;
 
 justify-content:center;
 
+align-items:center;
+
 flex-wrap:wrap;
 
 }
@@ -147,15 +156,20 @@ flex-wrap:wrap;
 
 .deck{
 
-width:320px;
+background:
+linear-gradient(
+145deg,
+#181818,
+#090909
+);
 
-background:#181818;
+border:2px solid #333;
+
+border-radius:20px;
 
 padding:20px;
 
-border-radius:12px;
-
-border:1px solid #444;
+width:340px;
 
 text-align:center;
 
@@ -171,39 +185,26 @@ text-align:center;
 
 .jog{
 
-width:170px;
+width:190px;
 
-height:170px;
+height:190px;
 
 margin:20px auto;
 
 border-radius:50%;
 
+
 background:
 
-radial-gradient(circle,#555 0,#111 35%,#000 70%);
-
-border:8px solid #333;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-}
+radial-gradient(
+circle,
+#777 0%,
+#222 35%,
+#000 70%
+);
 
 
-
-.jog-center{
-
-width:50px;
-
-height:50px;
-
-border-radius:50%;
-
-background:#222;
+border:10px solid #333;
 
 display:flex;
 
@@ -211,7 +212,40 @@ align-items:center;
 
 justify-content:center;
 
-font-size:20px;
+
+font-size:30px;
+
+font-weight:bold;
+
+box-shadow:
+0 0 20px #000;
+
+}
+
+
+
+
+.spin{
+
+animation:
+rotate 2s linear infinite;
+
+}
+
+
+@keyframes rotate{
+
+from{
+
+transform:rotate(0deg);
+
+}
+
+to{
+
+transform:rotate(360deg);
+
+}
 
 }
 
@@ -219,19 +253,18 @@ font-size:20px;
 
 
 
-
-/* WAVEFORM */
+/* WAVEFORM AREA */
 
 
 .waveform{
 
-height:60px;
+height:80px;
 
-background:#050505;
+background:#000;
 
-border:1px solid #333;
+border-radius:8px;
 
-margin:15px 0;
+border:1px solid #444;
 
 display:flex;
 
@@ -239,11 +272,11 @@ align-items:center;
 
 justify-content:center;
 
-color:#0f0;
+color:#00ff88;
+
+margin:15px 0;
 
 }
-
-
 
 
 
@@ -252,11 +285,14 @@ color:#0f0;
 /* SLIDERS */
 
 
-input[type="range"]{
+input[type=range]{
+
 
 width:90%;
 
-margin:10px;
+
+accent-color:#00ff88;
+
 
 }
 
@@ -271,11 +307,21 @@ margin:10px;
 
 .mixer{
 
-background:#101010;
+background:#080808;
 
-padding:20px;
+padding:25px;
 
-border-radius:10px;
+border-radius:15px;
+
+border:2px solid #333;
+
+min-width:280px;
+
+}
+
+
+
+.mixer h2{
 
 text-align:center;
 
@@ -284,34 +330,28 @@ text-align:center;
 
 
 
+/* EFFECT RACK */
 
 
-/* EFFECTS */
+.effect-unit{
 
+background:#151515;
 
-.effects{
+border:1px solid #444;
 
-display:flex;
+border-radius:12px;
 
-flex-wrap:wrap;
+padding:18px;
 
-gap:15px;
+margin:15px;
 
 }
 
 
 
-.effect-unit{
+.effect-unit h3{
 
-background:#181818;
-
-padding:15px;
-
-border-radius:8px;
-
-border:1px solid #333;
-
-width:220px;
+color:#00ff88;
 
 }
 
@@ -326,13 +366,14 @@ width:220px;
 
 display:flex;
 
-gap:10px;
+justify-content:center;
 
-align-items:center;
+gap:12px;
 
 height:180px;
 
 }
+
 
 
 .eq-container input{
@@ -351,20 +392,22 @@ transform:rotate(180deg);
 
 
 
-/* METER */
+/* OUTPUT METER */
 
 
 .meter{
 
 height:200px;
 
-width:40px;
+width:50px;
 
 background:#222;
 
 margin:auto;
 
-position:relative;
+border-radius:10px;
+
+overflow:hidden;
 
 }
 
@@ -372,20 +415,17 @@ position:relative;
 
 .level{
 
-position:absolute;
+height:50%;
 
-bottom:0;
-
-width:100%;
-
-height:40%;
-
-background:#0f0;
+background:#00ff66;
 
 }
 
 
 
+
+
+/* MOBILE */
 
 
 @media(max-width:700px){
@@ -396,71 +436,12 @@ width:95%;
 
 }
 
-}
-/* DJ JOG SPIN */
 
-.spin{
-animation: spinWheel 2s linear infinite;
-}
+.jog{
 
+width:160px;
 
-@keyframes spinWheel{
-
-from{
-transform:rotate(0deg);
-}
-
-to{
-transform:rotate(360deg);
-}
-
-}/* =========================
-   WAVEFORM ANIMATION
-========================= */
-
-
-.waveform{
-
-height:80px;
-
-background:#000;
-
-border:1px solid #333;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-color:#00ff66;
-
-overflow:hidden;
-
-}
-
-
-
-.waveform.playing{
-
-animation:pulseWave 0.8s infinite alternate;
-
-}
-
-
-
-@keyframes pulseWave{
-
-from{
-
-box-shadow:0 0 5px #00ff66;
-
-}
-
-
-to{
-
-box-shadow:0 0 25px #00ff66;
+height:160px;
 
 }
 
