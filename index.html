@@ -2,95 +2,10 @@
 <html>
 <head>
 <title>IMAN DJ AI STUDIO</title>
-    <link rel="stylesheet" href="style.css">
 
-<style>
-body{
-    margin:0;
-    background:#080808;
-    color:white;
-    font-family:Arial, sans-serif;
-}
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-header{
-    text-align:center;
-    padding:20px;
-    font-size:30px;
-    font-weight:bold;
-}
-
-.container{
-    padding:20px;
-}
-
-.decks{
-    display:flex;
-    gap:20px;
-    justify-content:center;
-    flex-wrap:wrap;
-}
-
-.deck{
-    background:#181818;
-    border-radius:15px;
-    padding:20px;
-    width:350px;
-    box-shadow:0 0 15px #000;
-}
-
-h2{
-    text-align:center;
-}
-
-.screen{
-    height:120px;
-    background:#000;
-    border:2px solid #333;
-    border-radius:10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#00ff99;
-    font-size:20px;
-}
-
-button{
-    background:#00aa66;
-    border:none;
-    color:white;
-    padding:12px;
-    margin:5px;
-    border-radius:8px;
-}
-
-.slider{
-    width:100%;
-}
-
-.mixer{
-    margin-top:30px;
-    background:#151515;
-    padding:20px;
-    border-radius:15px;
-}
-
-.eq{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-}
-
-.eq input{
-    height:150px;
-    writing-mode:bt-lr;
-    transform:rotate(-90deg);
-}
-
-.channel{
-    margin:20px;
-}
-
-</style>
+<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -101,86 +16,164 @@ button{
 </header>
 
 
-<div class="container">
+<div class="top-menu">
+
+<button>FADERS</button>
+<button>EFFECTS</button>
+<button>EQUALIZER</button>
+<button>SETTINGS</button>
+
+</div>
 
 
-<div class="decks">
+<div class="main-container">
 
+
+<!-- DECK A -->
 
 <div class="deck">
 
 <h2>DECK A</h2>
 
-<div class="screen">
+<div class="display">
+
 TRACK A
-</div>
-
-<input type="file">
-
-<br>
-
-<button>▶ PLAY</button>
-<button>⏸ PAUSE</button>
-
-<p>Volume</p>
-<input class="slider" type="range">
-
-
-<p>Key Control</p>
-<input class="slider" type="range">
 
 </div>
 
+
+<input type="file" id="fileA" accept="audio/*" onchange="loadTrackA(event)">
+
+
+<div class="controls">
+
+<button onclick="playA()">▶ PLAY</button>
+<button onclick="pauseA()">⏸ PAUSE</button>
+
+</div>
+
+
+<h3>BPM</h3>
+<div id="bpmA">128</div>
+
+
+<h3>KEY</h3>
+
+<input 
+type="range" 
+min="-12" 
+max="12" 
+value="0"
+oninput="keyA(this.value)">
+
+
+<h3>VOLUME</h3>
+
+<input 
+type="range"
+min="0"
+max="1"
+step="0.01"
+value="1"
+oninput="volumeA(this.value)">
+
+
+</div>
+
+
+
+<!-- DECK B -->
 
 
 <div class="deck">
 
 <h2>DECK B</h2>
 
-<div class="screen">
+
+<div class="display">
+
 TRACK B
-</div>
-
-<input type="file">
-
-<br>
-
-<button>▶ PLAY</button>
-<button>⏸ PAUSE</button>
-
-<p>Volume</p>
-<input class="slider" type="range">
-
-
-<p>Key Control</p>
-<input class="slider" type="range">
 
 </div>
 
 
+<input type="file" id="fileB" accept="audio/*" onchange="loadTrackB(event)">
+
+
+<div class="controls">
+
+<button onclick="playB()">▶ PLAY</button>
+<button onclick="pauseB()">⏸ PAUSE</button>
+
 </div>
 
 
+<h3>BPM</h3>
+<div id="bpmB">128</div>
+
+
+<h3>KEY</h3>
+
+<input 
+type="range"
+min="-12"
+max="12"
+value="0"
+oninput="keyB(this.value)">
+
+
+<h3>VOLUME</h3>
+
+<input 
+type="range"
+min="0"
+max="1"
+step="0.01"
+value="1"
+oninput="volumeB(this.value)">
+
+
+</div>
+    <!-- MASTER MIXER -->
 
 <div class="mixer">
 
 <h2>MASTER MIXER</h2>
 
 
-<p>Crossfader</p>
-<input class="slider" type="range">
+<h3>CROSSFADER</h3>
+
+<input 
+class="cross"
+type="range"
+min="0"
+max="1"
+step="0.01"
+value="0.5"
+oninput="crossfade(this.value)">
 
 
-<h2>Equalizer</h2>
+<div class="master-controls">
 
 
-<div class="eq">
+<div>
+<h3>MASTER VOLUME</h3>
 
-<input type="range" min="-12" max="12">
-<input type="range" min="-12" max="12">
-<input type="range" min="-12" max="12">
-<input type="range" min="-12" max="12">
-<input type="range" min="-12" max="12">
+<input 
+type="range"
+min="0"
+max="1"
+step="0.01"
+value="1">
+</div>
+
+
+<div>
+<h3>SYNC</h3>
+
+<button onclick="syncDecks()">
+SYNC
+</button>
 
 </div>
 
@@ -188,7 +181,84 @@ TRACK B
 </div>
 
 
+
+<!-- 31 BAND EQUALIZER -->
+
+<h2>GRAPHIC EQUALIZER</h2>
+
+
+<div class="equalizer">
+
+
+<div>
+<label>20</label>
+<input type="range" min="-12" max="12">
 </div>
+
+
+<div>
+<label>50</label>
+<input type="range" min="-12" max="12">
+</div>
+
+
+<div>
+<label>100</label>
+<input type="range" min="-12" max="12">
+</div>
+
+
+<div>
+<label>250</label>
+<input type="range" min="-12" max="12">
+</div>
+
+
+<div>
+<label>500</label>
+<input type="range" min="-12" max="12">
+</div>
+
+
+<div>
+<label>1K</label>
+<input type="range" min="-12" max="12">
+</div>
+
+
+<div>
+<label>2K</label>
+<input type="range" min="-12" max="12">
+</div>
+
+
+<div>
+<label>5K</label>
+<input type="range" min="-12" max="12">
+</div>
+
+
+<div>
+<label>10K</label>
+<input type="range" min="-12" max="12">
+</div>
+
+
+<div>
+<label>20K</label>
+<input type="range" min="-12" max="12">
+</div>
+
+
+</div>
+
+
+</div>
+
+
 <script src="app.js"></script>
+
+
 </body>
-</html>
+
+    </html>
