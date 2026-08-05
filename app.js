@@ -1,189 +1,182 @@
-// IMAN DJ AI STUDIO
-// Audio Engine
+// IMAN DJ AI STUDIO ENGINE
 
-let deckA = new Audio();
-let deckB = new Audio();
+let audioA = new Audio();
+let audioB = new Audio();
 
-let gainA = 1;
-let gainB = 1;
-
-let cross = 0.5;
-let master = 1;
+let masterVolume = 1;
+let volumeA = 1;
+let volumeB = 1;
+let crossFade = 0.5;
 
 
-// =======================
-// LOAD TRACKS
-// =======================
+// LOAD TRACK A
 
-function loadDeck(input, deck){
+function loadTrackA(event){
 
-    let file = input.files[0];
+let file = event.target.files[0];
 
-    if(!file) return;
+if(file){
 
-    let url = URL.createObjectURL(file);
+audioA.src = URL.createObjectURL(file);
 
-    if(deck === "A"){
+document.querySelector(".trackA").innerHTML =
+file.name;
 
-        deckA.src = url;
-
-        document.querySelector(".trackA").innerHTML =
-        file.name;
-
-    }
-
-
-    if(deck === "B"){
-
-        deckB.src = url;
-
-        document.querySelector(".trackB").innerHTML =
-        file.name;
-
-    }
+}
 
 }
 
 
 
-// =======================
-// PLAY CONTROLS
-// =======================
+// LOAD TRACK B
 
+function loadTrackB(event){
+
+let file = event.target.files[0];
+
+if(file){
+
+audioB.src = URL.createObjectURL(file);
+
+document.querySelector(".trackB").innerHTML =
+file.name;
+
+}
+
+}
+
+
+
+// PLAY
 
 function playA(){
 
-    deckA.play();
+audioA.play();
 
 }
-
-
-function pauseA(){
-
-    deckA.pause();
-
-}
-
-
-function stopA(){
-
-    deckA.pause();
-    deckA.currentTime = 0;
-
-}
-
 
 
 function playB(){
 
-    deckB.play();
+audioB.play();
+
+}
+
+
+
+// PAUSE
+
+function pauseA(){
+
+audioA.pause();
 
 }
 
 
 function pauseB(){
 
-    deckB.pause();
+audioB.pause();
+
+}
+
+
+
+// STOP
+
+function stopA(){
+
+audioA.pause();
+
+audioA.currentTime=0;
 
 }
 
 
 function stopB(){
 
-    deckB.pause();
-    deckB.currentTime = 0;
+audioB.pause();
+
+audioB.currentTime=0;
+
+}
+
+
+
+// VOLUME CONTROL
+
+function setVolumeA(value){
+
+volumeA=value;
+
+updateMix();
+
+}
+
+
+
+function setVolumeB(value){
+
+volumeB=value;
+
+updateMix();
 
 }
 
 
 
 
-// =======================
-// VOLUME
-// =======================
-
-
-function volumeA(value){
-
-    gainA=value;
-
-    deckA.volume =
-    gainA * (1-cross) * master;
-
-}
-
-
-
-function volumeB(value){
-
-    gainB=value;
-
-    deckB.volume =
-    gainB * cross * master;
-
-}
-
-
-
-
-
-// =======================
 // CROSS FADER
-// =======================
 
+function setCross(value){
 
-function crossFader(value){
+crossFade=value;
 
-    cross=value;
-
-
-    deckA.volume =
-    gainA * (1-cross) * master;
-
-
-    deckB.volume =
-    gainB * cross * master;
-
+updateMix();
 
 }
 
 
 
 
-
-
-// =======================
 // MASTER
-// =======================
 
+function setMaster(value){
 
-function masterVolume(value){
+masterVolume=value;
 
-    master=value;
-
-    deckA.volume =
-    gainA * (1-cross) * master;
-
-
-    deckB.volume =
-    gainB * cross * master;
+updateMix();
 
 }
 
 
 
 
+function updateMix(){
+
+audioA.volume =
+volumeA *
+(1-crossFade)
+*
+masterVolume;
+
+
+audioB.volume =
+volumeB *
+crossFade
+*
+masterVolume;
+
+
+}
 
 
 
-// =======================
-// PITCH CONTROL
-// =======================
 
+// PITCH
 
 function pitchA(value){
 
-    deckA.playbackRate=value;
+audioA.playbackRate=value;
 
 }
 
@@ -191,100 +184,35 @@ function pitchA(value){
 
 function pitchB(value){
 
-    deckB.playbackRate=value;
+audioB.playbackRate=value;
 
 }
 
 
 
 
-
-
-// =======================
-// EFFECTS
-// =======================
-
-
-let effects={
-
-reverb:false,
-
-delay:false,
-
-warmer:false,
-
-xciter:false,
-
-max:false
-
-};
-
-
-
-
-function toggleEffect(name){
-
-
-effects[name]=!effects[name];
-
-
-console.log(
-name,
-effects[name]
-);
-
-
-}
-
-
-
-
-
-
-// =======================
-// MASTER METER
-// =======================
-
+// LEVEL METER
 
 setInterval(()=>{
 
-
-let meter =
-document.querySelector(".level");
-
-
-if(meter){
-
-let height =
-Math.random()*80+20;
+let bars =
+document.querySelectorAll(".level");
 
 
-meter.style.height =
-height+"%";
+bars.forEach(bar=>{
 
-}
-
-
-},200);
+bar.style.height =
+(20 + Math.random()*70)+"%";
 
 
+});
 
 
+},150);
 
 
-
-// =======================
-// BUTTON CONNECTIONS
-// =======================
-
-
-
-window.onload=function(){
 
 
 console.log(
 "IMAN DJ AI STUDIO READY"
 );
-
-
-}
