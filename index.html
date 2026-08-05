@@ -19,11 +19,9 @@
 
 <h1>🎧 IMAN DJ AI STUDIO</h1>
 
-<p>AI POWERED RCF STYLE DIGITAL MIXER</p>
+<p>AI POWERED DJ SYSTEM</p>
 
 </header>
-
-
 
 
 
@@ -49,28 +47,14 @@ METERS
 SETTINGS
 </button>
 
-
 </nav>
 
 
 
 
-
-
-
-<main>
-
-
-
-
-<!-- AI CONTROL PANEL -->
-
-
 <section class="panel">
 
-
 <h2>AI DJ CONTROL</h2>
-
 
 <button onclick="AI_MIX()">
 🤖 AI MIX
@@ -94,11 +78,6 @@ AI READY
 
 
 
-
-
-<!-- DECK SYSTEM -->
-
-
 <section class="panel">
 
 
@@ -109,9 +88,6 @@ AI READY
 
 
 
-
-
-<!-- DECK A -->
 
 
 <div class="deck">
@@ -129,30 +105,24 @@ A
 </div>
 
 
+
 <div class="waveform">
-
 WAVEFORM A
-
 </div>
 
 
 
 <div id="trackA">
-
 NO TRACK
-
 </div>
 
 
 
-<input
+<input 
 type="file"
 accept="audio/*"
-onchange="loadTrackA(event)">
+onchange="loadTrackA(event);analyzeBPM(this.files[0],'bpmA')">
 
-
-
-<div class="audio-controls">
 
 
 <button onclick="playA()">
@@ -171,23 +141,6 @@ onchange="loadTrackA(event)">
 
 
 
-</div>
-
-
-
-
-
-<button>
-CUE
-</button>
-
-
-<button onclick="sync()">
-SYNC
-</button>
-
-
-
 <h3>
 BPM:
 <span id="bpmA">
@@ -197,37 +150,23 @@ BPM:
 
 
 
-<label>
-PITCH
-</label>
+<label>PITCH</label>
 
-
-<input
-type="range"
-min="0.5"
-max="1.5"
-step="0.01"
+<input type="range"
 oninput="pitchA(this.value)">
 
 
 
-<label>
-VOLUME
-</label>
+<label>VOLUME</label>
 
-
-<input
-type="range"
-min="0"
-max="1"
-step="0.01"
-value="1"
+<input type="range"
 oninput="volumeA(this.value)">
 
 
 
 </div>
 <!-- MIXER -->
+
 
 <div class="mixer">
 
@@ -297,34 +236,23 @@ B
 
 
 
-
 <div class="waveform">
-
 WAVEFORM B
-
 </div>
 
 
 
 <div id="trackB">
-
 NO TRACK
-
 </div>
 
 
 
-
-<input
+<input 
 type="file"
 accept="audio/*"
-onchange="loadTrackB(event)">
+onchange="loadTrackB(event);analyzeBPM(this.files[0],'bpmB')">
 
-
-
-
-
-<div class="audio-controls">
 
 
 <button onclick="playB()">
@@ -343,25 +271,6 @@ onchange="loadTrackB(event)">
 
 
 
-</div>
-
-
-
-
-
-<button>
-CUE
-</button>
-
-
-
-<button onclick="sync()">
-SYNC
-</button>
-
-
-
-
 
 <h3>
 BPM:
@@ -372,31 +281,16 @@ BPM:
 
 
 
-<label>
-PITCH
-</label>
+<label>PITCH</label>
 
-
-<input
-type="range"
-min="0.5"
-max="1.5"
-step="0.01"
+<input type="range"
 oninput="pitchB(this.value)">
 
 
 
-<label>
-VOLUME
-</label>
+<label>VOLUME</label>
 
-
-<input
-type="range"
-min="0"
-max="1"
-step="0.01"
-value="1"
+<input type="range"
 oninput="volumeB(this.value)">
 
 
@@ -437,16 +331,12 @@ HALL REVERB
 </h3>
 
 
-<label>
-DECAY
-</label>
+<label>DECAY</label>
 
 <input type="range">
 
 
-<label>
-SPACE
-</label>
+<label>SPACE</label>
 
 <input type="range">
 
@@ -457,7 +347,6 @@ ON
 
 
 </div>
-
 
 
 
@@ -470,16 +359,12 @@ DIGITAL DELAY
 </h3>
 
 
-<label>
-TIME
-</label>
+<label>TIME</label>
 
 <input type="range">
 
 
-<label>
-FEEDBACK
-</label>
+<label>FEEDBACK</label>
 
 <input type="range">
 
@@ -490,7 +375,6 @@ ON
 
 
 </div>
-
 
 
 
@@ -505,14 +389,13 @@ VALVE WARMER
 
 <input type="range">
 
-
 <button>
 ON
 </button>
 
 
-</div>
-<div class="effect-unit">
+  </div>
+  <div class="effect-unit">
 
 
 <h3>
@@ -562,7 +445,6 @@ ON
 
 
 
-
 <!-- GRAPHIC EQ -->
 
 
@@ -602,7 +484,6 @@ ON
 
 
 
-
 <!-- MASTER OUTPUT -->
 
 
@@ -616,19 +497,13 @@ MASTER OUTPUT
 
 <div class="meter">
 
-
 <div class="level"></div>
-
 
 </div>
 
 
-
 <input
 type="range"
-min="0"
-max="1"
-step="0.01"
 oninput="setMaster(this.value)">
 
 
@@ -640,11 +515,7 @@ oninput="setMaster(this.value)">
 
 
 
-</main>
-
-
-
-
+<script src="bpm_analyzer.js"></script>
 
 <script src="ai_dj.js"></script>
 
@@ -654,4 +525,4 @@ oninput="setMaster(this.value)">
 
 </body>
 
-</html>
+  </html>
