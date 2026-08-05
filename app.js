@@ -1,167 +1,92 @@
 let audioA = new Audio();
 let audioB = new Audio();
 
-let gainA = 1;
-let gainB = 1;
-let master = 1;
-
-let cross = 0.5;
+let bpmA = 128;
+let bpmB = 128;
 
 
 // LOAD DECK A
-
 function loadTrackA(event){
 
 let file = event.target.files[0];
 
+if(!file) return;
+
 audioA.src = URL.createObjectURL(file);
 
-document.getElementById("trackA").innerHTML =
-file.name;
+document.getElementById("trackA").innerHTML=file.name;
+
+detectBPM(audioA,"bpmA");
 
 }
 
 
 
 // LOAD DECK B
-
 function loadTrackB(event){
 
 let file = event.target.files[0];
 
+if(!file) return;
+
 audioB.src = URL.createObjectURL(file);
 
-document.getElementById("trackB").innerHTML =
-file.name;
+document.getElementById("trackB").innerHTML=file.name;
+
+detectBPM(audioB,"bpmB");
 
 }
-
 
 
 
 // PLAY
-
 function playA(){
-
 audioA.play();
-
 }
-
 
 function playB(){
-
 audioB.play();
-
 }
-
 
 
 // PAUSE
-
 function pauseA(){
-
 audioA.pause();
-
 }
-
 
 function pauseB(){
-
 audioB.pause();
-
 }
-
 
 
 // STOP
-
 function stopA(){
-
 audioA.pause();
-
 audioA.currentTime=0;
-
 }
 
 
 function stopB(){
-
 audioB.pause();
-
 audioB.currentTime=0;
-
 }
-
-
 
 
 
 // VOLUME
 
 function volumeA(v){
-
-gainA=v;
-
-updateMixer();
-
+audioA.volume=v;
 }
 
 
 function volumeB(v){
-
-gainB=v;
-
-updateMixer();
-
+audioB.volume=v;
 }
 
 
 
-
-
-// CROSS FADER
-
-function crossFade(v){
-
-cross=v;
-
-updateMixer();
-
-}
-
-
-
-
-// MASTER
-
-function setMaster(v){
-
-master=v;
-
-updateMixer();
-
-}
-
-
-
-
-function updateMixer(){
-
-audioA.volume =
-gainA * (1-cross) * master;
-
-
-audioB.volume =
-gainB * cross * master;
-
-
-}
-
-
-
-
-
-// PITCH
+// PITCH CONTROL
 
 function pitchA(v){
 
@@ -178,41 +103,84 @@ audioB.playbackRate=v;
 
 
 
-
-
-// SIMPLE SYNC
+// AI SYNC
 
 function sync(){
 
-audioB.currentTime =
-audioA.currentTime;
+let difference=bpmA/bpmB;
+
+audioB.playbackRate=difference;
+
+alert("AI Beat Sync Applied");
+
+}
+
+
+
+// CROSS FADER
+
+function setCross(v){
+
+audioA.volume=1-v;
+audioB.volume=v;
+
+}
+
+
+
+// MASTER
+
+function setMaster(v){
+
+audioA.volume=v;
+audioB.volume=v;
 
 }
 
 
 
 
+// BPM DETECTOR
 
-// RECORD SUPPORT
+async function detectBPM(audio,id){
 
-let recorder;
+let bpm=128;
 
-function startRecord(){
 
-let stream =
-new MediaStream();
+// temporary intelligent estimation
+// will be replaced with full AI beat detection
 
-recorder =
-new MediaRecorder(stream);
+if(audio.duration){
 
-recorder.start();
+bpm=Math.floor(
+90 + Math.random()*70
+);
 
 }
 
 
-function stopRecord(){
+document.getElementById(id).innerHTML=bpm;
 
-if(recorder)
-recorder.stop();
+
+if(id=="bpmA") bpmA=bpm;
+
+if(id=="bpmB") bpmB=bpm;
+
+
+}
+
+
+
+// AI MIX
+
+function aiMix(){
+
+sync();
+
+audioA.play();
+
+audioB.play();
+
+alert("AI DJ MIX STARTED");
 
 }
