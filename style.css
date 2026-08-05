@@ -1,7 +1,7 @@
-/* =====================================
+/* =================================
 IMAN DJ AI STUDIO
-RCF STYLE HARDWARE INTERFACE
-===================================== */
+RCF HARDWARE STYLE
+================================= */
 
 
 *{
@@ -10,35 +10,33 @@ font-family:Arial, sans-serif;
 }
 
 
-
 body{
 
 margin:0;
 
-background:#060606;
+background:#070707;
 
-color:#ddd;
+color:#eee;
 
 }
 
 
 
 
-.header{
+header{
 
-background:#101010;
-
-padding:25px;
+background:#111;
 
 text-align:center;
+
+padding:25px;
 
 border-bottom:2px solid #333;
 
 }
 
 
-
-.header h1{
+header h1{
 
 font-size:36px;
 
@@ -48,30 +46,33 @@ letter-spacing:3px;
 
 
 
-.header p{
+header p{
 
-color:#999;
+color:#aaa;
 
 }
 
 
 
 
-.tabs{
+
+
+
+nav{
 
 display:flex;
+
+flex-wrap:wrap;
 
 justify-content:center;
 
 gap:8px;
 
-flex-wrap:wrap;
+padding:15px;
 
-margin-top:20px;
+background:#151515;
 
 }
-
-
 
 
 
@@ -79,13 +80,13 @@ button{
 
 background:#222;
 
-color:#eee;
+color:white;
 
 border:1px solid #555;
 
-padding:10px 18px;
+border-radius:6px;
 
-border-radius:5px;
+padding:10px 18px;
 
 font-weight:bold;
 
@@ -93,10 +94,9 @@ font-weight:bold;
 
 
 
-
 button:hover{
 
-background:#555;
+background:#008cff;
 
 }
 
@@ -105,25 +105,29 @@ background:#555;
 
 
 
-/* RACK PANELS */
+/* RCF RACK PANELS */
 
 
-.rack,
-.rcf-rack{
-
-background:
-linear-gradient(#202020,#0b0b0b);
-
-border:2px solid #333;
-
-border-radius:12px;
+.panel{
 
 margin:20px;
 
 padding:25px;
 
+background:
+
+linear-gradient(
+145deg,
+#202020,
+#0a0a0a
+);
+
+border:2px solid #333;
+
+border-radius:15px;
+
 box-shadow:
-0 10px 30px #000;
+0 0 20px #000;
 
 }
 
@@ -148,14 +152,13 @@ flex-wrap:wrap;
 
 
 
-
 .deck{
 
 width:360px;
 
 background:#111;
 
-border:1px solid #444;
+border:2px solid #444;
 
 border-radius:15px;
 
@@ -168,11 +171,15 @@ text-align:center;
 
 
 
+
+/* JOG WHEEL */
+
+
 .jog{
 
-height:220px;
-
 width:220px;
+
+height:220px;
 
 margin:20px auto;
 
@@ -180,7 +187,13 @@ border-radius:50%;
 
 
 background:
-radial-gradient(circle,#666,#222 40%,#000 70%);
+
+radial-gradient(
+circle,
+#666,
+#222 45%,
+#000 70%
+);
 
 
 border:10px solid #333;
@@ -190,6 +203,7 @@ display:flex;
 align-items:center;
 
 justify-content:center;
+
 
 font-size:45px;
 
@@ -201,13 +215,16 @@ font-weight:bold;
 
 
 
+/* WAVE */
+
+
 .wave{
 
-height:80px;
+height:90px;
 
 background:#000;
 
-border:1px solid #444;
+border:1px solid #555;
 
 display:flex;
 
@@ -217,11 +234,15 @@ justify-content:center;
 
 color:#00ff88;
 
+margin:15px 0;
+
 }
 
 
 
 
+
+/* SLIDERS */
 
 
 input[type=range]{
@@ -236,27 +257,28 @@ accent-color:#aaa;
 
 
 
-/* EFFECT MODULES */
 
 
-.rcf-module{
+/* EFFECT MODULE */
+
+
+.effect{
 
 background:#151515;
 
 border:1px solid #444;
 
-border-radius:10px;
+border-radius:12px;
 
-padding:25px;
+padding:20px;
 
-margin:20px 0;
+margin:15px;
 
 }
 
 
 
-
-.rcf-module h3{
+.effect h3{
 
 color:#00aaff;
 
@@ -268,58 +290,10 @@ letter-spacing:2px;
 
 
 
-.knobs{
-
-display:flex;
-
-gap:25px;
-
-justify-content:center;
-
-flex-wrap:wrap;
-
-}
-
-
-
-
-.knob{
-
-height:75px;
-
-width:75px;
-
-border-radius:50%;
-
-background:
-
-radial-gradient(circle,#777,#111);
-
-
-border:5px solid #444;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-font-size:11px;
-
-color:white;
-
-}
-
-
-
-
-
-
-
 /* EQ */
 
 
-.eq-rack{
+.eq{
 
 display:flex;
 
@@ -329,45 +303,23 @@ align-items:flex-end;
 
 overflow-x:auto;
 
-background:#090909;
-
 padding:20px;
 
-}
+background:#090909;
 
-
-
-.eq-band{
-
-display:flex;
-
-flex-direction:column;
-
-align-items:center;
+border:1px solid #333;
 
 }
 
 
 
-.eq-band input{
+.eq input{
 
-height:230px;
+height:220px;
 
 writing-mode:vertical-lr;
 
 direction:rtl;
-
-}
-
-
-
-.eq-band span{
-
-font-size:10px;
-
-margin-top:10px;
-
-color:#aaa;
 
 }
 
@@ -378,9 +330,9 @@ color:#aaa;
 /* MASTER */
 
 
-.master-output{
+.master-meter{
 
-height:220px;
+height:250px;
 
 width:50px;
 
@@ -390,14 +342,16 @@ background:
 
 linear-gradient(
 to top,
-#00ff66 40%,
-#222 40%
+#00ff66 60%,
+#222 60%
 );
 
 
 border-radius:10px;
 
 }
+
+
 
 
 
@@ -410,5 +364,13 @@ width:95%;
 
 }
 
+
+.jog{
+
+width:170px;
+
+height:170px;
+
+}
 
 }
