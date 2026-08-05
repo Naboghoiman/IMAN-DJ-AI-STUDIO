@@ -19,69 +19,59 @@
 
 <h1>🎧 IMAN DJ AI STUDIO</h1>
 
-<p>AI POWERED DJ SYSTEM</p>
+<p>RCF STYLE DIGITAL DJ SYSTEM</p>
 
 </header>
 
 
 
+
 <nav class="top-menu">
 
-<button onclick="showPanel('faders')">
+<button>
 FADERS
 </button>
 
-<button onclick="showPanel('effects')">
+
+<button>
 EFFECTS
 </button>
 
-<button onclick="showPanel('outputs')">
+
+<button>
 OUTPUTS
 </button>
 
-<button onclick="showPanel('meters')">
+
+<button>
 METERS
 </button>
 
-<button onclick="showPanel('settings')">
+
+<button>
 SETTINGS
 </button>
+
 
 </nav>
 
 
 
 
-<section class="panel">
-
-<h2>AI DJ CONTROL</h2>
-
-<button onclick="AI_MIX()">
-🤖 AI MIX
-</button>
-
-
-<button onclick="autoBeatMatch()">
-🎵 AUTO SYNC
-</button>
-
-
-<p id="aiStatus">
-AI READY
-</p>
-
-
-</section>
 
 
 
+<main>
 
 
 
 <section class="panel">
 
 
-<h2>DUAL DECK SYSTEM</h2>
+<h2>
+DUAL DECK SYSTEM
+</h2>
+
 
 
 <div class="deck-container">
@@ -90,10 +80,15 @@ AI READY
 
 
 
+<!-- DECK A -->
+
 <div class="deck">
 
 
-<h2>DECK A</h2>
+<h2>
+DECK A
+</h2>
+
 
 
 <div class="jog">
@@ -106,60 +101,137 @@ A
 
 
 
+
+
 <div class="waveform">
+
 WAVEFORM A
+
 </div>
+
 
 
 
 <div id="trackA">
+
 NO TRACK
+
 </div>
+
 
 
 
 <input 
 type="file"
 accept="audio/*"
-onchange="loadTrackA(event);analyzeBPM(this.files[0],'bpmA')">
+onchange="loadTrackA(event)">
 
+
+
+
+
+<div class="audio-controls">
 
 
 <button onclick="playA()">
+
 ▶
+
 </button>
 
 
 <button onclick="pauseA()">
+
 ⏸
+
 </button>
 
 
 <button onclick="stopA()">
+
 ■
+
 </button>
 
 
 
+</div>
+
+
+
+
+
+<button onclick="cueA()">
+
+CUE
+
+</button>
+
+
+<button onclick="loopTrackA()">
+
+LOOP
+
+</button>
+
+
+<button onclick="sync()">
+
+SYNC
+
+</button>
+
+
+
+
+
 <h3>
+
 BPM:
+
 <span id="bpmA">
+
 128
+
 </span>
+
 </h3>
 
 
 
-<label>PITCH</label>
 
-<input type="range"
+
+<label>
+
+PITCH
+
+</label>
+
+
+<input 
+type="range"
+min="0.5"
+max="1.5"
+step="0.01"
 oninput="pitchA(this.value)">
 
 
 
-<label>VOLUME</label>
 
-<input type="range"
+
+<label>
+
+VOLUME
+
+</label>
+
+
+<input 
+type="range"
+min="0"
+max="1"
+step="0.01"
+value="1"
 oninput="volumeA(this.value)">
 
 
@@ -176,6 +248,7 @@ MIXER
 </h2>
 
 
+
 <label>
 CROSS FADER
 </label>
@@ -188,6 +261,8 @@ max="1"
 step="0.01"
 value="0.5"
 oninput="setCross(this.value)">
+
+
 
 
 
@@ -213,8 +288,8 @@ oninput="setMaster(this.value)">
 
 
 
-
 <!-- DECK B -->
+
 
 
 <div class="deck">
@@ -226,72 +301,158 @@ DECK B
 
 
 
+
 <div class="jog">
 
+
 <div class="jog-center">
+
 B
-</div>
 
 </div>
+
+
+</div>
+
+
 
 
 
 <div class="waveform">
+
 WAVEFORM B
+
 </div>
+
 
 
 
 <div id="trackB">
+
 NO TRACK
+
 </div>
 
 
 
-<input 
+
+
+<input
 type="file"
 accept="audio/*"
-onchange="loadTrackB(event);analyzeBPM(this.files[0],'bpmB')">
+onchange="loadTrackB(event)">
 
+
+
+
+
+<div class="audio-controls">
 
 
 <button onclick="playB()">
+
 ▶
+
 </button>
 
 
 <button onclick="pauseB()">
+
 ⏸
+
 </button>
 
 
 <button onclick="stopB()">
+
 ■
+
 </button>
+
+
+</div>
+
+
+
+
+
+<button onclick="cueB()">
+
+CUE
+
+</button>
+
+
+
+<button onclick="loopTrackB()">
+
+LOOP
+
+</button>
+
+
+
+
+<button onclick="sync()">
+
+SYNC
+
+</button>
+
 
 
 
 
 <h3>
+
 BPM:
+
 <span id="bpmB">
+
 128
+
 </span>
+
 </h3>
 
 
 
-<label>PITCH</label>
 
-<input type="range"
+
+<label>
+
+PITCH
+
+</label>
+
+
+<input
+type="range"
+min="0.5"
+max="1.5"
+step="0.01"
 oninput="pitchB(this.value)">
 
 
 
-<label>VOLUME</label>
 
-<input type="range"
+
+<label>
+
+VOLUME
+
+</label>
+
+
+<input
+type="range"
+min="0"
+max="1"
+step="0.01"
+value="1"
 oninput="volumeB(this.value)">
+
+
 
 
 
@@ -303,7 +464,6 @@ oninput="volumeB(this.value)">
 
 
 </section>
-
 
 
 
@@ -314,35 +474,53 @@ oninput="volumeB(this.value)">
 <!-- EFFECTS -->
 
 
-<section id="effects" class="panel">
+
+<section class="panel">
 
 
 <h2>
+
 RCF EFFECTS RACK
+
 </h2>
 
 
 
+
 <div class="effect-unit">
 
 
 <h3>
+
 HALL REVERB
+
 </h3>
 
 
-<label>DECAY</label>
+<label>
+
+DECAY
+
+</label>
+
 
 <input type="range">
 
 
-<label>SPACE</label>
+<label>
+
+SPACE
+
+</label>
+
 
 <input type="range">
 
 
 <button>
+
 ON
+
 </button>
 
 
@@ -351,26 +529,41 @@ ON
 
 
 
+
 <div class="effect-unit">
 
 
 <h3>
+
 DIGITAL DELAY
+
 </h3>
 
 
-<label>TIME</label>
+<label>
+
+TIME
+
+</label>
+
 
 <input type="range">
 
 
-<label>FEEDBACK</label>
+<label>
+
+FEEDBACK
+
+</label>
+
 
 <input type="range">
 
 
 <button>
+
 ON
+
 </button>
 
 
@@ -383,14 +576,19 @@ ON
 
 
 <h3>
-VALVE WARMER
+
+FILTER
+
 </h3>
 
 
 <input type="range">
 
+
 <button>
+
 ON
+
 </button>
 
 
@@ -399,29 +597,9 @@ ON
 
 
 <h3>
-XCITER
-</h3>
 
-
-<input type="range">
-
-
-<button>
-ON
-</button>
-
-
-</div>
-
-
-
-
-
-<div class="effect-unit">
-
-
-<h3>
 MAXIMIZER
+
 </h3>
 
 
@@ -429,7 +607,9 @@ MAXIMIZER
 
 
 <button>
+
 ON
+
 </button>
 
 
@@ -445,15 +625,19 @@ ON
 
 
 
-<!-- GRAPHIC EQ -->
+
+<!-- EQUALIZER -->
 
 
 <section class="panel">
 
 
 <h2>
+
 31 BAND GRAPHIC EQ
+
 </h2>
+
 
 
 <div class="eq-container">
@@ -470,7 +654,6 @@ ON
 <input type="range">
 <input type="range">
 <input type="range">
-
 
 
 </div>
@@ -491,19 +674,35 @@ ON
 
 
 <h2>
+
 MASTER OUTPUT
+
 </h2>
+
+
 
 
 <div class="meter">
 
-<div class="level"></div>
+
+<div class="level">
+
 
 </div>
 
 
+</div>
+
+
+
+
+
 <input
 type="range"
+min="0"
+max="1"
+step="0.01"
+value="1"
 oninput="setMaster(this.value)">
 
 
@@ -514,11 +713,18 @@ oninput="setMaster(this.value)">
 
 
 
+</main>
+
+
+
+
+
+
 
 <script src="app.js"></script>
 
 
-
 </body>
 
-  </html>
+
+</html>
