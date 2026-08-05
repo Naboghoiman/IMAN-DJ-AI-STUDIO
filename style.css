@@ -1,59 +1,81 @@
+*{
+    box-sizing:border-box;
+}
+
+
 body{
     margin:0;
     background:#050505;
-    color:#ffffff;
-    font-family:Arial, Helvetica, sans-serif;
+    color:#fff;
+    font-family:Arial, sans-serif;
 }
+
 
 
 header{
+
     text-align:center;
+    padding:20px;
     font-size:32px;
     font-weight:bold;
-    padding:20px;
     background:#111;
     letter-spacing:3px;
+
 }
 
 
-.top-menu{
+
+nav{
+
     display:flex;
     justify-content:center;
     gap:10px;
     padding:15px;
-    background:#0d0d0d;
+    background:#0b0b0b;
+
 }
+
 
 
 button{
-    background:#1c8c5a;
+
+    background:#008f5a;
     color:white;
-    border:0;
-    padding:12px 18px;
+    border:none;
+    padding:12px 20px;
     border-radius:8px;
-    cursor:pointer;
+    font-weight:bold;
+
 }
+
 
 
 button:hover{
-    background:#25c47c;
+
+    background:#00c878;
+
 }
 
 
-.main-container{
+
+
+.decks{
+
     display:flex;
     justify-content:center;
     gap:25px;
     flex-wrap:wrap;
-    padding:20px;
+    padding:25px;
+
 }
+
 
 
 
 .deck{
 
-    width:330px;
     background:#151515;
+    width:350px;
     padding:20px;
     border-radius:15px;
     box-shadow:0 0 20px #000;
@@ -73,7 +95,7 @@ button:hover{
 
 .display{
 
-    height:120px;
+    height:130px;
     background:#000;
     border:2px solid #333;
     border-radius:10px;
@@ -82,44 +104,37 @@ button:hover{
     align-items:center;
     justify-content:center;
 
-    font-size:22px;
     color:#00ff99;
+    font-size:22px;
 
 }
 
 
 
-input[type=file]{
-
-    margin:15px 0;
-    width:100%;
-
-}
-
-
-
-input[type=range]{
-
-    width:100%;
-
-}
-
-
-
-.controls{
+.buttons{
 
     text-align:center;
+    margin:15px;
+
 }
+
+
+
+.slider{
+
+    width:100%;
+
+}
+
 
 
 
 .mixer{
 
     margin:20px;
-    background:#151515;
     padding:25px;
+    background:#151515;
     border-radius:15px;
-    box-shadow:0 0 20px #000;
 
 }
 
@@ -134,6 +149,7 @@ input[type=range]{
 
 
 
+
 .cross{
 
     width:90%;
@@ -142,30 +158,21 @@ input[type=range]{
 
 
 
-.master-controls{
+
+
+.eq{
 
     display:flex;
     justify-content:center;
-    gap:40px;
-
-}
-
-
-
-.equalizer{
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:12px;
-    height:250px;
+    gap:15px;
     overflow-x:auto;
+    padding:20px;
 
 }
 
 
 
-.equalizer div{
+.band{
 
     display:flex;
     flex-direction:column;
@@ -175,10 +182,20 @@ input[type=range]{
 
 
 
-.equalizer input{
+.band label{
 
-    width:20px;
-    height:170px;
+    font-size:12px;
+    color:#aaa;
+    writing-mode:vertical-rl;
+
+}
+
+
+
+.band input{
+
+    height:200px;
+    width:25px;
 
     writing-mode:vertical-lr;
     direction:rtl;
@@ -187,28 +204,33 @@ input[type=range]{
 
 
 
-.equalizer label{
 
-    color:#aaa;
-    font-size:12px;
+input[type=file]{
+
+    width:100%;
+    margin:15px 0;
 
 }
 
 
 
+
 @media(max-width:700px){
 
-.main-container{
+
+.decks{
 
     flex-direction:column;
     align-items:center;
 
 }
 
+
 .deck{
 
     width:90%;
 
 }
+
 
 }
