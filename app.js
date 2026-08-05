@@ -1,32 +1,26 @@
-// =======================================
+// =================================
 // IMAN DJ AI STUDIO ENGINE
-// VERSION 2 - DJ CONTROLS
-// =======================================
+// VERSION 3
+// =================================
 
 
 let deckA = new Audio();
 let deckB = new Audio();
 
+let loopA = false;
+let loopB = false;
 
-let cross = 0.5;
-let master = 1;
 
 
-// ===============================
-// LOAD TRACK A
-// ===============================
+// LOAD A
 
 function loadTrackA(e){
 
-let file = e.target.files[0];
+let file=e.target.files[0];
 
-if(!file) return;
+if(!file)return;
 
-
-deckA.src = URL.createObjectURL(file);
-
-deckA.load();
-
+deckA.src=URL.createObjectURL(file);
 
 document.getElementById("trackA").innerHTML=file.name;
 
@@ -34,23 +28,15 @@ document.getElementById("trackA").innerHTML=file.name;
 
 
 
-
-// ===============================
-// LOAD TRACK B
-// ===============================
-
+// LOAD B
 
 function loadTrackB(e){
 
-let file = e.target.files[0];
+let file=e.target.files[0];
 
-if(!file) return;
+if(!file)return;
 
-
-deckB.src = URL.createObjectURL(file);
-
-deckB.load();
-
+deckB.src=URL.createObjectURL(file);
 
 document.getElementById("trackB").innerHTML=file.name;
 
@@ -60,27 +46,22 @@ document.getElementById("trackB").innerHTML=file.name;
 
 
 
-
-// ===============================
 // PLAY
-// ===============================
-
 
 function playA(){
 
 deckA.play();
 
-startSpin();
+spinOn();
 
 }
-
 
 
 function playB(){
 
 deckB.play();
 
-startSpin();
+spinOn();
 
 }
 
@@ -88,27 +69,19 @@ startSpin();
 
 
 
-// ===============================
 // PAUSE
-// ===============================
-
 
 function pauseA(){
 
 deckA.pause();
 
-stopSpin();
-
 }
-
 
 
 function pauseB(){
 
 deckB.pause();
 
-stopSpin();
-
 }
 
 
@@ -116,11 +89,7 @@ stopSpin();
 
 
 
-
-// ===============================
 // STOP
-// ===============================
-
 
 function stopA(){
 
@@ -128,10 +97,9 @@ deckA.pause();
 
 deckA.currentTime=0;
 
-stopSpin();
+spinOff();
 
 }
-
 
 
 function stopB(){
@@ -140,7 +108,7 @@ deckB.pause();
 
 deckB.currentTime=0;
 
-stopSpin();
+spinOff();
 
 }
 
@@ -150,9 +118,7 @@ stopSpin();
 
 
 
-// ===============================
 // VOLUME
-// ===============================
 
 
 function volumeA(v){
@@ -160,7 +126,6 @@ function volumeA(v){
 deckA.volume=v;
 
 }
-
 
 
 function volumeB(v){
@@ -174,10 +139,7 @@ deckB.volume=v;
 
 
 
-
-// ===============================
 // PITCH
-// ===============================
 
 
 function pitchA(v){
@@ -185,7 +147,6 @@ function pitchA(v){
 deckA.playbackRate=v;
 
 }
-
 
 
 function pitchB(v){
@@ -199,22 +160,14 @@ deckB.playbackRate=v;
 
 
 
-
-
-// ===============================
 // CROSS FADER
-// ===============================
 
 
 function setCross(v){
 
-cross=v;
+deckA.volume=1-v;
 
-
-deckA.volume=(1-v)*master;
-
-deckB.volume=v*master;
-
+deckB.volume=v;
 
 }
 
@@ -223,19 +176,14 @@ deckB.volume=v*master;
 
 
 
-// ===============================
 // MASTER
-// ===============================
 
 
 function setMaster(v){
 
-master=v;
+deckA.volume=v;
 
-
-deckA.volume=master;
-
-deckB.volume=master;
+deckB.volume=v;
 
 }
 
@@ -245,230 +193,163 @@ deckB.volume=master;
 
 
 
+// CUE
 
-// ===============================
-// SYNC
-// ===============================
-
-
-function sync(){
-
-
-deckB.currentTime=deckA.currentTime;
-
-
-console.log("SYNC COMPLETE");
-
-
-}
-
-
-
-
-
-
-
-
-// ===============================
-// JOG WHEEL
-// ===============================
-
-
-function startSpin(){
-
-document.querySelectorAll(".jog")
-.forEach(j=>{
-
-j.classList.add("spin");
-
-});
-
-
-}
-
-
-
-function stopSpin(){
-
-document.querySelectorAll(".jog")
-.forEach(j=>{
-
-j.classList.remove("spin");
-
-});
-
-}
-// =================================
-// TRACK TIME DISPLAY
-// =================================
-
-
-function formatTime(seconds){
-
-let min = Math.floor(seconds / 60);
-
-let sec = Math.floor(seconds % 60);
-
-if(sec < 10){
-sec = "0" + sec;
-}
-
-return min + ":" + sec;
-
-}
-
-
-
-deckA.addEventListener("timeupdate",()=>{
-
-let time = document.getElementById("timeA");
-
-if(time){
-
-time.innerHTML =
-formatTime(deckA.currentTime);
-
-}
-
-});
-
-
-
-deckB.addEventListener("timeupdate",()=>{
-
-let time = document.getElementById("timeB");
-
-if(time){
-
-time.innerHTML =
-formatTime(deckB.currentTime);
-
-}
-
-});
-
-
-
-
-console.log("IMAN DJ ENGINE READY");
-// =================================
-// DJ CONTROLS
-// CUE + LOOP
-// =================================
-
-
-let loopA = false;
-let loopB = false;
-
-
-
-// CUE DECK A
 
 function cueA(){
 
-if(deckA.paused){
-
-deckA.currentTime = 0;
+deckA.currentTime=0;
 
 deckA.play();
 
 }
 
-else{
 
-deckA.pause();
-
-}
-
-}
-
-
-
-
-// CUE DECK B
 
 function cueB(){
 
-if(deckB.paused){
-
-deckB.currentTime = 0;
+deckB.currentTime=0;
 
 deckB.play();
 
 }
 
-else{
-
-deckB.pause();
-
-}
-
-}
 
 
 
 
-// LOOP DECK A
+
+
+// LOOP
+
 
 function loopTrackA(){
 
-loopA = !loopA;
+loopA=!loopA;
 
 }
 
 
-
-
-// LOOP DECK B
 
 function loopTrackB(){
 
-loopB = !loopB;
+loopB=!loopB;
 
 }
 
 
 
 
-// LOOP ENGINE
 
 deckA.addEventListener("timeupdate",()=>{
 
-if(loopA && deckA.currentTime >= deckA.duration){
+if(loopA && deckA.currentTime>=deckA.duration){
 
-deckA.currentTime = 0;
+deckA.currentTime=0;
 
 }
 
+
+showTime("timeA",deckA.currentTime);
+
+
 });
+
 
 
 
 deckB.addEventListener("timeupdate",()=>{
 
-if(loopB && deckB.currentTime >= deckB.duration){
 
-deckB.currentTime = 0;
+if(loopB && deckB.currentTime>=deckB.duration){
+
+deckB.currentTime=0;
 
 }
+
+
+showTime("timeB",deckB.currentTime);
+
 
 });
 
 
 
 
-// IMPROVED SYNC
+
+
+
+// SYNC
+
 
 function sync(){
 
-if(deckA.src && deckB.src){
+deckB.currentTime=deckA.currentTime;
 
-deckB.currentTime = deckA.currentTime;
+deckB.playbackRate=deckA.playbackRate;
 
-deckB.playbackRate = deckA.playbackRate;
+}
 
-console.log("DECKS SYNCED");
+
+
+
+
+
+
+// TIME DISPLAY
+
+
+function showTime(id,time){
+
+let min=Math.floor(time/60);
+
+let sec=Math.floor(time%60);
+
+if(sec<10){
+
+sec="0"+sec;
+
+}
+
+
+let element=document.getElementById(id);
+
+
+if(element){
+
+element.innerHTML=min+":"+sec;
 
 }
 
 }
+
+
+
+
+
+
+
+
+// JOG ROTATION
+
+
+function spinOn(){
+
+document.querySelectorAll(".jog")
+.forEach(x=>x.classList.add("spin"));
+
+}
+
+
+
+function spinOff(){
+
+document.querySelectorAll(".jog")
+.forEach(x=>x.classList.remove("spin"));
+
+}
+
+
+
+
+console.log("IMAN DJ ENGINE VERSION 3 READY");
