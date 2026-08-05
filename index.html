@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html>
-
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>IMAN DJ AI STUDIO</title>
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="stylesheet" href="style.css">
 
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -22,7 +18,6 @@
 <p>RCF STYLE DIGITAL DJ SYSTEM</p>
 
 </header>
-
 
 
 <nav>
@@ -36,23 +31,14 @@
 </nav>
 
 
-
-<main>
-
-
-
-<section class="panel">
-
+<section class="deck-system">
 
 <h2>DUAL DECK SYSTEM</h2>
 
 
-<div class="deck-container">
-
-
+<!-- DECK A -->
 
 <div class="deck">
-
 
 <h2>DECK A</h2>
 
@@ -64,29 +50,26 @@ A
 </div>
 
 
-<div class="waveform">
+<div class="wave">
 
 WAVEFORM A
 
 </div>
 
 
-
-<div id="trackA">
-
+<h3 id="trackA">
 NO TRACK
-
-</div>
+</h3>
 
 
 <input 
 type="file"
 accept="audio/*"
-onchange="loadTrackA(event)">
+onchange="loadTrackA(event)"
+>
 
 
-
-<div>
+<div class="controls">
 
 <button onclick="playA()">▶</button>
 
@@ -97,18 +80,13 @@ onchange="loadTrackA(event)">
 </div>
 
 
-
 <button onclick="cueA()">CUE</button>
 
 <button onclick="sync()">SYNC</button>
 
 
 <h3>
-
-BPM:
-
-128
-
+BPM: 128
 </h3>
 
 
@@ -116,12 +94,12 @@ BPM:
 
 <input 
 type="range"
-min="0.5"
-max="1.5"
+min="0.8"
+max="1.2"
 step="0.01"
 value="1"
-oninput="pitchA(this.value)">
-
+oninput="pitchA(this.value)"
+>
 
 
 <label>VOLUME</label>
@@ -132,415 +110,8 @@ min="0"
 max="1"
 step="0.01"
 value="1"
-oninput="volumeA(this.value)">
-
-
-
-</div>
-<!-- MIXER -->
-
-<div class="mixer">
-
-
-<h2>
-MIXER
-</h2>
-
-
-
-<label>
-CROSS FADER
-</label>
-
-
-<input
-type="range"
-min="0"
-max="1"
-step="0.01"
-value="0.5"
-oninput="setCross(this.value)">
-
-
-
-<label>
-MASTER
-</label>
-
-
-<input
-type="range"
-min="0"
-max="1"
-step="0.01"
-value="1"
-oninput="setMaster(this.value)">
-
-
-
-
-
-<!-- VU METERS -->
-
-<div class="vu-container">
-
-
-<h3>
-MASTER VU
-</h3>
-
-
-<div class="vu-bar">
-
-<div id="vuLevel"></div>
-
-</div>
-
-
-
-<h3>
-CHANNEL METERS
-</h3>
-
-
-
-<div class="channel-meter">
-
-
-<p>
-DECK A
-</p>
-
-
-<div class="vu-small">
-
-<div id="vuA"></div>
-
-</div>
-
-
-
-
-<p>
-DECK B
-</p>
-
-
-<div class="vu-small">
-
-<div id="vuB"></div>
-
-</div>
-
+oninput="volumeA(this.value)"
+>
 
 
 </div>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-<!-- DECK B -->
-
-
-
-<div class="deck">
-
-
-<h2>
-DECK B
-</h2>
-
-
-
-<div class="jog">
-
-B
-
-</div>
-
-
-
-<div class="waveform">
-
-WAVEFORM B
-
-</div>
-
-
-
-<div id="trackB">
-
-NO TRACK
-
-</div>
-
-
-
-
-<input
-type="file"
-accept="audio/*"
-onchange="loadTrackB(event)">
-
-
-
-<div>
-
-
-<button onclick="playB()">▶</button>
-
-<button onclick="pauseB()">⏸</button>
-
-<button onclick="stopB()">■</button>
-
-
-</div>
-
-
-
-<button onclick="cueB()">
-
-CUE
-
-</button>
-
-
-<button onclick="sync()">
-
-SYNC
-
-</button>
-
-
-
-<h3>
-
-BPM:
-
-128
-
-</h3>
-
-
-
-
-<label>
-
-PITCH
-
-</label>
-
-
-<input
-type="range"
-min="0.5"
-max="1.5"
-step="0.01"
-value="1"
-oninput="pitchB(this.value)">
-
-
-
-
-
-<label>
-
-VOLUME
-
-</label>
-
-
-<input
-type="range"
-min="0"
-max="1"
-step="0.01"
-value="1"
-oninput="volumeB(this.value)">
-
-
-
-</div>
-
-
-
-</div>
-
-
-</section>
-<!-- EFFECTS -->
-
-<section class="panel">
-
-
-<h2>
-RCF EFFECTS RACK
-</h2>
-
-
-
-<div class="effect-unit">
-
-
-<h3>
-REVERB
-</h3>
-
-
-<input type="range">
-
-
-<button>
-ON
-</button>
-
-
-</div>
-
-
-
-
-<div class="effect-unit">
-
-
-<h3>
-ECHO DELAY
-</h3>
-
-
-<input type="range">
-
-
-<button>
-ON
-</button>
-
-
-</div>
-
-
-
-
-
-<div class="effect-unit">
-
-
-<h3>
-FILTER
-</h3>
-
-
-<input type="range">
-
-
-<button>
-ON
-</button>
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-
-<!-- GRAPHIC EQ -->
-
-
-<section class="panel">
-
-
-<h2>
-31 BAND GRAPHIC EQ
-</h2>
-
-
-<div class="eq-container">
-
-
-<input type="range">
-<input type="range">
-<input type="range">
-<input type="range">
-<input type="range">
-<input type="range">
-<input type="range">
-<input type="range">
-<input type="range">
-<input type="range">
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<!-- OUTPUT -->
-
-
-<section class="panel">
-
-
-<h2>
-MASTER OUTPUT
-</h2>
-
-
-<div class="meter">
-
-
-<div class="level"></div>
-
-
-</div>
-
-
-
-</section>
-
-
-
-
-
-
-
-</main>
-
-
-
-
-
-
-
-<script src="app.js"></script>
-
-
-</body>
-
-
-</html>
