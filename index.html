@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
 
 <title>IMAN DJ AI STUDIO</title>
@@ -11,33 +11,57 @@
 
 </head>
 
+
 <body>
 
+
 <header>
+
 🎧 IMAN DJ AI STUDIO
+
 </header>
 
 
-<nav>
+
+<!-- TOP RACK MENU -->
+
+<div class="rack-menu">
+
 <button>FADERS</button>
 <button>EFFECTS</button>
-<button>EQUALIZER</button>
+<button>OUTPUTS</button>
+<button>PHONES</button>
+<button>PLAY / REC</button>
+<button>METERS</button>
+<button>LOAD / SAVE</button>
 <button>SETTINGS</button>
-</nav>
+
+</div>
 
 
 
-<div class="decks">
+
+
+<!-- MAIN CONSOLE -->
+
+
+<div class="console">
+
 
 
 <!-- DECK A -->
 
-<section class="deck">
+
+<div class="channel">
+
 
 <h2>DECK A</h2>
 
-<div class="display" id="trackA">
-NO TRACK
+
+<div class="screen">
+
+TRACK A
+
 </div>
 
 
@@ -49,38 +73,122 @@ NO TRACK
 
 <button onclick="playA()">▶</button>
 <button onclick="pauseA()">⏸</button>
-<button onclick="stopA()">⏹</button>
+<button onclick="stopA()">■</button>
 
 </div>
 
 
-<h3>BPM</h3>
-<div id="bpmA">128</div>
 
+<div class="meter">
 
-<h3>KEY</h3>
+<div class="level"></div>
 
-<input class="slider"
-type="range"
-min="-12"
-max="12"
-value="0"
-oninput="keyA(this.value)">
+</div>
 
 
 
-<h3>VOLUME</h3>
+<label>BPM</label>
 
-<input class="slider"
+<div class="display-value">
+
+128
+
+</div>
+
+
+
+<label>KEY</label>
+
+<input type="range" min="-12" max="12">
+
+
+
+<label>PITCH</label>
+
+<input type="range" min="-8" max="8">
+
+
+
+<label>VOLUME</label>
+
+<input type="range"
+oninput="volumeA(this.value)">
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- CENTRAL MIXER -->
+
+
+<div class="mixer-panel">
+
+
+<h2>MIXER</h2>
+
+
+
+<div class="knobs">
+
+
+<div>
+GAIN
+<input type="range">
+</div>
+
+
+<div>
+LOW
+<input type="range">
+</div>
+
+
+<div>
+MID
+<input type="range">
+</div>
+
+
+<div>
+HIGH
+<input type="range">
+</div>
+
+
+</div>
+
+
+
+
+<h3>CROSS FADER</h3>
+
+
+<input class="crossfader"
 type="range"
 min="0"
 max="1"
 step="0.01"
-value="1"
-oninput="volumeA(this.value)">
+oninput="crossfade(this.value)">
 
 
-</section>
+
+
+
+<button onclick="syncDecks()">
+
+SYNC
+
+</button>
+
+
+</div>
+
 
 
 
@@ -89,13 +197,16 @@ oninput="volumeA(this.value)">
 <!-- DECK B -->
 
 
-<section class="deck">
+<div class="channel">
+
 
 <h2>DECK B</h2>
 
 
-<div class="display" id="trackB">
-NO TRACK
+<div class="screen">
+
+TRACK B
+
 </div>
 
 
@@ -107,40 +218,51 @@ NO TRACK
 
 <button onclick="playB()">▶</button>
 <button onclick="pauseB()">⏸</button>
-<button onclick="stopB()">⏹</button>
+<button onclick="stopB()">■</button>
 
 </div>
 
 
 
-<h3>BPM</h3>
-<div id="bpmB">128</div>
+<div class="meter">
+
+<div class="level"></div>
+
+</div>
 
 
 
-<h3>KEY</h3>
+<label>BPM</label>
 
-<input class="slider"
-type="range"
-min="-12"
-max="12"
-value="0"
-oninput="keyB(this.value)">
+<div class="display-value">
 
+128
+
+</div>
 
 
-<h3>VOLUME</h3>
 
-<input class="slider"
-type="range"
-min="0"
-max="1"
-step="0.01"
-value="1"
+<label>KEY</label>
+
+<input type="range" min="-12" max="12">
+
+
+
+<label>PITCH</label>
+
+<input type="range" min="-8" max="8">
+
+
+
+<label>VOLUME</label>
+
+<input type="range"
 oninput="volumeB(this.value)">
 
 
-</section>
+
+</div>
+
 
 
 </div>
@@ -148,69 +270,57 @@ oninput="volumeB(this.value)">
 
 
 
-<!-- MIXER -->
 
 
-<section class="mixer">
+<!-- EQUALIZER -->
+
+<section class="equalizer-panel">
 
 
-<h2>MIXER</h2>
+<h2>31 BAND GRAPHIC EQUALIZER</h2>
 
 
-<h3>CROSS FADER</h3>
-
-<input class="cross"
-type="range"
-min="0"
-max="1"
-step="0.01"
-value="0.5"
-oninput="crossfade(this.value)">
-
-
-
-<button onclick="syncDecks()">
-SYNC BEATS
-</button>
-
-
-
-<h2>31 BAND EQUALIZER</h2>
-
-
-<div class="eq">
+<div class="eq-sliders">
 
 
 <script>
 
-let freq=[
-"20Hz","50Hz","100Hz","250Hz",
-"500Hz","1kHz","2kHz","5kHz",
-"10kHz","20kHz"
+let bands=[
+"20Hz",
+"31Hz",
+"63Hz",
+"125Hz",
+"250Hz",
+"500Hz",
+"1kHz",
+"2kHz",
+"4kHz",
+"8kHz",
+"16kHz",
+"20kHz"
 ];
 
 
-freq.forEach((f,i)=>{
+bands.forEach(function(b){
 
-document.write(`
+document.write(
 
-<div class="band">
+`
+<div class="eq-band">
 
-<label>${f}</label>
+<span>${b}</span>
 
 <input 
 type="range"
 min="-12"
-max="12"
-value="0"
-oninput="changeEQ(${i},this.value)">
+max="12">
 
 </div>
+`
 
-`);
+);
 
 });
-
 
 </script>
 
@@ -223,9 +333,39 @@ oninput="changeEQ(${i},this.value)">
 
 
 
+
+
+<!-- MASTER -->
+
+
+<section class="master">
+
+
+<h2>MASTER OUTPUT</h2>
+
+
+<div class="master-meter">
+
+</div>
+
+
+<label>MASTER VOLUME</label>
+
+
+<input type="range">
+
+
+
+</section>
+
+
+
+
+
 <script src="app.js"></script>
 
 
 </body>
+
 
 </html>
