@@ -414,4 +414,54 @@ to{
 transform:rotate(360deg);
 }
 
+}/* =========================
+   WAVEFORM ANIMATION
+========================= */
+
+
+.waveform{
+
+height:80px;
+
+background:#000;
+
+border:1px solid #333;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+color:#00ff66;
+
+overflow:hidden;
+
+}
+
+
+
+.waveform.playing{
+
+animation:pulseWave 0.8s infinite alternate;
+
+}
+
+
+
+@keyframes pulseWave{
+
+from{
+
+box-shadow:0 0 5px #00ff66;
+
+}
+
+
+to{
+
+box-shadow:0 0 25px #00ff66;
+
+}
+
 }
