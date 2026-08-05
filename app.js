@@ -1,48 +1,22 @@
 // =====================================
 // IMAN DJ AI STUDIO
-// REAL WAVEFORM AUDIO ENGINE
+// FULL DJ ENGINE
 // =====================================
+
 
 let deckA = new Audio();
 let deckB = new Audio();
 
-let audioCtx;
-let analyserA;
-let analyserB;
-let sourceA;
-let sourceB;
 
-
-// CREATE AUDIO ENGINE
-
-function initAudio(){
-
-if(audioCtx) return;
-
-audioCtx = new AudioContext();
-
-analyserA = audioCtx.createAnalyser();
-analyserB = audioCtx.createAnalyser();
-
-analyserA.fftSize = 256;
-analyserB.fftSize = 256;
-
-sourceA = audioCtx.createMediaElementSource(deckA);
-sourceB = audioCtx.createMediaElementSource(deckB);
-
-sourceA.connect(analyserA);
-analyserA.connect(audioCtx.destination);
-
-sourceB.connect(analyserB);
-analyserB.connect(audioCtx.destination);
-
-drawWave();
-
-}
+let loopA = false;
+let loopB = false;
 
 
 
-// LOAD DECK A
+// =====================
+// LOAD TRACKS
+// =====================
+
 
 function loadTrackA(e){
 
@@ -54,13 +28,9 @@ deckA.src=URL.createObjectURL(file);
 
 document.getElementById("trackA").innerHTML=file.name;
 
-initAudio();
-
 }
 
 
-
-// LOAD DECK B
 
 function loadTrackB(e){
 
@@ -72,32 +42,25 @@ deckB.src=URL.createObjectURL(file);
 
 document.getElementById("trackB").innerHTML=file.name;
 
-initAudio();
-
 }
 
 
 
 
-
+// =====================
 // PLAY
+// =====================
+
 
 function playA(){
-
-initAudio();
-
-audioCtx.resume();
 
 deckA.play();
 
 }
 
 
+
 function playB(){
-
-initAudio();
-
-audioCtx.resume();
 
 deckB.play();
 
@@ -107,13 +70,17 @@ deckB.play();
 
 
 
+// =====================
 // PAUSE
+// =====================
+
 
 function pauseA(){
 
 deckA.pause();
 
 }
+
 
 
 function pauseB(){
@@ -126,7 +93,10 @@ deckB.pause();
 
 
 
+// =====================
 // STOP
+// =====================
+
 
 function stopA(){
 
@@ -135,6 +105,7 @@ deckA.pause();
 deckA.currentTime=0;
 
 }
+
 
 
 function stopB(){
@@ -150,13 +121,17 @@ deckB.currentTime=0;
 
 
 
+// =====================
 // VOLUME
+// =====================
+
 
 function volumeA(v){
 
 deckA.volume=v;
 
 }
+
 
 
 function volumeB(v){
@@ -169,13 +144,17 @@ deckB.volume=v;
 
 
 
-// PITCH
+// =====================
+// PITCH CONTROL
+// =====================
+
 
 function pitchA(v){
 
 deckA.playbackRate=v;
 
 }
+
 
 
 function pitchB(v){
@@ -188,7 +167,35 @@ deckB.playbackRate=v;
 
 
 
+
+// =====================
+// KEY LOCK
+// =====================
+
+
+function keyLockA(){
+
+deckA.preservesPitch=true;
+
+}
+
+
+
+function keyLockB(){
+
+deckB.preservesPitch=true;
+
+}
+
+
+
+
+
+
+// =====================
 // CROSS FADER
+// =====================
+
 
 function setCross(v){
 
@@ -202,7 +209,11 @@ deckB.volume=v;
 
 
 
+
+// =====================
 // MASTER
+// =====================
+
 
 function setMaster(v){
 
@@ -216,7 +227,89 @@ deckB.volume=v;
 
 
 
+// =====================
+// CUE
+// =====================
+
+
+function cueA(){
+
+deckA.currentTime=0;
+
+deckA.play();
+
+}
+
+
+
+function cueB(){
+
+deckB.currentTime=0;
+
+deckB.play();
+
+}
+
+
+
+
+
+
+
+// =====================
+// LOOP
+// =====================
+
+
+function loopTrackA(){
+
+loopA=!loopA;
+
+}
+
+
+
+function loopTrackB(){
+
+loopB=!loopB;
+
+}
+
+
+
+
+deckA.addEventListener("timeupdate",()=>{
+
+if(loopA && deckA.currentTime>=deckA.duration){
+
+deckA.currentTime=0;
+
+}
+
+});
+
+
+
+deckB.addEventListener("timeupdate",()=>{
+
+if(loopB && deckB.currentTime>=deckB.duration){
+
+deckB.currentTime=0;
+
+}
+
+});
+
+
+
+
+
+
+
+// =====================
 // SYNC
+// =====================
+
 
 function sync(){
 
@@ -230,47 +323,11 @@ deckB.playbackRate=deckA.playbackRate;
 
 
 
-// REAL WAVEFORM
+function autoSync(){
 
-function drawWave(){
+sync();
 
-requestAnimationFrame(drawWave);
-
-
-let dataA=new Uint8Array(analyserA.frequencyBinCount);
-
-let dataB=new Uint8Array(analyserB.frequencyBinCount);
-
-
-if(analyserA){
-
-analyserA.getByteFrequencyData(dataA);
-
-}
-
-
-if(analyserB){
-
-analyserB.getByteFrequencyData(dataB);
-
-}
-
-
-let levelA=Math.max(...dataA);
-
-let levelB=Math.max(...dataB);
-
-
-
-let waveA=document.querySelector(".waveform");
-
-if(waveA){
-
-waveA.style.height=(80+levelA/3)+"px";
-
-}
-
-
+alert("AUTO SYNC COMPLETE");
 
 }
 
@@ -278,4 +335,48 @@ waveA.style.height=(80+levelA/3)+"px";
 
 
 
-console.log("IMAN DJ REAL AUDIO ENGINE READY");
+
+
+// =====================
+// MASTER TEMPO
+// =====================
+
+
+function masterTempo(v){
+
+deckA.playbackRate=v;
+
+deckB.playbackRate=v;
+
+}
+
+
+
+
+
+
+
+// =====================
+// STATUS
+// =====================
+
+
+deckA.addEventListener("play",()=>{
+
+console.log("DECK A PLAYING");
+
+});
+
+
+
+deckB.addEventListener("play",()=>{
+
+console.log("DECK B PLAYING");
+
+});
+
+
+
+
+
+console.log("IMAN DJ AI STUDIO FULL ENGINE READY");
