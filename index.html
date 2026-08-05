@@ -1,48 +1,89 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
 <title>IMAN DJ AI STUDIO</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="stylesheet" href="style.css">
+
 </head>
 
+
 <body>
+
 
 <header>
 
 <h1>🎧 IMAN DJ AI STUDIO</h1>
+
 <p>RCF STYLE DIGITAL MIXER</p>
 
 </header>
 
 
-<nav>
 
-<button>FADERS</button>
-<button>EFFECTS</button>
-<button>OUTPUTS</button>
-<button>PHONES</button>
-<button>PLAY/REC</button>
-<button>METERS</button>
-<button>LOAD/SAVE</button>
-<button>SETTINGS</button>
+
+<nav class="top-menu">
+
+<button onclick="showPanel('faders')">
+FADERS
+</button>
+
+<button onclick="showPanel('effects')">
+EFFECTS
+</button>
+
+<button onclick="showPanel('outputs')">
+OUTPUTS
+</button>
+
+<button onclick="showPanel('meters')">
+METERS
+</button>
+
+<button onclick="showPanel('settings')">
+SETTINGS
+</button>
 
 </nav>
+
+
+
+
+
 
 
 <main>
 
 
+
+<!-- DECK SYSTEM -->
+
+
 <section class="panel">
 
+
 <h2>DUAL DECK SYSTEM</h2>
+
 
 
 <div class="deck-container">
 
 
+
+
+
+<!-- DECK A -->
+
+
 <div class="deck">
 
+
 <h2>DECK A</h2>
+
 
 
 <div class="jog">
@@ -54,57 +95,170 @@ A
 </div>
 
 
+
+
 <div class="waveform">
+
 WAVEFORM A
+
 </div>
 
 
-<h3>NO TRACK</h3>
+
+<div id="trackA">
+
+NO TRACK
+
+</div>
 
 
-<input type="file">
+
+<input 
+type="file"
+accept="audio/*"
+onchange="loadTrackA(event)">
+
+
+
 
 
 <div class="audio-controls">
 
-<button>⏮</button>
-<button>▶</button>
-<button>⏸</button>
-<button>■</button>
 
-</div>
+<button onclick="playA()">
+▶
+</button>
 
 
-<div class="deck-buttons">
-
-<button>CUE</button>
-<button>SYNC</button>
-<button>LOOP</button>
-
-</div>
+<button onclick="pauseA()">
+⏸
+</button>
 
 
-<h3>BPM 128</h3>
+<button onclick="stopA()">
+■
+</button>
 
-
-<label>PITCH</label>
-<input type="range">
-
-
-<label>CHANNEL VOLUME</label>
-<input type="range">
 
 
 </div>
 
 
 
+
+
+<button>
+CUE
+</button>
+
+
+<button onclick="sync()">
+SYNC
+</button>
+
+
+
+
+
+<h3>
+BPM:
+<span id="bpmA">
+128
+</span>
+</h3>
+
+
+
+
+<label>
+PITCH
+</label>
+
+<input 
+type="range"
+min="0.5"
+max="1.5"
+step="0.01"
+oninput="pitchA(this.value)">
+
+
+
+
+
+<label>
+VOLUME
+</label>
+
+<input 
+type="range"
+min="0"
+max="1"
+step="0.01"
+value="1"
+oninput="volumeA(this.value)">
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- MIXER -->
+
+<div class="mixer">
+
+
+<h2>
+MIXER
+</h2>
+
+
+<label>
+CROSS FADER
+</label>
+
+
+<input
+type="range"
+min="0"
+max="1"
+step="0.01"
+value="0.5"
+oninput="setCross(this.value)">
+
+
+
+<label>
+MASTER
+</label>
+
+
+<input
+type="range"
+min="0"
+max="1"
+step="0.01"
+value="1"
+oninput="setMaster(this.value)">
+
+
+
+</div>
+<!-- DECK B -->
 
 
 <div class="deck">
 
 
 <h2>DECK B</h2>
+
 
 
 <div class="jog">
@@ -116,102 +270,47 @@ B
 </div>
 
 
+
 <div class="waveform">
+
 WAVEFORM B
+
 </div>
 
 
-<h3>NO TRACK</h3>
+
+<div id="trackB">
+
+NO TRACK
+
+</div>
 
 
-<input type="file">
+
+<input 
+type="file"
+accept="audio/*"
+onchange="loadTrackB(event)">
+
+
+
 
 
 <div class="audio-controls">
 
-<button>⏮</button>
-<button>▶</button>
-<button>⏸</button>
-<button>■</button>
 
-</div>
+<button onclick="playB()">
+▶
+</button>
 
 
-
-<div class="deck-buttons">
-
-<button>CUE</button>
-<button>SYNC</button>
-<button>LOOP</button>
-
-</div>
+<button onclick="pauseB()">
+⏸
+</button>
 
 
-
-<h3>BPM 128</h3>
-
-
-<label>PITCH</label>
-<input type="range">
-
-
-<label>CHANNEL VOLUME</label>
-<input type="range">
-
-
-</div>
-
-
-</div>
-
-
-</section>
-<!-- MIXER -->
-
-
-<section class="panel mixer-panel">
-
-
-<h2>MIXER</h2>
-
-
-<div class="mixer">
-
-
-<div class="channel">
-
-<h3>DECK A</h3>
-
-<label>GAIN</label>
-<input type="range">
-
-
-<label>LOW</label>
-<input type="range">
-
-
-<label>MID</label>
-<input type="range">
-
-
-<label>HIGH</label>
-<input type="range">
-
-
-</div>
-
-
-
-<div class="channel">
-
-
-<h3>CROSS FADER</h3>
-
-<input type="range">
-
-
-<button>
-SYNC BEATS
+<button onclick="stopB()">
+■
 </button>
 
 
@@ -220,26 +319,60 @@ SYNC BEATS
 
 
 
-<div class="channel">
+
+<button>
+CUE
+</button>
 
 
-<h3>DECK B</h3>
+
+<button onclick="sync()">
+SYNC
+</button>
 
 
-<label>GAIN</label>
-<input type="range">
 
 
-<label>LOW</label>
-<input type="range">
+
+<h3>
+BPM:
+<span id="bpmB">
+128
+</span>
+</h3>
 
 
-<label>MID</label>
-<input type="range">
 
 
-<label>HIGH</label>
-<input type="range">
+<label>
+PITCH
+</label>
+
+
+<input 
+type="range"
+min="0.5"
+max="1.5"
+step="0.01"
+oninput="pitchB(this.value)">
+
+
+
+
+
+<label>
+VOLUME
+</label>
+
+
+<input 
+type="range"
+min="0"
+max="1"
+step="0.01"
+value="1"
+oninput="volumeB(this.value)">
+
 
 
 </div>
@@ -260,31 +393,33 @@ SYNC BEATS
 <!-- EFFECTS -->
 
 
-<section class="panel effects">
+<section id="effects" class="panel">
 
 
-<h2>RCF EFFECTS RACK</h2>
+<h2>
+RCF EFFECTS RACK
+</h2>
 
 
 
 <div class="effect-unit">
 
-
-<h3>HALL REVERB</h3>
-
-<label>PRE DELAY</label>
-<input type="range">
+<h3>
+HALL REVERB
+</h3>
 
 
 <label>DECAY</label>
 <input type="range">
 
 
-<label>DAMPING</label>
+<label>SPACE</label>
 <input type="range">
 
 
-<button>ON</button>
+<button>
+ON
+</button>
 
 
 </div>
@@ -295,8 +430,10 @@ SYNC BEATS
 
 <div class="effect-unit">
 
+<h3>
+DIGITAL DELAY
+</h3>
 
-<h3>DIGITAL DELAY</h3>
 
 <label>TIME</label>
 <input type="range">
@@ -306,11 +443,28 @@ SYNC BEATS
 <input type="range">
 
 
-<label>WIDTH</label>
+<button>
+ON
+</button>
+
+
+</div>
+
+
+
+
+
+<div class="effect-unit">
+
+<h3>
+VALVE WARMER
+</h3>
+
 <input type="range">
 
-
-<button>ON</button>
+<button>
+ON
+</button>
 
 
 </div>
@@ -320,37 +474,74 @@ SYNC BEATS
 
 <div class="effect-unit">
 
-<h3>VALVE WARMER</h3>
+<h3>
+XCITER
+</h3>
 
 <input type="range">
 
-<button>ON</button>
+<button>
+ON
+</button>
+
 
 </div>
 
 
 
 
+
 <div class="effect-unit">
 
-<h3>XCITER</h3>
+<h3>
+MAXIMIZER
+</h3>
 
 <input type="range">
 
-<button>ON</button>
+<button>
+ON
+</button>
+
 
 </div>
 
 
 
+</section>
 
-<div class="effect-unit">
 
-<h3>MAXIMIZER</h3>
+
+
+
+
+
+<!-- EQUALIZER -->
+
+
+<section class="panel">
+
+
+<h2>
+31 BAND GRAPHIC EQ
+</h2>
+
+
+<div class="eq-container">
+
 
 <input type="range">
+<input type="range">
+<input type="range">
+<input type="range">
+<input type="range">
+<input type="range">
+<input type="range">
+<input type="range">
+<input type="range">
+<input type="range">
+<input type="range">
 
-<button>ON</button>
 
 </div>
 
@@ -362,49 +553,15 @@ SYNC BEATS
 
 
 
-<!-- GRAPHIC EQ -->
+<!-- OUTPUT -->
 
 
 <section class="panel">
 
 
-<h2>31 BAND GRAPHIC EQUALIZER</h2>
-
-
-<div class="eq">
-
-
-<input type="range">
-<input type="range">
-<input type="range">
-<input type="range">
-<input type="range">
-<input type="range">
-<input type="range">
-<input type="range">
-<input type="range">
-<input type="range">
-<input type="range">
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<!-- MASTER -->
-
-
-<section class="panel">
-
-
-<h2>MASTER OUTPUT</h2>
+<h2>
+MASTER OUTPUT
+</h2>
 
 
 <div class="meter">
@@ -414,14 +571,20 @@ SYNC BEATS
 </div>
 
 
-<input type="range">
+<input
+type="range"
+oninput="setMaster(this.value)">
+
 
 
 </section>
 
 
 
+
+
 </main>
+
 
 
 <script src="app.js"></script>
