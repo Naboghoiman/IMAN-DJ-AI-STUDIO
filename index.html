@@ -115,3 +115,120 @@ oninput="volumeA(this.value)"
 
 
 </div>
+ <!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IMAN DJ AI STUDIO</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🎧 IMAN DJ AI STUDIO</h1>
+
+<p>RCF STYLE DIGITAL DJ SYSTEM</p>
+
+</header>
+
+
+<nav>
+
+<button>FADERS</button>
+<button>EFFECTS</button>
+<button>OUTPUTS</button>
+<button>METERS</button>
+<button>SETTINGS</button>
+
+</nav>
+
+
+<section class="deck-system">
+
+<h2>DUAL DECK SYSTEM</h2>
+
+
+<!-- DECK A -->
+
+<div class="deck">
+
+<h2>DECK A</h2>
+
+
+<div class="jog">
+
+A
+
+</div>
+
+
+<div class="wave">
+
+WAVEFORM A
+
+</div>
+
+
+<h3 id="trackA">
+NO TRACK
+</h3>
+
+
+<input 
+type="file"
+accept="audio/*"
+onchange="loadTrackA(event)"
+>
+
+
+<div class="controls">
+
+<button onclick="playA()">▶</button>
+
+<button onclick="pauseA()">⏸</button>
+
+<button onclick="stopA()">■</button>
+
+</div>
+
+
+<button onclick="cueA()">CUE</button>
+
+<button onclick="sync()">SYNC</button>
+
+
+<h3>
+BPM: 128
+</h3>
+
+
+<label>PITCH</label>
+
+<input 
+type="range"
+min="0.8"
+max="1.2"
+step="0.01"
+value="1"
+oninput="pitchA(this.value)"
+>
+
+
+<label>VOLUME</label>
+
+<input 
+type="range"
+min="0"
+max="1"
+step="0.01"
+value="1"
+oninput="volumeA(this.value)"
+>
+
+
+</div> 
