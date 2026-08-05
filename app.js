@@ -351,3 +351,124 @@ formatTime(deckB.currentTime);
 
 
 console.log("IMAN DJ ENGINE READY");
+// =================================
+// DJ CONTROLS
+// CUE + LOOP
+// =================================
+
+
+let loopA = false;
+let loopB = false;
+
+
+
+// CUE DECK A
+
+function cueA(){
+
+if(deckA.paused){
+
+deckA.currentTime = 0;
+
+deckA.play();
+
+}
+
+else{
+
+deckA.pause();
+
+}
+
+}
+
+
+
+
+// CUE DECK B
+
+function cueB(){
+
+if(deckB.paused){
+
+deckB.currentTime = 0;
+
+deckB.play();
+
+}
+
+else{
+
+deckB.pause();
+
+}
+
+}
+
+
+
+
+// LOOP DECK A
+
+function loopTrackA(){
+
+loopA = !loopA;
+
+}
+
+
+
+
+// LOOP DECK B
+
+function loopTrackB(){
+
+loopB = !loopB;
+
+}
+
+
+
+
+// LOOP ENGINE
+
+deckA.addEventListener("timeupdate",()=>{
+
+if(loopA && deckA.currentTime >= deckA.duration){
+
+deckA.currentTime = 0;
+
+}
+
+});
+
+
+
+deckB.addEventListener("timeupdate",()=>{
+
+if(loopB && deckB.currentTime >= deckB.duration){
+
+deckB.currentTime = 0;
+
+}
+
+});
+
+
+
+
+// IMPROVED SYNC
+
+function sync(){
+
+if(deckA.src && deckB.src){
+
+deckB.currentTime = deckA.currentTime;
+
+deckB.playbackRate = deckA.playbackRate;
+
+console.log("DECKS SYNCED");
+
+}
+
+}
