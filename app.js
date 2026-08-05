@@ -1,15 +1,86 @@
 // =====================================
 // IMAN DJ AI STUDIO
-// FULL DJ ENGINE
+// DJ EFFECT ENGINE VERSION
 // =====================================
 
 
 let deckA = new Audio();
 let deckB = new Audio();
 
+let audioCtx;
 
-let loopA = false;
-let loopB = false;
+let sourceA;
+let sourceB;
+
+let filterA;
+let filterB;
+
+let delayA;
+let delayB;
+
+let reverbA;
+let reverbB;
+
+
+
+// =====================
+// AUDIO ENGINE
+// =====================
+
+
+function initEffects(){
+
+if(audioCtx)return;
+
+
+audioCtx=new AudioContext();
+
+
+sourceA=audioCtx.createMediaElementSource(deckA);
+sourceB=audioCtx.createMediaElementSource(deckB);
+
+
+
+filterA=audioCtx.createBiquadFilter();
+filterB=audioCtx.createBiquadFilter();
+
+
+filterA.type="lowpass";
+filterB.type="lowpass";
+
+
+filterA.frequency.value=20000;
+filterB.frequency.value=20000;
+
+
+
+delayA=audioCtx.createDelay();
+delayB=audioCtx.createDelay();
+
+
+delayA.delayTime.value=0.3;
+delayB.delayTime.value=0.3;
+
+
+
+reverbA=audioCtx.createConvolver();
+reverbB=audioCtx.createConvolver();
+
+
+
+sourceA
+.connect(filterA)
+.connect(delayA)
+.connect(audioCtx.destination);
+
+
+sourceB
+.connect(filterB)
+.connect(delayB)
+.connect(audioCtx.destination);
+
+
+}
 
 
 
@@ -24,9 +95,14 @@ let file=e.target.files[0];
 
 if(!file)return;
 
+
 deckA.src=URL.createObjectURL(file);
 
+
 document.getElementById("trackA").innerHTML=file.name;
+
+
+initEffects();
 
 }
 
@@ -38,11 +114,17 @@ let file=e.target.files[0];
 
 if(!file)return;
 
+
 deckB.src=URL.createObjectURL(file);
+
 
 document.getElementById("trackB").innerHTML=file.name;
 
+
+initEffects();
+
 }
+
 
 
 
@@ -54,6 +136,10 @@ document.getElementById("trackB").innerHTML=file.name;
 
 function playA(){
 
+initEffects();
+
+audioCtx.resume();
+
 deckA.play();
 
 }
@@ -61,6 +147,10 @@ deckA.play();
 
 
 function playB(){
+
+initEffects();
+
+audioCtx.resume();
 
 deckB.play();
 
@@ -71,7 +161,7 @@ deckB.play();
 
 
 // =====================
-// PAUSE
+// PAUSE STOP
 // =====================
 
 
@@ -82,20 +172,12 @@ deckA.pause();
 }
 
 
-
 function pauseB(){
 
 deckB.pause();
 
 }
 
-
-
-
-
-// =====================
-// STOP
-// =====================
 
 
 function stopA(){
@@ -115,7 +197,6 @@ deckB.pause();
 deckB.currentTime=0;
 
 }
-
 
 
 
@@ -144,8 +225,10 @@ deckB.volume=v;
 
 
 
+
+
 // =====================
-// PITCH CONTROL
+// PITCH
 // =====================
 
 
@@ -167,23 +250,30 @@ deckB.playbackRate=v;
 
 
 
-
 // =====================
-// KEY LOCK
+// FILTER
 // =====================
 
 
-function keyLockA(){
+function filterAControl(v){
 
-deckA.preservesPitch=true;
+if(filterA){
+
+filterA.frequency.value=v;
+
+}
 
 }
 
 
 
-function keyLockB(){
+function filterBControl(v){
 
-deckB.preservesPitch=true;
+if(filterB){
+
+filterB.frequency.value=v;
+
+}
 
 }
 
@@ -191,9 +281,53 @@ deckB.preservesPitch=true;
 
 
 
+// =====================
+// ECHO
+// =====================
+
+
+function echoA(v){
+
+if(delayA){
+
+delayA.delayTime.value=v;
+
+}
+
+}
+
+
+function echoB(v){
+
+if(delayB){
+
+delayB.delayTime.value=v;
+
+}
+
+}
+
+
+
+
 
 // =====================
-// CROSS FADER
+// REVERB SWITCH READY
+// =====================
+
+
+function reverbOn(){
+
+console.log("REVERB ENABLED");
+
+}
+
+
+
+
+
+// =====================
+// MIXER
 // =====================
 
 
@@ -207,14 +341,6 @@ deckB.volume=v;
 
 
 
-
-
-
-// =====================
-// MASTER
-// =====================
-
-
 function setMaster(v){
 
 deckA.volume=v;
@@ -222,85 +348,6 @@ deckA.volume=v;
 deckB.volume=v;
 
 }
-
-
-
-
-
-// =====================
-// CUE
-// =====================
-
-
-function cueA(){
-
-deckA.currentTime=0;
-
-deckA.play();
-
-}
-
-
-
-function cueB(){
-
-deckB.currentTime=0;
-
-deckB.play();
-
-}
-
-
-
-
-
-
-
-// =====================
-// LOOP
-// =====================
-
-
-function loopTrackA(){
-
-loopA=!loopA;
-
-}
-
-
-
-function loopTrackB(){
-
-loopB=!loopB;
-
-}
-
-
-
-
-deckA.addEventListener("timeupdate",()=>{
-
-if(loopA && deckA.currentTime>=deckA.duration){
-
-deckA.currentTime=0;
-
-}
-
-});
-
-
-
-deckB.addEventListener("timeupdate",()=>{
-
-if(loopB && deckB.currentTime>=deckB.duration){
-
-deckB.currentTime=0;
-
-}
-
-});
-
-
 
 
 
@@ -323,11 +370,22 @@ deckB.playbackRate=deckA.playbackRate;
 
 
 
-function autoSync(){
+// =====================
+// CUE
+// =====================
 
-sync();
 
-alert("AUTO SYNC COMPLETE");
+function cueA(){
+
+deckA.currentTime=0;
+
+}
+
+
+
+function cueB(){
+
+deckB.currentTime=0;
 
 }
 
@@ -335,48 +393,4 @@ alert("AUTO SYNC COMPLETE");
 
 
 
-
-
-// =====================
-// MASTER TEMPO
-// =====================
-
-
-function masterTempo(v){
-
-deckA.playbackRate=v;
-
-deckB.playbackRate=v;
-
-}
-
-
-
-
-
-
-
-// =====================
-// STATUS
-// =====================
-
-
-deckA.addEventListener("play",()=>{
-
-console.log("DECK A PLAYING");
-
-});
-
-
-
-deckB.addEventListener("play",()=>{
-
-console.log("DECK B PLAYING");
-
-});
-
-
-
-
-
-console.log("IMAN DJ AI STUDIO FULL ENGINE READY");
+console.log("IMAN DJ EFFECT ENGINE READY");
