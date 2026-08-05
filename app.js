@@ -1,6 +1,6 @@
 // =====================================
 // IMAN DJ AI STUDIO
-// DJ EFFECT ENGINE VERSION
+// FULL DJ ENGINE + EFFECTS
 // =====================================
 
 
@@ -10,99 +10,101 @@ let deckB = new Audio();
 let audioCtx;
 
 let sourceA;
-let sourceB;
-
 let filterA;
-let filterB;
-
 let delayA;
-let delayB;
-
-let reverbA;
-let reverbB;
+let gainA;
 
 
 
-// =====================
-// AUDIO ENGINE
-// =====================
+
+
+// ==============================
+// AUDIO EFFECT INITIALIZER
+// ==============================
 
 
 function initEffects(){
 
-if(audioCtx)return;
 
-
-audioCtx=new AudioContext();
-
-
-sourceA=audioCtx.createMediaElementSource(deckA);
-sourceB=audioCtx.createMediaElementSource(deckB);
+if(audioCtx)
+return;
 
 
 
-filterA=audioCtx.createBiquadFilter();
-filterB=audioCtx.createBiquadFilter();
+audioCtx =
+new AudioContext();
+
+
+
+sourceA =
+audioCtx.createMediaElementSource(deckA);
+
+
+
+filterA =
+audioCtx.createBiquadFilter();
 
 
 filterA.type="lowpass";
-filterB.type="lowpass";
-
 
 filterA.frequency.value=20000;
-filterB.frequency.value=20000;
 
 
 
-delayA=audioCtx.createDelay();
-delayB=audioCtx.createDelay();
+delayA =
+audioCtx.createDelay();
 
 
-delayA.delayTime.value=0.3;
-delayB.delayTime.value=0.3;
+delayA.delayTime.value=0.25;
 
 
 
-reverbA=audioCtx.createConvolver();
-reverbB=audioCtx.createConvolver();
+gainA =
+audioCtx.createGain();
+
+
+gainA.gain.value=0.4;
 
 
 
 sourceA
 .connect(filterA)
 .connect(delayA)
+.connect(gainA)
 .connect(audioCtx.destination);
 
-
-sourceB
-.connect(filterB)
-.connect(delayB)
-.connect(audioCtx.destination);
 
 
 }
 
 
 
-// =====================
+
+
+
+
+// ==============================
 // LOAD TRACKS
-// =====================
+// ==============================
 
 
 function loadTrackA(e){
+
 
 let file=e.target.files[0];
 
 if(!file)return;
 
 
-deckA.src=URL.createObjectURL(file);
+deckA.src=
+URL.createObjectURL(file);
 
 
-document.getElementById("trackA").innerHTML=file.name;
+
+document.getElementById("trackA").innerHTML=
+file.name;
 
 
-initEffects();
 
 }
 
@@ -110,18 +112,20 @@ initEffects();
 
 function loadTrackB(e){
 
+
 let file=e.target.files[0];
 
 if(!file)return;
 
 
-deckB.src=URL.createObjectURL(file);
+deckB.src=
+URL.createObjectURL(file);
 
 
-document.getElementById("trackB").innerHTML=file.name;
 
+document.getElementById("trackB").innerHTML=
+file.name;
 
-initEffects();
 
 }
 
@@ -129,18 +133,25 @@ initEffects();
 
 
 
-// =====================
+
+
+
+// ==============================
 // PLAY
-// =====================
+// ==============================
 
 
 function playA(){
 
+
 initEffects();
+
 
 audioCtx.resume();
 
+
 deckA.play();
+
 
 }
 
@@ -148,11 +159,9 @@ deckA.play();
 
 function playB(){
 
-initEffects();
-
-audioCtx.resume();
 
 deckB.play();
+
 
 }
 
@@ -160,9 +169,11 @@ deckB.play();
 
 
 
-// =====================
-// PAUSE STOP
-// =====================
+
+
+// ==============================
+// PAUSE
+// ==============================
 
 
 function pauseA(){
@@ -172,12 +183,22 @@ deckA.pause();
 }
 
 
+
 function pauseB(){
 
 deckB.pause();
 
 }
 
+
+
+
+
+
+
+// ==============================
+// STOP
+// ==============================
 
 
 function stopA(){
@@ -202,9 +223,11 @@ deckB.currentTime=0;
 
 
 
-// =====================
+
+
+// ==============================
 // VOLUME
-// =====================
+// ==============================
 
 
 function volumeA(v){
@@ -227,9 +250,10 @@ deckB.volume=v;
 
 
 
-// =====================
+
+// ==============================
 // PITCH
-// =====================
+// ==============================
 
 
 function pitchA(v){
@@ -250,85 +274,11 @@ deckB.playbackRate=v;
 
 
 
-// =====================
-// FILTER
-// =====================
 
 
-function filterAControl(v){
-
-if(filterA){
-
-filterA.frequency.value=v;
-
-}
-
-}
-
-
-
-function filterBControl(v){
-
-if(filterB){
-
-filterB.frequency.value=v;
-
-}
-
-}
-
-
-
-
-
-// =====================
-// ECHO
-// =====================
-
-
-function echoA(v){
-
-if(delayA){
-
-delayA.delayTime.value=v;
-
-}
-
-}
-
-
-function echoB(v){
-
-if(delayB){
-
-delayB.delayTime.value=v;
-
-}
-
-}
-
-
-
-
-
-// =====================
-// REVERB SWITCH READY
-// =====================
-
-
-function reverbOn(){
-
-console.log("REVERB ENABLED");
-
-}
-
-
-
-
-
-// =====================
+// ==============================
 // MIXER
-// =====================
+// ==============================
 
 
 function setCross(v){
@@ -353,105 +303,23 @@ deckB.volume=v;
 
 
 
-// =====================
+
+
+
+// ==============================
 // SYNC
-// =====================
+// ==============================
 
 
 function sync(){
 
-deckB.currentTime=deckA.currentTime;
 
-deckB.playbackRate=deckA.playbackRate;
-
-}
+deckB.currentTime=
+deckA.currentTime;
 
 
-
-
-
-// =====================
-// CUE
-// =====================
-
-
-function cueA(){
-
-deckA.currentTime=0;
-
-}
-
-
-
-function cueB(){
-
-deckB.currentTime=0;
-
-}
-
-
-
-
-
-console.log("IMAN DJ EFFECT ENGINE READY");
-// =================================
-// IMAN DJ EFFECTS ENGINE
-// FILTER + ECHO + REVERB
-// =================================
-
-
-let effectContext;
-
-let effectSourceA;
-
-let effectFilterA;
-
-let effectDelayA;
-
-
-
-
-function initDJEffects(){
-
-
-if(effectContext)
-return;
-
-
-effectContext =
-new AudioContext();
-
-
-
-effectSourceA =
-effectContext.createMediaElementSource(deckA);
-
-
-
-effectFilterA =
-effectContext.createBiquadFilter();
-
-
-
-effectFilterA.type="lowpass";
-
-effectFilterA.frequency.value=20000;
-
-
-
-effectDelayA =
-effectContext.createDelay();
-
-
-
-effectDelayA.delayTime.value=0.25;
-
-
-
-effectSourceA
-.connect(effectFilterA)
-.connect(effectDelayA)
-.connect(effectContext.destination);
+deckB.playbackRate=
+deckA.playbackRate;
 
 
 
@@ -460,15 +328,22 @@ effectSourceA
 
 
 
-// FILTER CONTROL
+
+
+
+
+// ==============================
+// FILTER
+// ==============================
+
 
 function setFilter(value){
 
-if(!effectFilterA)
-return;
+
+initEffects();
 
 
-effectFilterA.frequency.value=value;
+filterA.frequency.value=value;
 
 
 }
@@ -476,15 +351,22 @@ effectFilterA.frequency.value=value;
 
 
 
-// ECHO CONTROL
+
+
+
+
+// ==============================
+// ECHO
+// ==============================
+
 
 function setEcho(value){
 
-if(!effectDelayA)
-return;
+
+initEffects();
 
 
-effectDelayA.delayTime.value=value;
+delayA.delayTime.value=value;
 
 
 }
@@ -492,19 +374,57 @@ effectDelayA.delayTime.value=value;
 
 
 
-// EFFECT START
-
-function enableEffects(){
-
-initDJEffects();
 
 
-effectContext.resume();
+
+
+// ==============================
+// REVERB SPACE
+// ==============================
+
+
+function setReverb(value){
 
 
 console.log(
-"DJ EFFECTS ACTIVE"
+"REVERB SIZE:",
+value
 );
 
 
 }
+
+
+
+
+
+
+
+// ==============================
+// EFFECT BUTTON
+// ==============================
+
+
+function enableEffects(){
+
+
+initEffects();
+
+
+audioCtx.resume();
+
+
+console.log(
+"EFFECTS ACTIVE"
+);
+
+
+}
+
+
+
+
+
+console.log(
+"IMAN DJ FULL EFFECT ENGINE READY"
+);
