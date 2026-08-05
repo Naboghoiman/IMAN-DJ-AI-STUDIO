@@ -1,49 +1,41 @@
-// IMAN DJ AI STUDIO ENGINE
-
 let audioA = new Audio();
 let audioB = new Audio();
 
-let masterVolume = 1;
-let volumeA = 1;
-let volumeB = 1;
-let crossFade = 0.5;
+let gainA = 1;
+let gainB = 1;
+let master = 1;
+
+let cross = 0.5;
 
 
-// LOAD TRACK A
+// LOAD DECK A
 
 function loadTrackA(event){
 
 let file = event.target.files[0];
 
-if(file){
-
 audioA.src = URL.createObjectURL(file);
 
-document.querySelector(".trackA").innerHTML =
+document.getElementById("trackA").innerHTML =
 file.name;
 
 }
 
-}
 
 
-
-// LOAD TRACK B
+// LOAD DECK B
 
 function loadTrackB(event){
 
 let file = event.target.files[0];
 
-if(file){
-
 audioB.src = URL.createObjectURL(file);
 
-document.querySelector(".trackB").innerHTML =
+document.getElementById("trackB").innerHTML =
 file.name;
 
 }
 
-}
 
 
 
@@ -102,36 +94,38 @@ audioB.currentTime=0;
 
 
 
-// VOLUME CONTROL
 
-function setVolumeA(value){
 
-volumeA=value;
+// VOLUME
 
-updateMix();
+function volumeA(v){
+
+gainA=v;
+
+updateMixer();
+
+}
+
+
+function volumeB(v){
+
+gainB=v;
+
+updateMixer();
 
 }
 
-
-
-function setVolumeB(value){
-
-volumeB=value;
-
-updateMix();
-
-}
 
 
 
 
 // CROSS FADER
 
-function setCross(value){
+function crossFade(v){
 
-crossFade=value;
+cross=v;
 
-updateMix();
+updateMixer();
 
 }
 
@@ -140,79 +134,85 @@ updateMix();
 
 // MASTER
 
-function setMaster(value){
+function setMaster(v){
 
-masterVolume=value;
+master=v;
 
-updateMix();
+updateMixer();
 
 }
 
 
 
 
-function updateMix(){
+function updateMixer(){
 
 audioA.volume =
-volumeA *
-(1-crossFade)
-*
-masterVolume;
+gainA * (1-cross) * master;
 
 
 audioB.volume =
-volumeB *
-crossFade
-*
-masterVolume;
+gainB * cross * master;
 
 
 }
+
 
 
 
 
 // PITCH
 
-function pitchA(value){
+function pitchA(v){
 
-audioA.playbackRate=value;
+audioA.playbackRate=v;
+
+}
+
+
+function pitchB(v){
+
+audioB.playbackRate=v;
 
 }
 
 
 
-function pitchB(value){
 
-audioB.playbackRate=value;
+
+// SIMPLE SYNC
+
+function sync(){
+
+audioB.currentTime =
+audioA.currentTime;
 
 }
 
 
 
 
-// LEVEL METER
 
-setInterval(()=>{
+// RECORD SUPPORT
 
-let bars =
-document.querySelectorAll(".level");
+let recorder;
 
+function startRecord(){
 
-bars.forEach(bar=>{
+let stream =
+new MediaStream();
 
-bar.style.height =
-(20 + Math.random()*70)+"%";
+recorder =
+new MediaRecorder(stream);
 
+recorder.start();
 
-});
-
-
-},150);
+}
 
 
+function stopRecord(){
 
+if(recorder)
+recorder.stop();
 
-console.log(
-"IMAN DJ AI STUDIO READY"
-);
+}
