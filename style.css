@@ -1,224 +1,414 @@
-/* RCF STYLE DARK RACK DESIGN */
+/* =====================================
+IMAN DJ AI STUDIO
+RCF STYLE HARDWARE INTERFACE
+===================================== */
+
+
+*{
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+
 
 body{
-    background:#050505;
-    color:#eee;
-    font-family:Arial, sans-serif;
-}
 
-.section,
-.eq-container,
-.effects-container,
-.mixer{
-    background:linear-gradient(#1b1b1b,#090909);
-    border:1px solid #333;
-    border-radius:12px;
-    padding:25px;
-    margin:20px;
-    box-shadow:0 0 15px #000;
+margin:0;
+
+background:#060606;
+
+color:#ddd;
+
 }
 
 
-/* TOP TABS */
+
+
+.header{
+
+background:#101010;
+
+padding:25px;
+
+text-align:center;
+
+border-bottom:2px solid #333;
+
+}
+
+
+
+.header h1{
+
+font-size:36px;
+
+letter-spacing:3px;
+
+}
+
+
+
+.header p{
+
+color:#999;
+
+}
+
+
+
+
+.tabs{
+
+display:flex;
+
+justify-content:center;
+
+gap:8px;
+
+flex-wrap:wrap;
+
+margin-top:20px;
+
+}
+
+
+
+
 
 button{
-    background:#222;
-    color:white;
-    border:1px solid #555;
-    border-radius:5px;
-    padding:12px 25px;
-    font-weight:bold;
-}
 
-button:hover{
-    background:#0077ff;
-}
+background:#222;
 
+color:#eee;
 
-/* EFFECT RACK */
+border:1px solid #555;
 
-.effect-box{
+padding:10px 18px;
 
-    background:
-    linear-gradient(#222,#111);
+border-radius:5px;
 
-    border:2px solid #333;
-    border-radius:8px;
-
-    padding:20px;
-    margin:15px 0;
-
-}
-
-
-.effect-box h2{
-
-    color:#00ff88;
-    letter-spacing:2px;
-
-}
-
-
-.effect-slider{
-
-width:80%;
-
-}
-
-
-/* RCF EQ */
-
-.eq-container{
-
-background:#111;
-
-}
-
-
-.eq-title{
-
-font-size:28px;
 font-weight:bold;
 
 }
 
 
-.eq-panel{
 
-display:flex;
-align-items:flex-end;
-justify-content:center;
-gap:12px;
 
-height:350px;
+button:hover{
 
-background:#161616;
+background:#555;
+
+}
+
+
+
+
+
+
+/* RACK PANELS */
+
+
+.rack,
+.rcf-rack{
+
+background:
+linear-gradient(#202020,#0b0b0b);
 
 border:2px solid #333;
 
+border-radius:12px;
+
+margin:20px;
+
+padding:25px;
+
+box-shadow:
+0 10px 30px #000;
+
+}
+
+
+
+
+
+/* DECKS */
+
+
+.decks{
+
+display:flex;
+
+gap:25px;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+}
+
+
+
+
+.deck{
+
+width:360px;
+
+background:#111;
+
+border:1px solid #444;
+
+border-radius:15px;
+
 padding:20px;
 
-}
-
-
-/* EACH EQ BAND */
-
-.eq-band{
-
-height:260px;
-display:flex;
-flex-direction:column;
-align-items:center;
+text-align:center;
 
 }
 
 
-.eq-band input[type="range"]{
 
-writing-mode:vertical-lr;
 
-direction:rtl;
+.jog{
 
 height:220px;
+
+width:220px;
+
+margin:20px auto;
+
+border-radius:50%;
+
+
+background:
+radial-gradient(circle,#666,#222 40%,#000 70%);
+
+
+border:10px solid #333;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:45px;
+
+font-weight:bold;
+
+}
+
+
+
+
+
+.wave{
+
+height:80px;
+
+background:#000;
+
+border:1px solid #444;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+color:#00ff88;
+
+}
+
+
+
+
+
+
+input[type=range]{
+
+width:90%;
 
 accent-color:#aaa;
 
 }
 
 
-/* FREQUENCY LABELS */
 
-.freq{
 
-font-size:10px;
-color:#bbb;
 
-transform:rotate(-90deg);
+/* EFFECT MODULES */
 
-margin-top:10px;
+
+.rcf-module{
+
+background:#151515;
+
+border:1px solid #444;
+
+border-radius:10px;
+
+padding:25px;
+
+margin:20px 0;
 
 }
 
 
-/* RCF STYLE KNOBS */
+
+
+.rcf-module h3{
+
+color:#00aaff;
+
+letter-spacing:2px;
+
+}
+
+
+
+
+
+.knobs{
+
+display:flex;
+
+gap:25px;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+}
+
+
+
 
 .knob{
 
-width:55px;
-height:55px;
+height:75px;
+
+width:75px;
 
 border-radius:50%;
 
 background:
-radial-gradient(circle,#555,#111);
 
-border:3px solid #777;
-
-margin:10px;
-
-}
+radial-gradient(circle,#777,#111);
 
 
-/* RACK TOP BAR */
-
-.rack-header{
-
-background:#222;
-
-padding:12px;
-
-border-bottom:2px solid #444;
+border:5px solid #444;
 
 display:flex;
 
-justify-content:space-between;
-
-}
-
-
-/* ON BUTTON */
-
-.on-btn{
-
-background:#111;
-border:1px solid #777;
-
-}
-
-.on-btn.active{
-
-background:#00aa55;
-
-}
-
-
-/* MASTER OUTPUT */
-
-.master-output{
-
-height:200px;
-
-background:#111;
-
-border:2px solid #333;
-
-display:flex;
-
-align-items:flex-end;
+align-items:center;
 
 justify-content:center;
 
+font-size:11px;
+
+color:white;
+
 }
 
 
-.master-bar{
 
-width:40px;
 
-height:70%;
 
-background:#00ff88;
 
-box-shadow:0 0 20px #00ff88;
+
+/* EQ */
+
+
+.eq-rack{
+
+display:flex;
+
+gap:12px;
+
+align-items:flex-end;
+
+overflow-x:auto;
+
+background:#090909;
+
+padding:20px;
+
+}
+
+
+
+.eq-band{
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+}
+
+
+
+.eq-band input{
+
+height:230px;
+
+writing-mode:vertical-lr;
+
+direction:rtl;
+
+}
+
+
+
+.eq-band span{
+
+font-size:10px;
+
+margin-top:10px;
+
+color:#aaa;
+
+}
+
+
+
+
+
+/* MASTER */
+
+
+.master-output{
+
+height:220px;
+
+width:50px;
+
+margin:auto;
+
+background:
+
+linear-gradient(
+to top,
+#00ff66 40%,
+#222 40%
+);
+
+
+border-radius:10px;
+
+}
+
+
+
+
+@media(max-width:700px){
+
+.deck{
+
+width:95%;
+
+}
+
 
 }
