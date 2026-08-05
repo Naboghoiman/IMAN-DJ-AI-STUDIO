@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -25,39 +25,15 @@
 
 
 
+<nav>
 
-<nav class="top-menu">
-
-<button>
-FADERS
-</button>
-
-
-<button>
-EFFECTS
-</button>
-
-
-<button>
-OUTPUTS
-</button>
-
-
-<button>
-METERS
-</button>
-
-
-<button>
-SETTINGS
-</button>
-
+<button>FADERS</button>
+<button>EFFECTS</button>
+<button>OUTPUTS</button>
+<button>METERS</button>
+<button>SETTINGS</button>
 
 </nav>
-
-
-
-
 
 
 
@@ -68,39 +44,24 @@ SETTINGS
 <section class="panel">
 
 
-<h2>
-DUAL DECK SYSTEM
-</h2>
-
+<h2>DUAL DECK SYSTEM</h2>
 
 
 <div class="deck-container">
 
 
 
-
-
-<!-- DECK A -->
-
 <div class="deck">
 
 
-<h2>
-DECK A
-</h2>
-
+<h2>DECK A</h2>
 
 
 <div class="jog">
 
-<div class="jog-center">
 A
-</div>
 
 </div>
-
-
-
 
 
 <div class="waveform">
@@ -111,14 +72,11 @@ WAVEFORM A
 
 
 
-
 <div id="trackA">
 
 NO TRACK
 
 </div>
-
-
 
 
 <input 
@@ -128,103 +86,45 @@ onchange="loadTrackA(event)">
 
 
 
+<div>
 
+<button onclick="playA()">▶</button>
 
-<div class="audio-controls">
+<button onclick="pauseA()">⏸</button>
 
-
-<button onclick="playA()">
-
-▶
-
-</button>
-
-
-<button onclick="pauseA()">
-
-⏸
-
-</button>
-
-
-<button onclick="stopA()">
-
-■
-
-</button>
-
-
+<button onclick="stopA()">■</button>
 
 </div>
 
 
 
+<button onclick="cueA()">CUE</button>
 
-
-<button onclick="cueA()">
-
-CUE
-
-</button>
-
-
-<button onclick="loopTrackA()">
-
-LOOP
-
-</button>
-
-
-<button onclick="sync()">
-
-SYNC
-
-</button>
-
-
-
+<button onclick="sync()">SYNC</button>
 
 
 <h3>
 
 BPM:
 
-<span id="bpmA">
-
 128
-
-</span>
 
 </h3>
 
 
-
-
-
-<label>
-
-PITCH
-
-</label>
-
+<label>PITCH</label>
 
 <input 
 type="range"
 min="0.5"
 max="1.5"
 step="0.01"
+value="1"
 oninput="pitchA(this.value)">
 
 
 
-
-
-<label>
-
-VOLUME
-
-</label>
-
+<label>VOLUME</label>
 
 <input 
 type="range"
@@ -238,7 +138,6 @@ oninput="volumeA(this.value)">
 
 </div>
 <!-- MIXER -->
-
 
 <div class="mixer">
 
@@ -264,8 +163,6 @@ oninput="setCross(this.value)">
 
 
 
-
-
 <label>
 MASTER
 </label>
@@ -281,7 +178,73 @@ oninput="setMaster(this.value)">
 
 
 
+
+
+<!-- VU METERS -->
+
+<div class="vu-container">
+
+
+<h3>
+MASTER VU
+</h3>
+
+
+<div class="vu-bar">
+
+<div id="vuLevel"></div>
+
 </div>
+
+
+
+<h3>
+CHANNEL METERS
+</h3>
+
+
+
+<div class="channel-meter">
+
+
+<p>
+DECK A
+</p>
+
+
+<div class="vu-small">
+
+<div id="vuA"></div>
+
+</div>
+
+
+
+
+<p>
+DECK B
+</p>
+
+
+<div class="vu-small">
+
+<div id="vuB"></div>
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
 
 
 
@@ -301,20 +264,11 @@ DECK B
 
 
 
-
 <div class="jog">
-
-
-<div class="jog-center">
 
 B
 
 </div>
-
-
-</div>
-
-
 
 
 
@@ -323,7 +277,6 @@ B
 WAVEFORM B
 
 </div>
-
 
 
 
@@ -336,7 +289,6 @@ NO TRACK
 
 
 
-
 <input
 type="file"
 accept="audio/*"
@@ -344,35 +296,17 @@ onchange="loadTrackB(event)">
 
 
 
+<div>
 
 
-<div class="audio-controls">
+<button onclick="playB()">▶</button>
 
+<button onclick="pauseB()">⏸</button>
 
-<button onclick="playB()">
-
-▶
-
-</button>
-
-
-<button onclick="pauseB()">
-
-⏸
-
-</button>
-
-
-<button onclick="stopB()">
-
-■
-
-</button>
+<button onclick="stopB()">■</button>
 
 
 </div>
-
-
 
 
 
@@ -383,16 +317,6 @@ CUE
 </button>
 
 
-
-<button onclick="loopTrackB()">
-
-LOOP
-
-</button>
-
-
-
-
 <button onclick="sync()">
 
 SYNC
@@ -401,20 +325,13 @@ SYNC
 
 
 
-
-
 <h3>
 
 BPM:
 
-<span id="bpmB">
-
 128
 
-</span>
-
 </h3>
-
 
 
 
@@ -431,6 +348,7 @@ type="range"
 min="0.5"
 max="1.5"
 step="0.01"
+value="1"
 oninput="pitchB(this.value)">
 
 
@@ -454,8 +372,6 @@ oninput="volumeB(this.value)">
 
 
 
-
-
 </div>
 
 
@@ -464,63 +380,51 @@ oninput="volumeB(this.value)">
 
 
 </section>
-
-
-
-
-
-
-
 <!-- EFFECTS -->
 
-
-
 <section class="panel">
 
 
 <h2>
-
 RCF EFFECTS RACK
-
 </h2>
 
 
 
-
 <div class="effect-unit">
 
 
 <h3>
-
-HALL REVERB
-
+REVERB
 </h3>
-
-
-<label>
-
-DECAY
-
-</label>
-
-
-<input type="range">
-
-
-<label>
-
-SPACE
-
-</label>
 
 
 <input type="range">
 
 
 <button>
-
 ON
+</button>
 
+
+</div>
+
+
+
+
+<div class="effect-unit">
+
+
+<h3>
+ECHO DELAY
+</h3>
+
+
+<input type="range">
+
+
+<button>
+ON
 </button>
 
 
@@ -534,51 +438,7 @@ ON
 
 
 <h3>
-
-DIGITAL DELAY
-
-</h3>
-
-
-<label>
-
-TIME
-
-</label>
-
-
-<input type="range">
-
-
-<label>
-
-FEEDBACK
-
-</label>
-
-
-<input type="range">
-
-
-<button>
-
-ON
-
-</button>
-
-
-</div>
-
-
-
-
-<div class="effect-unit">
-
-
-<h3>
-
 FILTER
-
 </h3>
 
 
@@ -586,30 +446,7 @@ FILTER
 
 
 <button>
-
 ON
-
-</button>
-
-
-  </div>
-  <div class="effect-unit">
-
-
-<h3>
-
-MAXIMIZER
-
-</h3>
-
-
-<input type="range">
-
-
-<button>
-
-ON
-
 </button>
 
 
@@ -626,18 +463,15 @@ ON
 
 
 
-<!-- EQUALIZER -->
+<!-- GRAPHIC EQ -->
 
 
 <section class="panel">
 
 
 <h2>
-
 31 BAND GRAPHIC EQ
-
 </h2>
-
 
 
 <div class="eq-container">
@@ -653,7 +487,6 @@ ON
 <input type="range">
 <input type="range">
 <input type="range">
-<input type="range">
 
 
 </div>
@@ -667,47 +500,30 @@ ON
 
 
 
-<!-- MASTER OUTPUT -->
+<!-- OUTPUT -->
 
 
 <section class="panel">
 
 
 <h2>
-
 MASTER OUTPUT
-
 </h2>
-
-
 
 
 <div class="meter">
 
 
-<div class="level">
+<div class="level"></div>
 
 
 </div>
-
-
-</div>
-
-
-
-
-
-<input
-type="range"
-min="0"
-max="1"
-step="0.01"
-value="1"
-oninput="setMaster(this.value)">
 
 
 
 </section>
+
+
 
 
 
