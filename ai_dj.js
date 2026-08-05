@@ -1,293 +1,198 @@
-// =====================================
-// IMAN DJ AI STUDIO
-// ADVANCED AI SYNC ENGINE V4
-// DJAY STYLE ENGINE
-// =====================================
+// IMAN DJ AI STUDIO - STABLE AUDIO ENGINE
 
 
 let deckA = new Audio();
 let deckB = new Audio();
 
-let ctx;
-
-let sourceA;
-let sourceB;
-
-let analyserA;
-let analyserB;
-
-
-let bpmA = 0;
-let bpmB = 0;
-
-
-let beatA = 0;
-let beatB = 0;
-
-
-let syncEnabled=false;
+let cross = 0.5;
 
 
 
-// CREATE AUDIO ENGINE
+function loadTrackA(event){
 
-function initAudio(){
+let file = event.target.files[0];
 
-if(ctx) return;
-
-
-ctx = new AudioContext();
+if(!file) return;
 
 
-analyserA = ctx.createAnalyser();
-analyserB = ctx.createAnalyser();
-
-
-analyserA.fftSize=2048;
-analyserB.fftSize=2048;
-
-
-sourceA = ctx.createMediaElementSource(deckA);
-
-sourceB = ctx.createMediaElementSource(deckB);
-
-
-sourceA.connect(analyserA);
-sourceB.connect(analyserB);
-
-
-analyserA.connect(ctx.destination);
-analyserB.connect(ctx.destination);
-
-
-console.log(
-"AI AUDIO ENGINE READY"
-);
-
-}
-
-
-
-// LOAD DECK A
-
-function loadTrackA(e){
-
-initAudio();
-
-
-let file=e.target.files[0];
-
-if(!file)return;
-
-
-deckA.src=
+deckA.src =
 URL.createObjectURL(file);
 
 
-document.getElementById("trackA").innerHTML=
+document.getElementById("trackA").innerHTML =
 file.name;
-
 
 }
 
 
 
-// LOAD DECK B
-
-function loadTrackB(e){
-
-initAudio();
 
 
-let file=e.target.files[0];
+function loadTrackB(event){
 
-if(!file)return;
+let file = event.target.files[0];
+
+if(!file) return;
 
 
-deckB.src=
+deckB.src =
 URL.createObjectURL(file);
 
 
-document.getElementById("trackB").innerHTML=
+document.getElementById("trackB").innerHTML =
 file.name;
 
+}
+
+
+
+
+
+function playA(){
+
+deckA.play();
 
 }
-// =====================================
-// BPM DETECTION ENGINE
-// =====================================
 
 
-function analyseBPM(analyser){
 
-let buffer=
-new Uint8Array(
-analyser.frequencyBinCount
+function playB(){
+
+deckB.play();
+
+}
+
+
+
+
+
+function pauseA(){
+
+deckA.pause();
+
+}
+
+
+function pauseB(){
+
+deckB.pause();
+
+}
+
+
+
+
+
+function stopA(){
+
+deckA.pause();
+
+deckA.currentTime=0;
+
+}
+
+
+
+function stopB(){
+
+deckB.pause();
+
+deckB.currentTime=0;
+
+}
+
+
+
+
+
+function volumeA(value){
+
+deckA.volume=value;
+
+}
+
+
+
+
+function volumeB(value){
+
+deckB.volume=value;
+
+}
+
+
+
+
+
+function pitchA(value){
+
+deckA.playbackRate=value;
+
+}
+
+
+
+function pitchB(value){
+
+deckB.playbackRate=value;
+
+}
+
+
+
+
+
+function setCross(value){
+
+cross=value;
+
+
+deckA.volume=1-value;
+
+deckB.volume=value;
+
+}
+
+
+
+
+
+function setMaster(value){
+
+deckA.volume=value;
+
+deckB.volume=value;
+
+}
+
+
+
+
+
+function sync(){
+
+console.log(
+"SYNC READY"
 );
 
-
-analyser.getByteFrequencyData(buffer);
-
-
-let energy=0;
-
-
-for(let i=0;i<buffer.length;i++){
-
-energy+=buffer[i];
-
 }
 
 
-energy=
-energy/buffer.length;
 
 
 
-// Estimate BPM from energy changes
+function AI_MIX(){
 
-let bpm=
-Math.floor(
-80 + (energy/255)*100
+alert(
+"AI MIX MODULE READY"
 );
 
-
-return bpm;
-
 }
 
 
-
-
-// CONTINUOUS AI ANALYSIS
-
-function startAIAnalysis(){
-
-
-setInterval(()=>{
-
-
-if(analyserA){
-
-bpmA=
-analyseBPM(analyserA);
-
-}
-
-
-
-if(analyserB){
-
-bpmB=
-analyseBPM(analyserB);
-
-}
 
 
 
 console.log(
-"DECK A BPM:",
-bpmA,
-"DECK B BPM:",
-bpmB
+"IMAN DJ STABLE ENGINE LOADED"
 );
-
-
-
-if(syncEnabled){
-
-autoBeatMatch();
-
-}
-
-
-
-},1000);
-
-
-
-}
-
-
-
-
-
-
-// =====================================
-// BEAT MATCH ENGINE
-// =====================================
-
-
-function autoBeatMatch(){
-
-
-if(!bpmA || !bpmB)
-return;
-
-
-
-let difference=
-bpmA/bpmB;
-
-
-
-// Correct speed of Deck B
-
-deckB.playbackRate=
-difference;
-
-
-
-// phase correction
-
-let gap=
-deckA.currentTime-
-deckB.currentTime;
-
-
-
-if(Math.abs(gap)>0.05){
-
-
-deckB.currentTime +=
-gap*0.1;
-
-
-}
-
-
-
-console.log(
-"AI MATCH",
-difference
-);
-
-
-
-}
-
-
-
-
-
-
-// =====================================
-// ENABLE SYNC
-// =====================================
-
-
-function enableSync(){
-
-
-syncEnabled=true;
-
-
-startAIAnalysis();
-
-
-console.log(
-"AI SYNC ACTIVE"
-);
-
-
-                              }
