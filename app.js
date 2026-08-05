@@ -1,98 +1,240 @@
+// ======================================
+// IMAN DJ AI STUDIO
+// AUDIO ENGINE
+// ======================================
+
+
 let deckA = new Audio();
 let deckB = new Audio();
 
-let currentA = false;
+let reverbOn = false;
+let delayOn = false;
+let filterOn = false;
+
 
 
 // LOAD DECK A
+
 function loadA(file){
-    deckA.src = URL.createObjectURL(file);
-    currentA=true;
+
+if(!file) return;
+
+deckA.src = URL.createObjectURL(file);
+
+let name=document.getElementById("trackA");
+
+if(name){
+
+name.innerHTML=file.name;
+
 }
 
-// LOAD DECK B
-function loadB(file){
-    deckB.src = URL.createObjectURL(file);
-    currentA=false;
 }
+
+
+
+
+
+// LOAD DECK B
+
+function loadB(file){
+
+if(!file) return;
+
+deckB.src = URL.createObjectURL(file);
+
+let name=document.getElementById("trackB");
+
+if(name){
+
+name.innerHTML=file.name;
+
+}
+
+}
+
+
+
 
 
 // PLAY
+
 function playA(){
-    deckA.play();
+
+deckA.play();
+
 }
 
+
+
 function playB(){
-    deckB.play();
+
+deckB.play();
+
 }
+
+
+
+
+
+
+// PAUSE
+
+
+function pauseA(){
+
+deckA.pause();
+
+}
+
+
+
+function pauseB(){
+
+deckB.pause();
+
+}
+
+
+
+
 
 
 // STOP
+
+
 function stopA(){
-    deckA.pause();
-    deckA.currentTime=0;
+
+deckA.pause();
+
+deckA.currentTime=0;
+
 }
 
+
+
 function stopB(){
-    deckB.pause();
-    deckB.currentTime=0;
+
+deckB.pause();
+
+deckB.currentTime=0;
+
 }
+
+
+
+
 
 
 // VOLUME
 
-function volumeA(value){
-    deckA.volume=value;
-}
 
-function volumeB(value){
-    deckB.volume=value;
-}
+function volumeA(v){
 
+deckA.volume=v;
 
-// PITCH CONTROL
-
-function pitchA(value){
-    deckA.playbackRate=value;
-}
-
-function pitchB(value){
-    deckB.playbackRate=value;
 }
 
 
 
-// EFFECT ENGINE
+function volumeB(v){
 
-const audioCtx = new AudioContext();
+deckB.volume=v;
 
-let reverb=false;
-let delay=false;
-let filter=false;
+}
+
+
+
+
+
+
+// PITCH
+
+
+function pitchA(v){
+
+deckA.playbackRate=v;
+
+}
+
+
+
+function pitchB(v){
+
+deckB.playbackRate=v;
+
+}
+
+
+
+
+
+
+
+// SYNC
+
+
+function sync(){
+
+deckB.currentTime=
+deckA.currentTime;
+
+deckB.playbackRate=
+deckA.playbackRate;
+
+}
+
+
+
+
+
+
+// EFFECT BUTTONS
 
 
 function toggleReverb(){
 
-reverb=!reverb;
+reverbOn=!reverbOn;
 
-alert("Hall Reverb "+(reverb?"ON":"OFF"));
+console.log(
+"Reverb:",
+reverbOn
+);
 
 }
+
+
 
 
 function toggleDelay(){
 
-delay=!delay;
+delayOn=!delayOn;
 
-alert("Digital Delay "+(delay?"ON":"OFF"));
+console.log(
+"Delay:",
+delayOn
+);
 
 }
+
+
 
 
 function toggleFilter(){
 
-filter=!filter;
+filterOn=!filterOn;
 
-alert("RCF Filter "+(filter?"ON":"OFF"));
+console.log(
+"Filter:",
+filterOn
+);
 
 }
+
+
+
+
+
+console.log(
+"IMAN DJ ENGINE READY"
+);
