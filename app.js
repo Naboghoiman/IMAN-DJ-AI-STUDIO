@@ -1,186 +1,298 @@
-let audioA = new Audio();
-let audioB = new Audio();
+// ======================================
+// IMAN DJ AI STUDIO
+// STABLE AUDIO PLAYER ENGINE
+// ======================================
 
-let bpmA = 128;
-let bpmB = 128;
+
+let deckA = new Audio();
+let deckB = new Audio();
+
+let volumeDeckA = 1;
+let volumeDeckB = 1;
+let crossFader = 0.5;
+let masterVolume = 1;
 
 
+
+
+// ===============================
 // LOAD DECK A
+// ===============================
+
 function loadTrackA(event){
 
-let file = event.target.files[0];
+    let file = event.target.files[0];
 
-if(!file) return;
+    if(!file) return;
 
-audioA.src = URL.createObjectURL(file);
 
-document.getElementById("trackA").innerHTML=file.name;
+    deckA.src = URL.createObjectURL(file);
 
-detectBPM(audioA,"bpmA");
+    deckA.load();
+
+
+    let display = document.getElementById("trackA");
+
+    if(display){
+        display.innerHTML = file.name;
+    }
 
 }
 
 
 
+
+// ===============================
 // LOAD DECK B
+// ===============================
+
 function loadTrackB(event){
 
-let file = event.target.files[0];
+    let file = event.target.files[0];
 
-if(!file) return;
+    if(!file) return;
 
-audioB.src = URL.createObjectURL(file);
 
-document.getElementById("trackB").innerHTML=file.name;
+    deckB.src = URL.createObjectURL(file);
 
-detectBPM(audioB,"bpmB");
+    deckB.load();
+
+
+    let display = document.getElementById("trackB");
+
+    if(display){
+        display.innerHTML = file.name;
+    }
 
 }
 
 
 
+
+
+
+// ===============================
 // PLAY
+// ===============================
+
 function playA(){
-audioA.play();
+
+    deckA.play();
+
 }
+
+
 
 function playB(){
-audioB.play();
+
+    deckB.play();
+
 }
 
 
+
+
+
+
+// ===============================
 // PAUSE
+// ===============================
+
 function pauseA(){
-audioA.pause();
+
+    deckA.pause();
+
 }
+
+
 
 function pauseB(){
-audioB.pause();
+
+    deckB.pause();
+
 }
 
 
+
+
+
+
+
+// ===============================
 // STOP
+// ===============================
+
 function stopA(){
-audioA.pause();
-audioA.currentTime=0;
+
+    deckA.pause();
+
+    deckA.currentTime = 0;
+
 }
+
 
 
 function stopB(){
-audioB.pause();
-audioB.currentTime=0;
+
+    deckB.pause();
+
+    deckB.currentTime = 0;
+
 }
 
 
 
+
+
+
+
+// ===============================
 // VOLUME
-
-function volumeA(v){
-audioA.volume=v;
-}
+// ===============================
 
 
-function volumeB(v){
-audioB.volume=v;
-}
+function volumeA(value){
 
+    volumeDeckA = value;
 
-
-// PITCH CONTROL
-
-function pitchA(v){
-
-audioA.playbackRate=v;
-
-}
-
-
-function pitchB(v){
-
-audioB.playbackRate=v;
+    updateMixer();
 
 }
 
 
 
-// AI SYNC
+function volumeB(value){
+
+    volumeDeckB = value;
+
+    updateMixer();
+
+}
+
+
+
+
+
+
+
+// ===============================
+// CROSS FADER
+// ===============================
+
+
+function setCross(value){
+
+    crossFader = value;
+
+    updateMixer();
+
+}
+
+
+
+
+
+
+// ===============================
+// MASTER
+// ===============================
+
+
+function setMaster(value){
+
+    masterVolume = value;
+
+    updateMixer();
+
+}
+
+
+
+
+
+
+function updateMixer(){
+
+    deckA.volume =
+    volumeDeckA *
+    (1-crossFader) *
+    masterVolume;
+
+
+    deckB.volume =
+    volumeDeckB *
+    crossFader *
+    masterVolume;
+
+}
+
+
+
+
+
+
+// ===============================
+// PITCH
+// ===============================
+
+
+function pitchA(value){
+
+    deckA.playbackRate = value;
+
+}
+
+
+
+function pitchB(value){
+
+    deckB.playbackRate = value;
+
+}
+
+
+
+
+
+
+
+// ===============================
+// BASIC SYNC
+// ===============================
+
 
 function sync(){
 
-let difference=bpmA/bpmB;
+    deckB.currentTime =
+    deckA.currentTime;
 
-audioB.playbackRate=difference;
-
-alert("AI Beat Sync Applied");
-
-}
-
-
-
-// CROSS FADER
-
-function setCross(v){
-
-audioA.volume=1-v;
-audioB.volume=v;
-
-}
-
-
-
-// MASTER
-
-function setMaster(v){
-
-audioA.volume=v;
-audioB.volume=v;
+    console.log("SYNC COMPLETE");
 
 }
 
 
 
 
-// BPM DETECTOR
-
-async function detectBPM(audio,id){
-
-let bpm=128;
 
 
-// temporary intelligent estimation
-// will be replaced with full AI beat detection
 
-if(audio.duration){
+// ===============================
+// AI MIX PLACEHOLDER
+// ===============================
 
-bpm=Math.floor(
-90 + Math.random()*70
+
+function AI_MIX(){
+
+    alert(
+    "AI MIX READY - ENGINE CONNECTING"
+    );
+
+}
+
+
+
+
+
+console.log(
+"IMAN DJ STUDIO PLAYER READY"
 );
-
-}
-
-
-document.getElementById(id).innerHTML=bpm;
-
-
-if(id=="bpmA") bpmA=bpm;
-
-if(id=="bpmB") bpmB=bpm;
-
-
-}
-
-
-
-// AI MIX
-
-function aiMix(){
-
-sync();
-
-audioA.play();
-
-audioB.play();
-
-alert("AI DJ MIX STARTED");
-
-}
