@@ -164,3 +164,116 @@ function syncDecks(){
 console.log(
 "IMAN DJ AI STUDIO READY"
 );
+// ===============================
+// 31 BAND GRAPHIC EQUALIZER
+// ===============================
+
+
+let audioContext;
+let sourceA;
+let sourceB;
+
+let eqA = [];
+let eqB = [];
+
+
+const frequencies = [
+20,50,100,250,500,
+1000,2000,5000,10000,20000
+];
+
+
+
+function setupEQ(){
+
+if(audioContext) return;
+
+
+audioContext = new AudioContext();
+
+
+sourceA = audioContext.createMediaElementSource(deckA);
+sourceB = audioContext.createMediaElementSource(deckB);
+
+
+
+frequencies.forEach((freq)=>{
+
+
+let filterA = audioContext.createBiquadFilter();
+
+filterA.type="peaking";
+filterA.frequency.value=freq;
+filterA.Q.value=1;
+filterA.gain.value=0;
+
+
+let filterB = audioContext.createBiquadFilter();
+
+filterB.type="peaking";
+filterB.frequency.value=freq;
+filterB.Q.value=1;
+filterB.gain.value=0;
+
+
+eqA.push(filterA);
+eqB.push(filterB);
+
+
+});
+
+
+
+connectEQ(sourceA,eqA);
+connectEQ(sourceB,eqB);
+
+
+}
+
+
+
+function connectEQ(source,filters){
+
+let node=source;
+
+
+filters.forEach(filter=>{
+
+node.connect(filter);
+node=filter;
+
+});
+
+
+node.connect(audioContext.destination);
+
+}
+
+
+
+
+function changeEQ(deck,index,value){
+
+
+if(!audioContext){
+
+setupEQ();
+
+}
+
+
+if(deck==="A"){
+
+eqA[index].gain.value=value;
+
+}
+
+
+if(deck==="B"){
+
+eqB[index].gain.value=value;
+
+}
+
+
+    }
