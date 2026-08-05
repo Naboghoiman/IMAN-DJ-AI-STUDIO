@@ -4,34 +4,40 @@
 
 
 body{
+
     margin:0;
-    background:#050505;
-    color:#fff;
+    background:#080808;
+    color:#ffffff;
     font-family:Arial, sans-serif;
+
 }
+
 
 
 
 header{
 
     text-align:center;
-    padding:20px;
-    font-size:32px;
-    font-weight:bold;
     background:#111;
+    padding:20px;
+    font-size:30px;
+    font-weight:bold;
     letter-spacing:3px;
+    border-bottom:2px solid #333;
 
 }
 
 
 
-nav{
+
+.rack-menu{
 
     display:flex;
+    flex-wrap:wrap;
     justify-content:center;
-    gap:10px;
+    gap:8px;
     padding:15px;
-    background:#0b0b0b;
+    background:#151515;
 
 }
 
@@ -39,12 +45,11 @@ nav{
 
 button{
 
-    background:#008f5a;
+    background:#222;
     color:white;
-    border:none;
-    padding:12px 20px;
-    border-radius:8px;
-    font-weight:bold;
+    border:1px solid #555;
+    padding:10px 15px;
+    border-radius:5px;
 
 }
 
@@ -52,39 +57,46 @@ button{
 
 button:hover{
 
-    background:#00c878;
+    background:#008f5a;
 
 }
 
 
 
 
-.decks{
+.console{
 
     display:flex;
     justify-content:center;
-    gap:25px;
+    gap:15px;
+    padding:20px;
     flex-wrap:wrap;
-    padding:25px;
 
 }
 
 
 
 
-.deck{
 
-    background:#151515;
-    width:350px;
+.channel,
+.mixer-panel{
+
+    background:#171717;
+    border:1px solid #333;
+    border-radius:10px;
     padding:20px;
-    border-radius:15px;
+    width:300px;
     box-shadow:0 0 20px #000;
 
 }
 
 
 
-.deck h2{
+
+.channel h2,
+.mixer-panel h2,
+.equalizer-panel h2,
+.master h2{
 
     text-align:center;
     color:#00ff99;
@@ -93,21 +105,21 @@ button:hover{
 
 
 
-.display{
 
-    height:130px;
+.screen{
+
+    height:120px;
     background:#000;
-    border:2px solid #333;
-    border-radius:10px;
-
+    border:2px solid #444;
     display:flex;
     align-items:center;
     justify-content:center;
-
     color:#00ff99;
-    font-size:22px;
+    border-radius:8px;
+    margin-bottom:15px;
 
 }
+
 
 
 
@@ -120,7 +132,8 @@ button:hover{
 
 
 
-.slider{
+
+input[type="range"]{
 
     width:100%;
 
@@ -129,30 +142,45 @@ button:hover{
 
 
 
-.mixer{
 
-    margin:20px;
-    padding:25px;
-    background:#151515;
-    border-radius:15px;
+.meter{
+
+    height:150px;
+    width:25px;
+    background:#000;
+    margin:auto;
+    border:1px solid #444;
 
 }
 
 
 
-.mixer h2{
+.level{
+
+    width:100%;
+    height:40%;
+    background:#00ff00;
+
+}
+
+
+
+
+
+.knobs{
+
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+
+}
+
+
+.knobs div{
 
     text-align:center;
-    color:#00ff99;
-
-}
-
-
-
-
-.cross{
-
-    width:90%;
+    width:60px;
 
 }
 
@@ -160,19 +188,47 @@ button:hover{
 
 
 
-.eq{
+
+.crossfader{
+
+    margin-top:20px;
+
+}
+
+
+
+
+
+.equalizer-panel{
+
+    margin:20px;
+    background:#151515;
+    padding:20px;
+    border-radius:10px;
+    border:1px solid #333;
+
+}
+
+
+
+
+
+.eq-sliders{
 
     display:flex;
     justify-content:center;
-    gap:15px;
+    gap:12px;
     overflow-x:auto;
-    padding:20px;
+    height:260px;
+    align-items:center;
 
 }
 
 
 
-.band{
+
+
+.eq-band{
 
     display:flex;
     flex-direction:column;
@@ -182,21 +238,22 @@ button:hover{
 
 
 
-.band label{
 
-    font-size:12px;
+.eq-band span{
+
+    font-size:11px;
     color:#aaa;
-    writing-mode:vertical-rl;
 
 }
 
 
 
-.band input{
 
-    height:200px;
-    width:25px;
 
+.eq-band input{
+
+    height:180px;
+    width:20px;
     writing-mode:vertical-lr;
     direction:rtl;
 
@@ -205,10 +262,28 @@ button:hover{
 
 
 
-input[type=file]{
 
-    width:100%;
-    margin:15px 0;
+.master{
+
+    margin:20px;
+    padding:20px;
+    background:#151515;
+    border-radius:10px;
+    text-align:center;
+
+}
+
+
+
+
+
+.master-meter{
+
+    height:150px;
+    width:40px;
+    background:#000;
+    margin:auto;
+    border:1px solid #555;
 
 }
 
@@ -218,7 +293,7 @@ input[type=file]{
 @media(max-width:700px){
 
 
-.decks{
+.console{
 
     flex-direction:column;
     align-items:center;
@@ -226,7 +301,9 @@ input[type=file]{
 }
 
 
-.deck{
+
+.channel,
+.mixer-panel{
 
     width:90%;
 
