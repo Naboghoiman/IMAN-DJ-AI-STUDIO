@@ -15,148 +15,222 @@
 <body>
 
 
-<header>
+<div class="rcf-console">
 
+
+<!-- HEADER -->
+
+<header class="top-header">
+
+<div class="logo">
+MIX<br>
+REMOTE
+</div>
+
+<h1>
 🎧 IMAN DJ AI STUDIO
+</h1>
+
+<div class="rcf-logo">
+RCF
+</div>
 
 </header>
 
 
 
-<!-- TOP RACK MENU -->
 
-<div class="rack-menu">
+<!-- TOP MENU -->
+
+<nav class="menu">
 
 <button>FADERS</button>
-<button>EFFECTS</button>
+<button class="active">EFFECTS</button>
 <button>OUTPUTS</button>
 <button>PHONES</button>
-<button>PLAY / REC</button>
+<button>PLAY/REC</button>
 <button>METERS</button>
-<button>LOAD / SAVE</button>
+<button>LOAD/SAVE</button>
 <button>SETTINGS</button>
 
-</div>
+</nav>
 
 
 
 
 
-<!-- MAIN CONSOLE -->
+
+<!-- EFFECT RACK -->
 
 
-<div class="console">
+<section class="rack">
 
 
+<!-- HALL REVERB -->
 
-<!-- DECK A -->
-
-
-<div class="channel">
+<div class="module blue">
 
 
-<h2>DECK A</h2>
+<div class="module-title">
 
-
-<div class="screen">
-
-TRACK A
-
-</div>
-
-
-<input type="file" accept="audio/*" onchange="loadTrackA(event)">
-
-
-
-<div class="buttons">
-
-<button onclick="playA()">▶</button>
-<button onclick="pauseA()">⏸</button>
-<button onclick="stopA()">■</button>
+HALL REVERB
 
 </div>
 
 
 
-<div class="meter">
-
-<div class="level"></div>
-
-</div>
+<div class="controls">
 
 
-
-<label>BPM</label>
-
-<div class="display-value">
-
-128
-
-</div>
-
-
-
-<label>KEY</label>
-
-<input type="range" min="-12" max="12">
-
-
-
-<label>PITCH</label>
-
-<input type="range" min="-8" max="8">
-
-
-
-<label>VOLUME</label>
-
-<input type="range"
-oninput="volumeA(this.value)">
-
-
-
-</div>
-
-
-
-
-
-
-
-<!-- CENTRAL MIXER -->
-
-
-<div class="mixer-panel">
-
-
-<h2>MIXER</h2>
-
-
-
-<div class="knobs">
-
-
-<div>
-GAIN
+<div class="knob">
+PRE DELAY
 <input type="range">
 </div>
 
 
-<div>
-LOW
+<div class="knob">
+ER
 <input type="range">
 </div>
 
 
-<div>
-MID
+<div class="knob">
+DECAY
 <input type="range">
 </div>
 
 
-<div>
-HIGH
+<div class="knob">
+SPACE
+<input type="range">
+</div>
+
+
+<div class="knob">
+DAMPING
+<input type="range">
+</div>
+
+
+
+</div>
+
+
+
+<div class="display">
+
+HALL
+
+</div>
+
+
+
+<button>ON</button>
+
+
+</div>
+
+
+
+
+
+
+<!-- DIGITAL DELAY 1 -->
+
+<div class="module orange">
+
+
+<h2>RCF DIGITAL DELAY</h2>
+
+
+<div class="controls">
+
+
+<div class="knob">
+TIME
+<input type="range">
+</div>
+
+
+<div class="knob">
+FEEDBACK
+<input type="range">
+</div>
+
+
+<div class="knob">
+LOCUT
+<input type="range">
+</div>
+
+
+<div class="knob">
+HICUT
+<input type="range">
+</div>
+
+
+<div class="knob">
+WIDTH
+<input type="range">
+</div>
+
+
+</div>
+
+
+<button>SET TIME</button>
+
+
+<button>ON</button>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- DIGITAL DELAY 2 -->
+
+
+<div class="module orange">
+
+
+<h2>RCF DIGITAL DELAY</h2>
+
+
+<div class="controls">
+
+
+<div class="knob">
+TIME
+<input type="range">
+</div>
+
+
+<div class="knob">
+FEEDBACK
+<input type="range">
+</div>
+
+
+<div class="knob">
+LOCUT
+<input type="range">
+</div>
+
+
+<div class="knob">
+HICUT
+<input type="range">
+</div>
+
+
+<div class="knob">
+WIDTH
 <input type="range">
 </div>
 
@@ -165,26 +239,9 @@ HIGH
 
 
 
+<button>SET TIME</button>
 
-<h3>CROSS FADER</h3>
-
-
-<input class="crossfader"
-type="range"
-min="0"
-max="1"
-step="0.01"
-oninput="crossfade(this.value)">
-
-
-
-
-
-<button onclick="syncDecks()">
-
-SYNC
-
-</button>
+<button>ON</button>
 
 
 </div>
@@ -194,78 +251,106 @@ SYNC
 
 
 
-<!-- DECK B -->
 
 
-<div class="channel">
+<!-- PROCESSORS -->
 
 
-<h2>DECK B</h2>
+<div class="module red">
 
 
-<div class="screen">
+<h2>VALVE WARMER</h2>
 
-TRACK B
+
+<div class="controls">
+
+
+<div class="knob">
+DRIVE
+<input type="range">
+</div>
+
 
 </div>
 
 
-<input type="file" accept="audio/*" onchange="loadTrackB(event)">
-
-
-
-<div class="buttons">
-
-<button onclick="playB()">▶</button>
-<button onclick="pauseB()">⏸</button>
-<button onclick="stopB()">■</button>
-
-</div>
-
-
-
-<div class="meter">
-
-<div class="level"></div>
-
-</div>
-
-
-
-<label>BPM</label>
-
-<div class="display-value">
-
-128
-
-</div>
-
-
-
-<label>KEY</label>
-
-<input type="range" min="-12" max="12">
-
-
-
-<label>PITCH</label>
-
-<input type="range" min="-8" max="8">
-
-
-
-<label>VOLUME</label>
-
-<input type="range"
-oninput="volumeB(this.value)">
-
+<button>ON</button>
 
 
 </div>
 
 
 
+
+
+<div class="module red">
+
+
+<h2>XCITER</h2>
+
+
+<div class="controls">
+
+
+<div class="knob">
+FOCUS
+<input type="range">
 </div>
+
+
+<div class="knob">
+PROCESS
+<input type="range">
+</div>
+
+
+</div>
+
+
+<button>ON</button>
+
+
+</div>
+
+
+
+
+
+<div class="module red">
+
+
+<h2>MAXIMIZER</h2>
+
+
+<div class="controls">
+
+
+<div class="knob">
+BOOST
+<input type="range">
+</div>
+
+
+<div class="knob">
+OUT CEILING
+<input type="range">
+</div>
+
+
+</div>
+
+
+<button>ON</button>
+
+
+</div>
+
+
+
+
+
+</section>
+
 
 
 
@@ -274,46 +359,63 @@ oninput="volumeB(this.value)">
 
 <!-- EQUALIZER -->
 
-<section class="equalizer-panel">
+
+<section class="equalizer">
 
 
 <h2>31 BAND GRAPHIC EQUALIZER</h2>
 
 
-<div class="eq-sliders">
+<div class="eq">
 
 
 <script>
 
-let bands=[
-"20Hz",
-"31Hz",
-"63Hz",
-"125Hz",
-"250Hz",
-"500Hz",
-"1kHz",
-"2kHz",
-"4kHz",
-"8kHz",
-"16kHz",
-"20kHz"
+let frequencies=[
+"20",
+"25",
+"31",
+"40",
+"50",
+"63",
+"80",
+"100",
+"125",
+"160",
+"200",
+"250",
+"315",
+"400",
+"500",
+"630",
+"800",
+"1k",
+"1.25k",
+"1.6k",
+"2k",
+"2.5k",
+"3.15k",
+"4k",
+"5k",
+"6.3k",
+"8k",
+"10k",
+"12.5k",
+"16k",
+"20k"
 ];
 
 
-bands.forEach(function(b){
+frequencies.forEach(function(f){
 
 document.write(
 
 `
-<div class="eq-band">
+<div class="band">
 
-<span>${b}</span>
+<span>${f}</span>
 
-<input 
-type="range"
-min="-12"
-max="12">
+<input type="range" min="-12" max="12">
 
 </div>
 `
@@ -335,37 +437,35 @@ max="12">
 
 
 
-<!-- MASTER -->
+
+<!-- MASTER OUTPUT -->
 
 
-<section class="master">
+<aside class="master">
 
 
-<h2>MASTER OUTPUT</h2>
+<h2>MAIN OUT</h2>
 
 
-<div class="master-meter">
-
-</div>
-
-
-<label>MASTER VOLUME</label>
+<div class="meter"></div>
 
 
 <input type="range">
 
 
-
-</section>
-
+</aside>
 
 
+
+
+
+
+</div>
 
 
 <script src="app.js"></script>
 
 
 </body>
-
 
 </html>
