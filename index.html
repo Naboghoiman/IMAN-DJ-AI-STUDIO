@@ -1,19 +1,27 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+
 <title>IMAN DJ AI STUDIO</title>
+
 <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-<header>
+
+<header class="header">
+
 <h1>🎧 IMAN DJ AI STUDIO</h1>
+
 <p>RCF STYLE DIGITAL DJ SYSTEM</p>
-</header>
 
 
-<nav>
+<div class="tabs">
+
 <button>FADERS</button>
 <button>EFFECTS</button>
 <button>OUTPUTS</button>
@@ -22,110 +30,177 @@
 <button>METERS</button>
 <button>LOAD/SAVE</button>
 <button>SETTINGS</button>
-</nav>
+
+</div>
+
+</header>
+
 
 
 <section class="rack">
 
+
 <h2>DUAL DECK SYSTEM</h2>
+
 
 
 <div class="decks">
 
 
+<!-- DECK A -->
+
 <div class="deck">
+
 
 <h2>DECK A</h2>
 
+
 <div class="jog">
+
 A
+
 </div>
+
 
 <div class="wave">
+
 WAVEFORM A
+
 </div>
 
-<h3 id="nameA">NO TRACK</h3>
 
-<input type="file" id="fileA" accept="audio/*">
 
-<br>
+<h3>NO TRACK</h3>
 
-<button onclick="playA()">▶</button>
-<button onclick="pauseA()">Ⅱ</button>
-<button onclick="stopA()">■</button>
+
+<input type="file">
+
+
+<div class="controls">
+
+<button>▶</button>
+<button>Ⅱ</button>
+<button>■</button>
+
+</div>
+
+
+<div class="cue">
+
+<button>CUE</button>
+<button>SYNC</button>
+
+</div>
 
 
 <h3>BPM: 128</h3>
 
+
+
 <label>PITCH</label>
+
 <input type="range">
+
+
 
 <label>VOLUME</label>
+
 <input type="range">
 
 
-<audio id="audioA"></audio>
 
 </div>
 
 
+
+
+
+<!-- DECK B -->
 
 
 <div class="deck">
 
+
 <h2>DECK B</h2>
 
+
 <div class="jog">
+
 B
+
 </div>
 
 
 <div class="wave">
+
 WAVEFORM B
+
 </div>
 
-<h3 id="nameB">NO TRACK</h3>
 
-<input type="file" id="fileB" accept="audio/*">
 
-<br>
+<h3>NO TRACK</h3>
 
-<button onclick="playB()">▶</button>
-<button onclick="pauseB()">Ⅱ</button>
-<button onclick="stopB()">■</button>
+
+<input type="file">
+
+
+<div class="controls">
+
+<button>▶</button>
+<button>Ⅱ</button>
+<button>■</button>
+
+</div>
+
+
+<div class="cue">
+
+<button>CUE</button>
+<button>SYNC</button>
+
+</div>
 
 
 <h3>BPM: 128</h3>
 
 
+
 <label>PITCH</label>
+
 <input type="range">
+
 
 
 <label>VOLUME</label>
+
 <input type="range">
 
 
-<audio id="audioB"></audio>
 
 </div>
 
 
+
 </div>
 
-</section>
 
-
+</section><!-- MIXER -->
 
 <section class="rack">
+
 
 <h2>MIXER</h2>
 
+
 <label>CROSS FADER</label>
+
 <input type="range">
 
+
+
 <label>MASTER</label>
+
 <input type="range">
 
 
@@ -134,72 +209,208 @@ WAVEFORM B
 
 
 
-<section class="rack">
+<!-- RCF EFFECTS RACK -->
+
+
+<section class="rcf-rack">
+
 
 <h2>RCF EFFECTS RACK</h2>
 
 
-<div class="effect">
+
+<div class="rcf-module">
+
 
 <h3>HALL REVERB</h3>
 
-<input type="range">
 
-<button>ON</button>
+<div class="knobs">
+
+
+<div class="knob">
+PRE DELAY
+</div>
+
+
+<div class="knob">
+ER
+</div>
+
+
+<div class="knob">
+DECAY
+</div>
+
+
+<div class="knob">
+SPACE
+</div>
+
+
+<div class="knob">
+DAMPING
+</div>
+
 
 </div>
 
 
-<div class="effect">
+<button>POWER</button>
+
+
+</div>
+
+
+
+
+
+<div class="rcf-module">
+
 
 <h3>DIGITAL DELAY</h3>
 
-<input type="range">
 
-<button>ON</button>
+<div class="knobs">
+
+
+<div class="knob">
+TIME
+</div>
+
+
+<div class="knob">
+FEEDBACK
+</div>
+
+
+<div class="knob">
+LOW CUT
+</div>
+
+
+<div class="knob">
+HIGH CUT
+</div>
+
+
+<div class="knob">
+WIDTH
+</div>
+
 
 </div>
 
 
-<div class="effect">
+<button>POWER</button>
 
-<h3>FILTER</h3>
-
-<input type="range">
-
-<button>ON</button>
 
 </div>
 
 
-<div class="effect">
 
-<h3>MAXIMIZER</h3>
+  </section><!-- RCF STYLE 31 BAND GRAPHIC EQ -->
 
-<input type="range">
+<section class="rcf-rack">
 
-<button>ON</button>
-
-</div>
-
-
-</section>
-
-
-
-
-
-<section class="rack">
 
 <h2>31 BAND GRAPHIC EQ</h2>
 
-<div class="eq">
 
-<script>
-for(let i=0;i<31;i++){
-document.write('<input type="range" orient="vertical">');
-}
-</script>
+<div class="eq-rack">
+
+
+<div class="eq-band">
+
+<input type="range" min="-12" max="12" value="0">
+<span>20</span>
+
+</div>
+
+
+<div class="eq-band">
+<input type="range" min="-12" max="12" value="0">
+<span>25</span>
+</div>
+
+
+<div class="eq-band">
+<input type="range" min="-12" max="12" value="0">
+<span>31</span>
+</div>
+
+
+<div class="eq-band">
+<input type="range" min="-12" max="12" value="0">
+<span>40</span>
+</div>
+
+
+<div class="eq-band">
+<input type="range" min="-12" max="12" value="0">
+<span>50</span>
+</div>
+
+
+<div class="eq-band">
+<input type="range" min="-12" max="12" value="0">
+<span>63</span>
+</div>
+
+
+<div class="eq-band">
+<input type="range" min="-12" max="12" value="0">
+<span>80</span>
+</div>
+
+
+<div class="eq-band">
+<input type="range" min="-12" max="12" value="0">
+<span>100</span>
+</div>
+
+
+<div class="eq-band">
+<input type="range" min="-12" max="12" value="0">
+<span>125</span>
+</div>
+
+
+<div class="eq-band">
+<input type="range" min="-12" max="12" value="0">
+<span>160</span>
+</div>
+
+
+<div class="eq-band">
+<input type="range" min="-12" max="12" value="0">
+<span>200</span>
+</div>
+
+
+<div class="eq-band">
+<input type="range" min="-12" max="12" value="0">
+<span>250</span>
+</div>
+
+
+<div class="eq-band">
+<input type="range" min="-12" max="12" value="0">
+<span>315</span>
+</div>
+
+
+<div class="eq-band">
+<input type="range" min="-12" max="12" value="0">
+<span>400</span>
+</div>
+
+
+<div class="eq-band">
+<input type="range" min="-12" max="12" value="0">
+<span>500</span>
+</div>
+
 
 </div>
 
@@ -208,19 +419,19 @@ document.write('<input type="range" orient="vertical">');
 
 
 
+<section class="rcf-rack">
 
-
-<section class="rack">
 
 <h2>MASTER OUTPUT</h2>
 
-<div class="meter"></div>
+
+<div class="master-output"></div>
 
 
 </section>
 
 
-<script src="script.js"></script>
 
 </body>
-</html>
+
+  </html>
