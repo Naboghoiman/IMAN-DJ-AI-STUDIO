@@ -1,19 +1,21 @@
-let audioA = new Audio();
-let audioB = new Audio();
+// IMAN DJ AI STUDIO - STABLE PLAYER ENGINE
 
-let bpmA = 128;
-let bpmB = 128;
+let deckA = new Audio();
+let deckB = new Audio();
+
+let cross = 0.5;
 
 
-// LOAD A
-function loadTrackA(event){
+// LOAD DECK A
+function loadTrackA(e){
 
-let file = event.target.files[0];
+const file=e.target.files[0];
 
-if(!file) return;
+if(!file)return;
 
-audioA.src = URL.createObjectURL(file);
-audioA.load();
+deckA.src=URL.createObjectURL(file);
+
+deckA.load();
 
 document.getElementById("trackA").innerHTML=file.name;
 
@@ -21,15 +23,16 @@ document.getElementById("trackA").innerHTML=file.name;
 
 
 
-// LOAD B
-function loadTrackB(event){
+// LOAD DECK B
+function loadTrackB(e){
 
-let file = event.target.files[0];
+const file=e.target.files[0];
 
-if(!file) return;
+if(!file)return;
 
-audioB.src = URL.createObjectURL(file);
-audioB.load();
+deckB.src=URL.createObjectURL(file);
+
+deckB.load();
 
 document.getElementById("trackB").innerHTML=file.name;
 
@@ -41,18 +44,18 @@ document.getElementById("trackB").innerHTML=file.name;
 
 function playA(){
 
-if(audioA.src){
-audioA.play();
-}
+deckA.play()
+.then(()=>console.log("Deck A playing"))
+.catch(e=>console.log(e));
 
 }
 
 
 function playB(){
 
-if(audioB.src){
-audioB.play();
-}
+deckB.play()
+.then(()=>console.log("Deck B playing"))
+.catch(e=>console.log(e));
 
 }
 
@@ -61,12 +64,12 @@ audioB.play();
 // PAUSE
 
 function pauseA(){
-audioA.pause();
+deckA.pause();
 }
 
 
 function pauseB(){
-audioB.pause();
+deckB.pause();
 }
 
 
@@ -75,16 +78,16 @@ audioB.pause();
 
 function stopA(){
 
-audioA.pause();
-audioA.currentTime=0;
+deckA.pause();
+deckA.currentTime=0;
 
 }
 
 
 function stopB(){
 
-audioB.pause();
-audioB.currentTime=0;
+deckB.pause();
+deckB.currentTime=0;
 
 }
 
@@ -94,14 +97,14 @@ audioB.currentTime=0;
 
 function volumeA(v){
 
-audioA.volume=v;
+deckA.volume=v;
 
 }
 
 
 function volumeB(v){
 
-audioB.volume=v;
+deckB.volume=v;
 
 }
 
@@ -111,14 +114,14 @@ audioB.volume=v;
 
 function pitchA(v){
 
-audioA.playbackRate=v;
+deckA.playbackRate=v;
 
 }
 
 
 function pitchB(v){
 
-audioB.playbackRate=v;
+deckB.playbackRate=v;
 
 }
 
@@ -128,8 +131,11 @@ audioB.playbackRate=v;
 
 function setCross(v){
 
-audioA.volume=1-v;
-audioB.volume=v;
+cross=v;
+
+deckA.volume=1-v;
+
+deckB.volume=v;
 
 }
 
@@ -139,22 +145,25 @@ audioB.volume=v;
 
 function setMaster(v){
 
-audioA.volume=v;
-audioB.volume=v;
+deckA.volume=v;
+deckB.volume=v;
 
 }
 
 
 
-// AUTO SYNC
+// SYNC (safe)
 
 function sync(){
 
-let ratio=bpmA/bpmB;
+let bpm1=128;
+let bpm2=128;
 
-audioB.playbackRate=ratio;
+let rate=bpm1/bpm2;
 
-alert("AUTO SYNC ENABLED");
+deckB.playbackRate=rate;
+
+console.log("SYNC COMPLETE");
 
 }
 
@@ -164,30 +173,40 @@ alert("AUTO SYNC ENABLED");
 
 function aiMix(){
 
-audioA.play();
+if(!deckA.src || !deckB.src){
+
+alert("Load both decks first");
+
+return;
+
+}
+
+
+deckA.play();
 
 setTimeout(()=>{
 
-audioB.play();
+deckB.play();
 
 sync();
 
-},5000);
+},4000);
+
 
 }
 
 
 
-// FIXED BPM DISPLAY
+// AUTO SYNC BUTTON
 
-function detectBPM(){
+function autoSync(){
 
-document.getElementById("bpmA").innerHTML=bpmA;
-document.getElementById("bpmB").innerHTML=bpmB;
+sync();
+
+alert("AUTO SYNC READY");
 
 }
 
 
-detectBPM();
 
-console.log("IMAN DJ AI STUDIO READY");
+console.log("IMAN DJ ENGINE LOADED");
