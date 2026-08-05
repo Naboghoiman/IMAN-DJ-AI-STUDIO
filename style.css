@@ -1,1 +1,77 @@
+body {
+    margin: 0;
+    background: #050505;
+    color: white;
+    font-family: Arial, sans-serif;
+}
 
+header {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    padding: 25px;
+    letter-spacing: 2px;
+}
+
+.container {
+    padding: 20px;
+}
+
+.decks {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.deck {
+    background: #151515;
+    width: 350px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #000;
+}
+
+.screen {
+    height: 120px;
+    background: #000;
+    border: 2px solid #333;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #00ff99;
+    font-size: 22px;
+}
+
+button {
+    background: #008f66;
+    color: white;
+    border: none;
+    padding: 12px;
+    margin: 5px;
+    border-radius: 8px;
+}
+
+.slider {
+    width: 100%;
+}
+
+.mixer {
+    margin-top: 30px;
+    background: #151515;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.eq {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.eq input {
+    height: 150px;
+    writing-mode: bt-lr;
+    transform: rotate(-90deg);
+}
