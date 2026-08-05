@@ -1,6 +1,8 @@
+
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>IMAN DJ AI STUDIO</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,39 +18,38 @@
 </header>
 
 
-<div class="top-menu">
-
+<nav>
 <button>FADERS</button>
 <button>EFFECTS</button>
 <button>EQUALIZER</button>
 <button>SETTINGS</button>
+</nav>
 
-</div>
 
 
-<div class="main-container">
+<div class="decks">
 
 
 <!-- DECK A -->
 
-<div class="deck">
+<section class="deck">
 
 <h2>DECK A</h2>
 
-<div class="display">
-
-TRACK A
-
+<div class="display" id="trackA">
+NO TRACK
 </div>
 
 
-<input type="file" id="fileA" accept="audio/*" onchange="loadTrackA(event)">
+<input type="file" accept="audio/*" onchange="loadTrackA(event)">
 
 
-<div class="controls">
 
-<button onclick="playA()">▶ PLAY</button>
-<button onclick="pauseA()">⏸ PAUSE</button>
+<div class="buttons">
+
+<button onclick="playA()">▶</button>
+<button onclick="pauseA()">⏸</button>
+<button onclick="stopA()">⏹</button>
 
 </div>
 
@@ -59,17 +60,18 @@ TRACK A
 
 <h3>KEY</h3>
 
-<input 
-type="range" 
-min="-12" 
-max="12" 
+<input class="slider"
+type="range"
+min="-12"
+max="12"
 value="0"
 oninput="keyA(this.value)">
 
 
+
 <h3>VOLUME</h3>
 
-<input 
+<input class="slider"
 type="range"
 min="0"
 max="1"
@@ -78,43 +80,47 @@ value="1"
 oninput="volumeA(this.value)">
 
 
-</div>
+</section>
+
+
 
 
 
 <!-- DECK B -->
 
 
-<div class="deck">
+<section class="deck">
 
 <h2>DECK B</h2>
 
 
-<div class="display">
-
-TRACK B
-
+<div class="display" id="trackB">
+NO TRACK
 </div>
 
 
-<input type="file" id="fileB" accept="audio/*" onchange="loadTrackB(event)">
+<input type="file" accept="audio/*" onchange="loadTrackB(event)">
 
 
-<div class="controls">
 
-<button onclick="playB()">▶ PLAY</button>
-<button onclick="pauseB()">⏸ PAUSE</button>
+<div class="buttons">
+
+<button onclick="playB()">▶</button>
+<button onclick="pauseB()">⏸</button>
+<button onclick="stopB()">⏹</button>
 
 </div>
+
 
 
 <h3>BPM</h3>
 <div id="bpmB">128</div>
 
 
+
 <h3>KEY</h3>
 
-<input 
+<input class="slider"
 type="range"
 min="-12"
 max="12"
@@ -122,9 +128,10 @@ value="0"
 oninput="keyB(this.value)">
 
 
+
 <h3>VOLUME</h3>
 
-<input 
+<input class="slider"
 type="range"
 min="0"
 max="1"
@@ -133,18 +140,26 @@ value="1"
 oninput="volumeB(this.value)">
 
 
+</section>
+
+
 </div>
-    <!-- MASTER MIXER -->
-
-<div class="mixer">
-
-<h2>MASTER MIXER</h2>
 
 
-<h3>CROSSFADER</h3>
 
-<input 
-class="cross"
+
+<!-- MIXER -->
+
+
+<section class="mixer">
+
+
+<h2>MIXER</h2>
+
+
+<h3>CROSS FADER</h3>
+
+<input class="cross"
 type="range"
 min="0"
 max="1"
@@ -153,107 +168,59 @@ value="0.5"
 oninput="crossfade(this.value)">
 
 
-<div class="master-controls">
+
+<button onclick="syncDecks()">
+SYNC BEATS
+</button>
 
 
-<div>
-<h3>MASTER VOLUME</h3>
+
+<h2>31 BAND EQUALIZER</h2>
+
+
+<div class="eq">
+
+
+<script>
+
+let freq=[
+"20Hz","50Hz","100Hz","250Hz",
+"500Hz","1kHz","2kHz","5kHz",
+"10kHz","20kHz"
+];
+
+
+freq.forEach((f,i)=>{
+
+document.write(`
+
+<div class="band">
+
+<label>${f}</label>
 
 <input 
 type="range"
-min="0"
-max="1"
-step="0.01"
-value="1">
-</div>
-
-
-<div>
-<h3>SYNC</h3>
-
-<button onclick="syncDecks()">
-SYNC
-</button>
+min="-12"
+max="12"
+value="0"
+oninput="changeEQ(${i},this.value)">
 
 </div>
 
+`);
 
-</div>
-
-
-
-<!-- 31 BAND EQUALIZER -->
-
-<h2>GRAPHIC EQUALIZER</h2>
+});
 
 
-<div class="equalizer">
-
-
-<div>
-<label>20</label>
-<input type="range" min="-12" max="12">
-</div>
-
-
-<div>
-<label>50</label>
-<input type="range" min="-12" max="12">
-</div>
-
-
-<div>
-<label>100</label>
-<input type="range" min="-12" max="12">
-</div>
-
-
-<div>
-<label>250</label>
-<input type="range" min="-12" max="12">
-</div>
-
-
-<div>
-<label>500</label>
-<input type="range" min="-12" max="12">
-</div>
-
-
-<div>
-<label>1K</label>
-<input type="range" min="-12" max="12">
-</div>
-
-
-<div>
-<label>2K</label>
-<input type="range" min="-12" max="12">
-</div>
-
-
-<div>
-<label>5K</label>
-<input type="range" min="-12" max="12">
-</div>
-
-
-<div>
-<label>10K</label>
-<input type="range" min="-12" max="12">
-</div>
-
-
-<div>
-<label>20K</label>
-<input type="range" min="-12" max="12">
-</div>
+</script>
 
 
 </div>
 
 
-</div>
+</section>
+
+
 
 
 <script src="app.js"></script>
@@ -261,4 +228,4 @@ SYNC
 
 </body>
 
-    </html>
+</html>
