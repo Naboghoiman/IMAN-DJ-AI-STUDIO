@@ -298,6 +298,54 @@ j.classList.remove("spin");
 });
 
 }
+// =================================
+// TRACK TIME DISPLAY
+// =================================
+
+
+function formatTime(seconds){
+
+let min = Math.floor(seconds / 60);
+
+let sec = Math.floor(seconds % 60);
+
+if(sec < 10){
+sec = "0" + sec;
+}
+
+return min + ":" + sec;
+
+}
+
+
+
+deckA.addEventListener("timeupdate",()=>{
+
+let time = document.getElementById("timeA");
+
+if(time){
+
+time.innerHTML =
+formatTime(deckA.currentTime);
+
+}
+
+});
+
+
+
+deckB.addEventListener("timeupdate",()=>{
+
+let time = document.getElementById("timeB");
+
+if(time){
+
+time.innerHTML =
+formatTime(deckB.currentTime);
+
+}
+
+});
 
 
 
