@@ -397,3 +397,21 @@ width:95%;
 }
 
 }
+/* DJ JOG SPIN */
+
+.spin{
+animation: spinWheel 2s linear infinite;
+}
+
+
+@keyframes spinWheel{
+
+from{
+transform:rotate(0deg);
+}
+
+to{
+transform:rotate(360deg);
+}
+
+}
