@@ -1,89 +1,152 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
 <title>IMAN DJ AI STUDIO</title>
-
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
 <link rel="stylesheet" href="style.css">
-
 </head>
-
 
 <body>
 
-
 <header>
-
-🎧 IMAN DJ AI STUDIO
-
+<h1>🎧 IMAN DJ AI STUDIO</h1>
+<p>RCF STYLE DIGITAL MIXER</p>
 </header>
 
 
+<nav>
 
-<nav class="top-menu">
-
-<button onclick="showPanel('faders')">
-FADERS
-</button>
-
-<button onclick="showPanel('effects')">
-EFFECTS
-</button>
-
-<button onclick="showPanel('outputs')">
-OUTPUTS
-</button>
-
-<button onclick="showPanel('phones')">
-PHONES
-</button>
-
-<button onclick="showPanel('playrec')">
-PLAY/REC
-</button>
-
-<button onclick="showPanel('meters')">
-METERS
-</button>
-
-<button onclick="showPanel('loadsave')">
-LOAD/SAVE
-</button>
-
-<button onclick="showPanel('settings')">
-SETTINGS
-</button>
+<button>FADERS</button>
+<button>EFFECTS</button>
+<button>OUTPUTS</button>
+<button>PHONES</button>
+<button>PLAY/REC</button>
+<button>METERS</button>
+<button>LOAD/SAVE</button>
+<button>SETTINGS</button>
 
 </nav>
 
 
+<main>
+
+
+<section class="panel">
+
+<h2>DUAL DECK SYSTEM</h2>
+
+<div class="deck-container">
+
+
+<div class="deck">
+
+<h2>DECK A</h2>
+
+<div class="track-display">
+TRACK A
+</div>
+
+<input type="file">
+
+<div class="audio-controls">
+<button>▶</button>
+<button>⏸</button>
+<button>■</button>
+</div>
+
+
+<h3>BPM 128</h3>
+
+<label>PITCH</label>
+<input type="range">
+
+
+<label>VOLUME</label>
+<input type="range">
+
+
+<button>CUE</button>
+
+</div>
 
 
 
-<!-- CONTROL PANELS -->
+
+<div class="deck">
+
+<h2>DECK B</h2>
+
+<div class="track-display">
+TRACK B
+</div>
 
 
-<section id="faders" class="panel">
-
-<h2>FADERS</h2>
+<input type="file">
 
 
+<div class="audio-controls">
+<button>▶</button>
+<button>⏸</button>
+<button>■</button>
+</div>
+
+
+<h3>BPM 128</h3>
+
+<label>PITCH</label>
+<input type="range">
+
+
+<label>VOLUME</label>
+<input type="range">
+
+
+<button>CUE</button>
+
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+
+
+<section class="panel">
+
+<h2>MIXER</h2>
+
+
+<div class="mixer">
+
+
+<div class="channel">
 <h3>CHANNEL A</h3>
+<input class="vertical" type="range">
+</div>
 
-<input class="slider" type="range">
 
-
+<div class="channel">
 <h3>CHANNEL B</h3>
+<input class="vertical" type="range">
+</div>
 
-<input class="slider" type="range">
 
-
+<div class="channel">
 <h3>CROSS FADER</h3>
+<input type="range">
+</div>
 
-<input class="slider" type="range">
+
+<div class="channel">
+<h3>MASTER</h3>
+<input type="range">
+</div>
+
+
+</div>
 
 
 </section>
@@ -92,473 +155,54 @@ SETTINGS
 
 
 
-<section id="effects" class="panel hidden">
+
+<section class="panel effects">
 
 
 <h2>RCF EFFECTS RACK</h2>
 
 
+<div class="effect-unit">
+
 <h3>HALL REVERB</h3>
 
 <label>PRE DELAY</label>
-<input class="slider" type="range">
-
+<input type="range">
 
 <label>DECAY</label>
-<input class="slider" type="range">
-
+<input type="range">
 
 <label>DAMPING</label>
-<input class="slider" type="range">
+<input type="range">
+
+<button>ON</button>
+
+</div>
 
 
-<button>
-ON
-</button>
 
 
+<div class="effect-unit">
 
 <h3>DIGITAL DELAY</h3>
 
 <label>TIME</label>
-<input class="slider" type="range">
-
+<input type="range">
 
 <label>FEEDBACK</label>
-<input class="slider" type="range">
-
+<input type="range">
 
 <label>WIDTH</label>
-<input class="slider" type="range">
+<input type="range">
 
-
-<button>
-ON
-</button>
-
-
-
-</section>
-
-  <section id="outputs" class="panel hidden">
-
-<h2>MASTER OUTPUT</h2>
-
-<label>MASTER VOLUME</label>
-
-<input class="slider" type="range">
-
-
-<div class="master-meter">
-
-<div class="level"></div>
-
-</div>
-
-</section>
-
-
-
-
-
-<section id="phones" class="panel hidden">
-
-<h2>PHONES</h2>
-
-
-<label>HEADPHONE VOLUME</label>
-
-<input class="slider" type="range">
-
-
-<button>
-CUE
-</button>
-
-
-</section>
-
-
-
-
-
-<section id="playrec" class="panel hidden">
-
-<h2>PLAY / RECORD</h2>
-
-
-<button>
-START RECORDING
-</button>
-
-
-<button>
-STOP RECORDING
-</button>
-
-
-</section>
-
-
-
-
-
-<section id="meters" class="panel hidden">
-
-<h2>METERS</h2>
-
-
-<div class="meter">
-
-<div class="level"></div>
+<button>ON</button>
 
 </div>
 
 
-<div class="meter">
 
-<div class="level"></div>
 
-</div>
-
-
-</section>
-
-
-
-
-
-<section id="loadsave" class="panel hidden">
-
-<h2>LOAD / SAVE</h2>
-
-
-<button>
-LOAD SETUP
-</button>
-
-
-<button>
-SAVE SETUP
-</button>
-
-
-</section>
-
-
-
-
-
-<section id="settings" class="panel hidden">
-
-<h2>SETTINGS</h2>
-
-
-<label>
-MASTER MODE
-</label>
-
-
-<select>
-
-<option>DJ MODE</option>
-
-<option>LIVE MODE</option>
-
-<option>STUDIO MODE</option>
-
-</select>
-
-
-</section>
-
-
-
-
-
-
-
-<!-- DECK AREA -->
-
-
-<main class="console">
-
-
-
-<section class="deck">
-
-
-<h2>DECK A</h2>
-
-
-<div class="screen" id="trackA">
-
-NO TRACK
-
-</div>
-
-
-<input 
-type="file"
-accept="audio/*"
-onchange="loadTrack('A',this)">
-
-
-
-<button onclick="playTrack('A')">
-▶
-</button>
-
-
-<button onclick="pauseTrack('A')">
-⏸
-</button>
-
-
-<button onclick="stopTrack('A')">
-■
-</button>
-
-
-
-<h3>BPM</h3>
-
-<div>
-128
-</div>
-
-
-
-<h3>KEY</h3>
-
-<input 
-type="range"
-min="-12"
-max="12">
-
-
-
-<h3>PITCH</h3>
-
-<input 
-type="range"
-min="-8"
-max="8">
-
-
-
-<h3>VOLUME</h3>
-
-<input
-class="slider"
-type="range"
-min="0"
-max="100"
-value="80"
-oninput="setVolume('A',this.value)">
-
-
-
-</section>
-
-
-
-
-
-<section class="mixer">
-
-
-<h2>MIXER</h2>
-
-
-<h3>GAIN</h3>
-<input class="slider" type="range">
-
-
-<h3>LOW</h3>
-<input class="slider" type="range">
-
-
-<h3>MID</h3>
-<input class="slider" type="range">
-
-
-<h3>HIGH</h3>
-<input class="slider" type="range">
-
-
-<button onclick="sync()">
-SYNC
-</button>
-
-
-</section>
-<!-- DECK B -->
-
-
-<section class="deck">
-
-
-<h2>DECK B</h2>
-
-
-<div class="screen" id="trackB">
-
-NO TRACK
-
-</div>
-
-
-<input 
-type="file"
-accept="audio/*"
-onchange="loadTrack('B',this)">
-
-
-
-<button onclick="playTrack('B')">
-▶
-</button>
-
-
-<button onclick="pauseTrack('B')">
-⏸
-</button>
-
-
-<button onclick="stopTrack('B')">
-■
-</button>
-
-
-
-<h3>BPM</h3>
-
-<div>
-128
-</div>
-
-
-
-<h3>KEY</h3>
-
-<input 
-type="range"
-min="-12"
-max="12">
-
-
-
-<h3>PITCH</h3>
-
-<input 
-type="range"
-min="-8"
-max="8">
-
-
-
-<h3>VOLUME</h3>
-
-
-<input
-class="slider"
-type="range"
-min="0"
-max="100"
-value="80"
-oninput="setVolume('B',this.value)">
-
-
-
-</section>
-
-
-
-</main>
-
-
-
-
-
-
-<!-- GRAPHIC EQ -->
-
-
-<section class="equalizer">
-
-
-<h2>31 BAND GRAPHIC EQ</h2>
-
-
-<div class="eq-container">
-
-
-<script>
-
-let eq=[
-"20",
-"31",
-"63",
-"125",
-"250",
-"500",
-"1K",
-"2K",
-"4K",
-"8K",
-"16K",
-"20K"
-];
-
-
-eq.forEach(function(x){
-
-document.write(
-
-`
-<div class="eq-band">
-
-<label>${x}</label>
-
-<input 
-type="range"
-min="-12"
-max="12">
-
-</div>
-`
-
-);
-
-});
-
-
-</script>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<!-- EFFECT PROCESSORS -->
-
-
-<section class="effects">
-
-
-<h2>PROCESSORS</h2>
-
-
-<div class="processor">
+<div class="effect-unit">
 
 <h3>VALVE WARMER</h3>
 
@@ -570,7 +214,7 @@ max="12">
 
 
 
-<div class="processor">
+<div class="effect-unit">
 
 <h3>XCITER</h3>
 
@@ -582,7 +226,7 @@ max="12">
 
 
 
-<div class="processor">
+<div class="effect-unit">
 
 <h3>MAXIMIZER</h3>
 
@@ -593,6 +237,31 @@ max="12">
 </div>
 
 
+</section>
+
+
+
+
+
+<section class="panel">
+
+
+<h2>31 BAND GRAPHIC EQ</h2>
+
+
+<div class="eq">
+
+<input type="range">
+<input type="range">
+<input type="range">
+<input type="range">
+<input type="range">
+<input type="range">
+<input type="range">
+<input type="range">
+
+</div>
+
 
 </section>
 
@@ -600,11 +269,29 @@ max="12">
 
 
 
+<section class="panel">
+
+<h2>MASTER OUTPUT</h2>
+
+<div class="meter">
+
+<div class="level"></div>
+
+</div>
+
+
+<input type="range">
+
+
+</section>
+
+
+
+
+</main>
+
 
 <script src="app.js"></script>
 
-
 </body>
-
-
-  </html>
+</html>
