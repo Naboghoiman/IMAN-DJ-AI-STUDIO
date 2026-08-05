@@ -8,8 +8,10 @@
 <body>
 
 <header>
+
 <h1>🎧 IMAN DJ AI STUDIO</h1>
 <p>RCF STYLE DIGITAL MIXER</p>
+
 </header>
 
 
@@ -34,6 +36,7 @@
 
 <h2>DUAL DECK SYSTEM</h2>
 
+
 <div class="deck-container">
 
 
@@ -41,80 +44,133 @@
 
 <h2>DECK A</h2>
 
-<div class="track-display">
-TRACK A
+
+<div class="jog">
+
+<div class="jog-center">
+A
 </div>
+
+</div>
+
+
+<div class="waveform">
+WAVEFORM A
+</div>
+
+
+<h3>NO TRACK</h3>
+
 
 <input type="file">
 
+
 <div class="audio-controls">
+
+<button>⏮</button>
 <button>▶</button>
 <button>⏸</button>
 <button>■</button>
+
+</div>
+
+
+<div class="deck-buttons">
+
+<button>CUE</button>
+<button>SYNC</button>
+<button>LOOP</button>
+
 </div>
 
 
 <h3>BPM 128</h3>
 
+
 <label>PITCH</label>
 <input type="range">
 
 
-<label>VOLUME</label>
+<label>CHANNEL VOLUME</label>
 <input type="range">
 
 
-<button>CUE</button>
-
 </div>
+
 
 
 
 
 <div class="deck">
 
+
 <h2>DECK B</h2>
 
-<div class="track-display">
-TRACK B
+
+<div class="jog">
+
+<div class="jog-center">
+B
 </div>
+
+</div>
+
+
+<div class="waveform">
+WAVEFORM B
+</div>
+
+
+<h3>NO TRACK</h3>
 
 
 <input type="file">
 
 
 <div class="audio-controls">
+
+<button>⏮</button>
 <button>▶</button>
 <button>⏸</button>
 <button>■</button>
+
 </div>
 
 
+
+<div class="deck-buttons">
+
+<button>CUE</button>
+<button>SYNC</button>
+<button>LOOP</button>
+
+</div>
+
+
+
 <h3>BPM 128</h3>
+
 
 <label>PITCH</label>
 <input type="range">
 
 
-<label>VOLUME</label>
+<label>CHANNEL VOLUME</label>
 <input type="range">
 
 
-<button>CUE</button>
-
-
 </div>
 
 
 </div>
+
 
 </section>
+<!-- MIXER -->
 
 
+<section class="panel mixer-panel">
 
-
-
-<section class="panel">
 
 <h2>MIXER</h2>
 
@@ -123,27 +179,71 @@ TRACK B
 
 
 <div class="channel">
-<h3>CHANNEL A</h3>
-<input class="vertical" type="range">
+
+<h3>DECK A</h3>
+
+<label>GAIN</label>
+<input type="range">
+
+
+<label>LOW</label>
+<input type="range">
+
+
+<label>MID</label>
+<input type="range">
+
+
+<label>HIGH</label>
+<input type="range">
+
+
 </div>
 
 
-<div class="channel">
-<h3>CHANNEL B</h3>
-<input class="vertical" type="range">
-</div>
-
 
 <div class="channel">
+
+
 <h3>CROSS FADER</h3>
+
 <input type="range">
+
+
+<button>
+SYNC BEATS
+</button>
+
+
 </div>
+
+
 
 
 <div class="channel">
-<h3>MASTER</h3>
+
+
+<h3>DECK B</h3>
+
+
+<label>GAIN</label>
 <input type="range">
+
+
+<label>LOW</label>
+<input type="range">
+
+
+<label>MID</label>
+<input type="range">
+
+
+<label>HIGH</label>
+<input type="range">
+
+
 </div>
+
 
 
 </div>
@@ -156,46 +256,62 @@ TRACK B
 
 
 
+
+<!-- EFFECTS -->
+
+
 <section class="panel effects">
 
 
 <h2>RCF EFFECTS RACK</h2>
 
 
+
 <div class="effect-unit">
+
 
 <h3>HALL REVERB</h3>
 
 <label>PRE DELAY</label>
 <input type="range">
 
+
 <label>DECAY</label>
 <input type="range">
+
 
 <label>DAMPING</label>
 <input type="range">
 
+
 <button>ON</button>
+
 
 </div>
 
 
 
 
+
 <div class="effect-unit">
+
 
 <h3>DIGITAL DELAY</h3>
 
 <label>TIME</label>
 <input type="range">
 
+
 <label>FEEDBACK</label>
 <input type="range">
+
 
 <label>WIDTH</label>
 <input type="range">
 
+
 <button>ON</button>
+
 
 </div>
 
@@ -214,6 +330,7 @@ TRACK B
 
 
 
+
 <div class="effect-unit">
 
 <h3>XCITER</h3>
@@ -223,6 +340,7 @@ TRACK B
 <button>ON</button>
 
 </div>
+
 
 
 
@@ -243,14 +361,19 @@ TRACK B
 
 
 
+
+<!-- GRAPHIC EQ -->
+
+
 <section class="panel">
 
 
-<h2>31 BAND GRAPHIC EQ</h2>
+<h2>31 BAND GRAPHIC EQUALIZER</h2>
 
 
 <div class="eq">
 
+
 <input type="range">
 <input type="range">
 <input type="range">
@@ -259,6 +382,10 @@ TRACK B
 <input type="range">
 <input type="range">
 <input type="range">
+<input type="range">
+<input type="range">
+<input type="range">
+
 
 </div>
 
@@ -269,9 +396,16 @@ TRACK B
 
 
 
+
+
+<!-- MASTER -->
+
+
 <section class="panel">
 
+
 <h2>MASTER OUTPUT</h2>
+
 
 <div class="meter">
 
@@ -287,11 +421,12 @@ TRACK B
 
 
 
-
 </main>
 
 
 <script src="app.js"></script>
 
+
 </body>
-</html>
+
+  </html>
