@@ -1,324 +1,132 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>IMAN DJ AI STUDIO</title>
-
-<link rel="stylesheet" href="style.css">
-
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
 <header>
-
 <h1>🎧 IMAN DJ AI STUDIO</h1>
-
 <p>RCF STYLE DIGITAL DJ SYSTEM</p>
-
 </header>
 
 
 <nav>
-
 <button>FADERS</button>
 <button>EFFECTS</button>
 <button>OUTPUTS</button>
+<button>PHONES</button>
+<button>PLAY/REC</button>
 <button>METERS</button>
+<button>LOAD/SAVE</button>
 <button>SETTINGS</button>
-
 </nav>
 
 
-<section class="deck-system">
+<section class="rack">
 
 <h2>DUAL DECK SYSTEM</h2>
 
 
-<!-- DECK A -->
+<div class="decks">
+
 
 <div class="deck">
 
 <h2>DECK A</h2>
 
-
 <div class="jog">
-
 A
-
 </div>
-
 
 <div class="wave">
-
 WAVEFORM A
-
 </div>
 
+<h3 id="nameA">NO TRACK</h3>
 
-<h3 id="trackA">
-NO TRACK
-</h3>
+<input type="file" id="fileA" accept="audio/*">
 
-
-<input 
-type="file"
-accept="audio/*"
-onchange="loadTrackA(event)"
->
-
-
-<div class="controls">
+<br>
 
 <button onclick="playA()">▶</button>
-
-<button onclick="pauseA()">⏸</button>
-
+<button onclick="pauseA()">Ⅱ</button>
 <button onclick="stopA()">■</button>
 
-</div>
 
-
-<button onclick="cueA()">CUE</button>
-
-<button onclick="sync()">SYNC</button>
-
-
-<h3>
-BPM: 128
-</h3>
-
+<h3>BPM: 128</h3>
 
 <label>PITCH</label>
-
-<input 
-type="range"
-min="0.8"
-max="1.2"
-step="0.01"
-value="1"
-oninput="pitchA(this.value)"
->
-
+<input type="range">
 
 <label>VOLUME</label>
+<input type="range">
 
-<input 
-type="range"
-min="0"
-max="1"
-step="0.01"
-value="1"
-oninput="volumeA(this.value)"
->
 
+<audio id="audioA"></audio>
 
 </div>
- <!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>IMAN DJ AI STUDIO</title>
-
-<link rel="stylesheet" href="style.css">
-
-</head>
-
-<body>
-
-<header>
-
-<h1>🎧 IMAN DJ AI STUDIO</h1>
-
-<p>RCF STYLE DIGITAL DJ SYSTEM</p>
-
-</header>
 
 
-<nav>
 
-<button>FADERS</button>
-<button>EFFECTS</button>
-<button>OUTPUTS</button>
-<button>METERS</button>
-<button>SETTINGS</button>
-
-</nav>
-
-
-<section class="deck-system">
-
-<h2>DUAL DECK SYSTEM</h2>
-
-
-<!-- DECK A -->
 
 <div class="deck">
 
-<h2>DECK A</h2>
-
+<h2>DECK B</h2>
 
 <div class="jog">
-
-A
-
+B
 </div>
 
 
 <div class="wave">
-
-WAVEFORM A
-
+WAVEFORM B
 </div>
 
+<h3 id="nameB">NO TRACK</h3>
 
-<h3 id="trackA">
-NO TRACK
-</h3>
+<input type="file" id="fileB" accept="audio/*">
 
+<br>
 
-<input 
-type="file"
-accept="audio/*"
-onchange="loadTrackA(event)"
->
+<button onclick="playB()">▶</button>
+<button onclick="pauseB()">Ⅱ</button>
+<button onclick="stopB()">■</button>
 
 
-<div class="controls">
-
-<button onclick="playA()">▶</button>
-
-<button onclick="pauseA()">⏸</button>
-
-<button onclick="stopA()">■</button>
-
-</div>
-
-
-<button onclick="cueA()">CUE</button>
-
-<button onclick="sync()">SYNC</button>
-
-
-<h3>
-BPM: 128
-</h3>
+<h3>BPM: 128</h3>
 
 
 <label>PITCH</label>
-
-<input 
-type="range"
-min="0.8"
-max="1.2"
-step="0.01"
-value="1"
-oninput="pitchA(this.value)"
->
+<input type="range">
 
 
 <label>VOLUME</label>
-
-<input 
-type="range"
-min="0"
-max="1"
-step="0.01"
-value="1"
-oninput="volumeA(this.value)"
->
+<input type="range">
 
 
-</div>
- <!-- EFFECTS -->
-
-<section class="effects panel">
-
-
-<h2>
-RCF EFFECTS RACK
-</h2>
-
-
-
-<div class="effect-box">
-
-<h3>
-FILTER
-</h3>
-
-<input
-type="range"
-min="200"
-max="20000"
-value="20000"
-oninput="setFilter(this.value)"
->
-
-
-<button onclick="enableEffects()">
-ON
-</button>
-
+<audio id="audioB"></audio>
 
 </div>
 
 
-
-
-<div class="effect-box">
-
-<h3>
-ECHO DELAY
-</h3>
-
-
-<input
-type="range"
-min="0"
-max="1"
-step="0.01"
-value="0.25"
-oninput="setEcho(this.value)"
->
-
-
-<button onclick="enableEffects()">
-ON
-</button>
-
-
 </div>
 
+</section>
 
 
 
-<div class="effect-box">
+<section class="rack">
 
-<h3>
-REVERB
-</h3>
+<h2>MIXER</h2>
 
+<label>CROSS FADER</label>
+<input type="range">
 
-<input
-type="range"
-min="0"
-max="1"
-step="0.01"
-value="0.5"
-oninput="setReverb(this.value)"
->
-
-
-<button onclick="enableEffects()">
-ON
-</button>
-
-
-</div>
-
+<label>MASTER</label>
+<input type="range">
 
 
 </section>
@@ -326,50 +134,51 @@ ON
 
 
 
+<section class="rack">
 
-<!-- GRAPHIC EQ -->
-
-
-<section class="panel">
+<h2>RCF EFFECTS RACK</h2>
 
 
-<h2>
-31 BAND GRAPHIC EQ
-</h2>
+<div class="effect">
 
-
-<div class="eq-container">
-
+<h3>HALL REVERB</h3>
 
 <input type="range">
-<input type="range">
-<input type="range">
-<input type="range">
-<input type="range">
-<input type="range">
-<input type="range">
-<input type="range">
-<input type="range">
-<input type="range">
 
+<button>ON</button>
 
 </div>
 
 
- </section><!-- MASTER OUTPUT -->
+<div class="effect">
+
+<h3>DIGITAL DELAY</h3>
+
+<input type="range">
+
+<button>ON</button>
+
+</div>
 
 
-<section class="panel">
+<div class="effect">
+
+<h3>FILTER</h3>
+
+<input type="range">
+
+<button>ON</button>
+
+</div>
 
 
-<h2>
-MASTER OUTPUT
-</h2>
+<div class="effect">
 
+<h3>MAXIMIZER</h3>
 
-<div class="meter">
+<input type="range">
 
-<div class="level"></div>
+<button>ON</button>
 
 </div>
 
@@ -380,17 +189,38 @@ MASTER OUTPUT
 
 
 
-</main>
+<section class="rack">
+
+<h2>31 BAND GRAPHIC EQ</h2>
+
+<div class="eq">
+
+<script>
+for(let i=0;i<31;i++){
+document.write('<input type="range" orient="vertical">');
+}
+</script>
+
+</div>
+
+
+</section>
 
 
 
 
 
-<!-- AUDIO ENGINE -->
+<section class="rack">
 
-<script src="app.js"></script>
+<h2>MASTER OUTPUT</h2>
 
+<div class="meter"></div>
+
+
+</section>
+
+
+<script src="script.js"></script>
 
 </body>
-
- </html>
+</html>
