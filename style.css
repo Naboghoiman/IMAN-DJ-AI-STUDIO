@@ -1,209 +1,224 @@
-*{
-box-sizing:border-box;
-}
+/* RCF STYLE DARK RACK DESIGN */
 
 body{
-margin:0;
-background:#050505;
-color:white;
-font-family:Arial,Helvetica,sans-serif;
+    background:#050505;
+    color:#eee;
+    font-family:Arial, sans-serif;
+}
+
+.section,
+.eq-container,
+.effects-container,
+.mixer{
+    background:linear-gradient(#1b1b1b,#090909);
+    border:1px solid #333;
+    border-radius:12px;
+    padding:25px;
+    margin:20px;
+    box-shadow:0 0 15px #000;
 }
 
 
-header{
-text-align:center;
-padding:30px 10px;
-background:#111;
-border-bottom:2px solid #333;
-}
-
-header h1{
-font-size:38px;
-letter-spacing:2px;
-margin:0;
-}
-
-header p{
-font-size:20px;
-color:#aaa;
-}
-
-
-
-nav{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:10px;
-padding:20px;
-background:#090909;
-}
-
+/* TOP TABS */
 
 button{
-background:#1b1b1b;
-color:white;
-border:1px solid #444;
-padding:12px 25px;
-border-radius:6px;
-font-size:16px;
-cursor:pointer;
+    background:#222;
+    color:white;
+    border:1px solid #555;
+    border-radius:5px;
+    padding:12px 25px;
+    font-weight:bold;
 }
-
 
 button:hover{
-background:#00ff88;
-color:black;
+    background:#0077ff;
 }
 
 
+/* EFFECT RACK */
 
-.rack{
-background:#111;
-margin:25px auto;
-padding:25px;
-max-width:900px;
-border:2px solid #292929;
-border-radius:20px;
-box-shadow:0 0 20px #000;
+.effect-box{
+
+    background:
+    linear-gradient(#222,#111);
+
+    border:2px solid #333;
+    border-radius:8px;
+
+    padding:20px;
+    margin:15px 0;
+
 }
 
 
+.effect-box h2{
 
-h2{
-font-size:32px;
-letter-spacing:2px;
+    color:#00ff88;
+    letter-spacing:2px;
+
 }
 
 
+.effect-slider{
 
-.decks{
-display:flex;
-gap:25px;
-justify-content:center;
-flex-wrap:wrap;
-}
-
-
-
-.deck{
-background:#181818;
-border:2px solid #333;
-border-radius:20px;
-padding:25px;
-width:380px;
-text-align:center;
-}
-
-
-
-.jog{
-height:220px;
-width:220px;
-margin:20px auto;
-border-radius:50%;
-background:
-radial-gradient(circle,#555,#111 45%,#000 70%);
-border:10px solid #333;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:45px;
-font-weight:bold;
-}
-
-
-
-.wave{
-height:100px;
-background:#000;
-border:1px solid #333;
-display:flex;
-align-items:center;
-justify-content:center;
-color:#00ff88;
-font-size:25px;
-margin:20px 0;
-}
-
-
-
-input[type="range"]{
 width:80%;
-accent-color:#00ff88;
-margin:15px;
+
 }
 
 
+/* RCF EQ */
 
-label{
-display:block;
-font-size:18px;
-margin-top:10px;
+.eq-container{
+
+background:#111;
+
 }
 
 
+.eq-title{
 
-.effect{
-background:#181818;
-border:1px solid #333;
-border-radius:15px;
-padding:25px;
-margin:15px;
-}
-
-
-
-.effect h3{
-color:#00ff88;
-font-size:25px;
-}
-
-
-
-.eq{
-display:grid;
-grid-template-columns:repeat(6,1fr);
-gap:20px;
-padding:20px;
-}
-
-
-
-.eq input{
-height:160px;
-writing-mode:vertical-lr;
-transform:rotate(180deg);
-width:20px;
-}
-
-
-
-.meter{
-height:250px;
-width:50px;
-margin:auto;
-background:#00ff88;
-border-radius:10px;
-box-shadow:0 0 20px #00ff88;
-}
-
-
-
-@media(max-width:700px){
-
-header h1{
 font-size:28px;
+font-weight:bold;
+
 }
 
 
-.deck{
-width:100%;
+.eq-panel{
+
+display:flex;
+align-items:flex-end;
+justify-content:center;
+gap:12px;
+
+height:350px;
+
+background:#161616;
+
+border:2px solid #333;
+
+padding:20px;
+
 }
 
 
-.eq{
-grid-template-columns:repeat(3,1fr);
+/* EACH EQ BAND */
+
+.eq-band{
+
+height:260px;
+display:flex;
+flex-direction:column;
+align-items:center;
+
 }
+
+
+.eq-band input[type="range"]{
+
+writing-mode:vertical-lr;
+
+direction:rtl;
+
+height:220px;
+
+accent-color:#aaa;
+
+}
+
+
+/* FREQUENCY LABELS */
+
+.freq{
+
+font-size:10px;
+color:#bbb;
+
+transform:rotate(-90deg);
+
+margin-top:10px;
+
+}
+
+
+/* RCF STYLE KNOBS */
+
+.knob{
+
+width:55px;
+height:55px;
+
+border-radius:50%;
+
+background:
+radial-gradient(circle,#555,#111);
+
+border:3px solid #777;
+
+margin:10px;
+
+}
+
+
+/* RACK TOP BAR */
+
+.rack-header{
+
+background:#222;
+
+padding:12px;
+
+border-bottom:2px solid #444;
+
+display:flex;
+
+justify-content:space-between;
+
+}
+
+
+/* ON BUTTON */
+
+.on-btn{
+
+background:#111;
+border:1px solid #777;
+
+}
+
+.on-btn.active{
+
+background:#00aa55;
+
+}
+
+
+/* MASTER OUTPUT */
+
+.master-output{
+
+height:200px;
+
+background:#111;
+
+border:2px solid #333;
+
+display:flex;
+
+align-items:flex-end;
+
+justify-content:center;
+
+}
+
+
+.master-bar{
+
+width:40px;
+
+height:70%;
+
+background:#00ff88;
+
+box-shadow:0 0 20px #00ff88;
 
 }
