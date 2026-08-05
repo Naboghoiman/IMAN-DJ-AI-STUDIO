@@ -1,18 +1,48 @@
-// =================================
-// IMAN DJ AI STUDIO ENGINE
-// VERSION 3
-// =================================
-
+// =====================================
+// IMAN DJ AI STUDIO
+// REAL WAVEFORM AUDIO ENGINE
+// =====================================
 
 let deckA = new Audio();
 let deckB = new Audio();
 
-let loopA = false;
-let loopB = false;
+let audioCtx;
+let analyserA;
+let analyserB;
+let sourceA;
+let sourceB;
+
+
+// CREATE AUDIO ENGINE
+
+function initAudio(){
+
+if(audioCtx) return;
+
+audioCtx = new AudioContext();
+
+analyserA = audioCtx.createAnalyser();
+analyserB = audioCtx.createAnalyser();
+
+analyserA.fftSize = 256;
+analyserB.fftSize = 256;
+
+sourceA = audioCtx.createMediaElementSource(deckA);
+sourceB = audioCtx.createMediaElementSource(deckB);
+
+sourceA.connect(analyserA);
+analyserA.connect(audioCtx.destination);
+
+sourceB.connect(analyserB);
+analyserB.connect(audioCtx.destination);
+
+drawWave();
+
+}
 
 
 
-// LOAD A
+// LOAD DECK A
 
 function loadTrackA(e){
 
@@ -24,11 +54,13 @@ deckA.src=URL.createObjectURL(file);
 
 document.getElementById("trackA").innerHTML=file.name;
 
+initAudio();
+
 }
 
 
 
-// LOAD B
+// LOAD DECK B
 
 function loadTrackB(e){
 
@@ -40,6 +72,8 @@ deckB.src=URL.createObjectURL(file);
 
 document.getElementById("trackB").innerHTML=file.name;
 
+initAudio();
+
 }
 
 
@@ -50,18 +84,22 @@ document.getElementById("trackB").innerHTML=file.name;
 
 function playA(){
 
-deckA.play();
+initAudio();
 
-spinOn();
+audioCtx.resume();
+
+deckA.play();
 
 }
 
 
 function playB(){
 
-deckB.play();
+initAudio();
 
-spinOn();
+audioCtx.resume();
+
+deckB.play();
 
 }
 
@@ -88,7 +126,6 @@ deckB.pause();
 
 
 
-
 // STOP
 
 function stopA(){
@@ -96,8 +133,6 @@ function stopA(){
 deckA.pause();
 
 deckA.currentTime=0;
-
-spinOff();
 
 }
 
@@ -108,8 +143,6 @@ deckB.pause();
 
 deckB.currentTime=0;
 
-spinOff();
-
 }
 
 
@@ -117,9 +150,7 @@ spinOff();
 
 
 
-
 // VOLUME
-
 
 function volumeA(v){
 
@@ -138,9 +169,7 @@ deckB.volume=v;
 
 
 
-
 // PITCH
-
 
 function pitchA(v){
 
@@ -159,9 +188,7 @@ deckB.playbackRate=v;
 
 
 
-
 // CROSS FADER
-
 
 function setCross(v){
 
@@ -175,9 +202,7 @@ deckB.volume=v;
 
 
 
-
 // MASTER
-
 
 function setMaster(v){
 
@@ -191,96 +216,7 @@ deckB.volume=v;
 
 
 
-
-
-// CUE
-
-
-function cueA(){
-
-deckA.currentTime=0;
-
-deckA.play();
-
-}
-
-
-
-function cueB(){
-
-deckB.currentTime=0;
-
-deckB.play();
-
-}
-
-
-
-
-
-
-
-// LOOP
-
-
-function loopTrackA(){
-
-loopA=!loopA;
-
-}
-
-
-
-function loopTrackB(){
-
-loopB=!loopB;
-
-}
-
-
-
-
-
-deckA.addEventListener("timeupdate",()=>{
-
-if(loopA && deckA.currentTime>=deckA.duration){
-
-deckA.currentTime=0;
-
-}
-
-
-showTime("timeA",deckA.currentTime);
-
-
-});
-
-
-
-
-deckB.addEventListener("timeupdate",()=>{
-
-
-if(loopB && deckB.currentTime>=deckB.duration){
-
-deckB.currentTime=0;
-
-}
-
-
-showTime("timeB",deckB.currentTime);
-
-
-});
-
-
-
-
-
-
-
 // SYNC
-
 
 function sync(){
 
@@ -294,62 +230,52 @@ deckB.playbackRate=deckA.playbackRate;
 
 
 
+// REAL WAVEFORM
+
+function drawWave(){
+
+requestAnimationFrame(drawWave);
 
 
-// TIME DISPLAY
+let dataA=new Uint8Array(analyserA.frequencyBinCount);
+
+let dataB=new Uint8Array(analyserB.frequencyBinCount);
 
 
-function showTime(id,time){
+if(analyserA){
 
-let min=Math.floor(time/60);
-
-let sec=Math.floor(time%60);
-
-if(sec<10){
-
-sec="0"+sec;
-
-}
-
-
-let element=document.getElementById(id);
-
-
-if(element){
-
-element.innerHTML=min+":"+sec;
-
-}
+analyserA.getByteFrequencyData(dataA);
 
 }
 
 
+if(analyserB){
 
-
-
-
-
-
-// JOG ROTATION
-
-
-function spinOn(){
-
-document.querySelectorAll(".jog")
-.forEach(x=>x.classList.add("spin"));
+analyserB.getByteFrequencyData(dataB);
 
 }
 
 
+let levelA=Math.max(...dataA);
 
-function spinOff(){
+let levelB=Math.max(...dataB);
 
-document.querySelectorAll(".jog")
-.forEach(x=>x.classList.remove("spin"));
+
+
+let waveA=document.querySelector(".waveform");
+
+if(waveA){
+
+waveA.style.height=(80+levelA/3)+"px";
+
+}
+
+
 
 }
 
 
 
 
-console.log("IMAN DJ ENGINE VERSION 3 READY");
+
+console.log("IMAN DJ REAL AUDIO ENGINE READY");
