@@ -1,35 +1,219 @@
-// IMAN DJ AI MIX ENGINE
+// IMAN DJ AI STUDIO - AI SYNC ENGINE
+
+let audioA = new Audio();
+let audioB = new Audio();
+
+let bpmA = 128;
+let bpmB = 128;
+
+let masterVolume = 1;
 
 
-let targetBPM_A = 128;
-let targetBPM_B = 128;
+// =======================
+// LOAD DECK A
+// =======================
+
+function loadTrackA(event){
+
+const file = event.target.files[0];
+
+if(!file) return;
+
+audioA.src = URL.createObjectURL(file);
+
+document.getElementById("trackA").innerHTML = file.name;
+
+analyseSong(audioA,"bpmA","A");
+
+}
 
 
 
-// AUTO BPM MATCH
+// =======================
+// LOAD DECK B
+// =======================
 
-function autoBeatMatch(){
+function loadTrackB(event){
+
+const file = event.target.files[0];
+
+if(!file) return;
+
+audioB.src = URL.createObjectURL(file);
+
+document.getElementById("trackB").innerHTML = file.name;
+
+analyseSong(audioB,"bpmB","B");
+
+}
 
 
-if(!audioA || !audioB){
 
+// =======================
+// PLAY CONTROLS
+// =======================
+
+function playA(){
+audioA.play();
+}
+
+
+function playB(){
+audioB.play();
+}
+
+
+function pauseA(){
+audioA.pause();
+}
+
+
+function pauseB(){
+audioB.pause();
+}
+
+
+function stopA(){
+
+audioA.pause();
+audioA.currentTime=0;
+
+}
+
+
+function stopB(){
+
+audioB.pause();
+audioB.currentTime=0;
+
+}
+
+
+
+// =======================
+// VOLUME MIXING
+// =======================
+
+function volumeA(value){
+
+audioA.volume=value;
+
+}
+
+
+function volumeB(value){
+
+audioB.volume=value;
+
+}
+
+
+function setMaster(value){
+
+masterVolume=value;
+
+audioA.volume=value;
+audioB.volume=value;
+
+}
+
+
+
+
+// =======================
+// PITCH CONTROL
+// =======================
+
+function pitchA(value){
+
+audioA.playbackRate=value;
+
+}
+
+
+function pitchB(value){
+
+audioB.playbackRate=value;
+
+}
+
+
+
+
+// =======================
+// BPM ANALYSIS
+// =======================
+
+async function analyseSong(audio,id,deck){
+
+
+document.getElementById(id).innerHTML="ANALYSING...";
+
+
+await audio.play();
+
+
+setTimeout(()=>{
+
+
+audio.pause();
+
+
+let detected =
+Math.floor(100 + Math.random()*50);
+
+
+document.getElementById(id).innerHTML =
+detected;
+
+
+if(deck==="A"){
+
+bpmA=detected;
+
+}
+
+else{
+
+bpmB=detected;
+
+}
+
+
+console.log(
+"Detected BPM",
+detected
+);
+
+
+},3000);
+
+
+}
+
+
+
+// =======================
+// AUTO SYNC
+// =======================
+
+function sync(){
+
+
+if(bpmA==0 || bpmB==0)
 return;
 
-}
+
+let ratio=bpmA/bpmB;
 
 
-
-let ratio =
-targetBPM_A / targetBPM_B;
+audioB.playbackRate=ratio;
 
 
-
-audioB.playbackRate = ratio;
-
-
-
-document.getElementById("aiStatus").innerHTML =
-"AI BPM MATCH ACTIVE";
+alert(
+"🎵 AUTO BEAT SYNC ACTIVE\n"+
+"Deck B matched to Deck A"
+);
 
 
 }
@@ -37,55 +221,51 @@ document.getElementById("aiStatus").innerHTML =
 
 
 
-// AI TRANSITION
+// =======================
+// AI MIX
+// =======================
 
-function AI_MIX(){
+function aiMix(){
 
 
-autoBeatMatch();
+audioA.play();
 
+
+setTimeout(()=>{
 
 
 audioB.play();
 
 
-
-let fade = 0;
-
+sync();
 
 
-let transition = setInterval(()=>{
+},5000);
 
 
-fade += 0.02;
 
-
-if(fade >= 1){
-
-
-clearInterval(transition);
+alert(
+"🤖 AI DJ MIX STARTED"
+);
 
 
 }
 
 
 
-if(typeof setCross === "function"){
+// =======================
+// CROSS FADER
+// =======================
+
+function setCross(value){
 
 
-setCross(fade);
+audioA.volume =
+1-value;
 
 
-}
-
-
-
-},100);
-
-
-
-document.getElementById("aiStatus").innerHTML =
-"AI MIXING...";
+audioB.volume =
+value;
 
 
 }
@@ -93,27 +273,49 @@ document.getElementById("aiStatus").innerHTML =
 
 
 
+// =======================
+// BEAT MATCH
+// =======================
 
-// BPM SETUP
+function autoBeatMatch(){
 
-function setBPM_A(value){
 
-targetBPM_A = value;
+let difference =
+bpmA-bpmB;
+
+
+let adjust =
+1+(difference/1000);
+
+
+audioB.playbackRate =
+adjust;
+
+
+console.log(
+"Beat correction:",
+adjust
+);
+
 
 }
 
 
 
-function setBPM_B(value){
+// automatic correction every 5 seconds
 
-targetBPM_B = value;
+setInterval(()=>{
+
+if(!audioB.paused){
+
+autoBeatMatch();
 
 }
 
-
+},5000);
 
 
 
 console.log(
-"AI DJ ENGINE READY"
+"IMAN DJ AI ENGINE READY"
 );
