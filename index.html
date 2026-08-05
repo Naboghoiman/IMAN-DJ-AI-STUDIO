@@ -19,9 +19,10 @@
 
 <h1>🎧 IMAN DJ AI STUDIO</h1>
 
-<p>RCF STYLE DIGITAL MIXER</p>
+<p>AI POWERED RCF STYLE DIGITAL MIXER</p>
 
 </header>
+
 
 
 
@@ -48,6 +49,7 @@ METERS
 SETTINGS
 </button>
 
+
 </nav>
 
 
@@ -60,6 +62,40 @@ SETTINGS
 
 
 
+
+<!-- AI CONTROL PANEL -->
+
+
+<section class="panel">
+
+
+<h2>AI DJ CONTROL</h2>
+
+
+<button onclick="AI_MIX()">
+🤖 AI MIX
+</button>
+
+
+<button onclick="autoBeatMatch()">
+🎵 AUTO SYNC
+</button>
+
+
+<p id="aiStatus">
+AI READY
+</p>
+
+
+</section>
+
+
+
+
+
+
+
+
 <!-- DECK SYSTEM -->
 
 
@@ -67,7 +103,6 @@ SETTINGS
 
 
 <h2>DUAL DECK SYSTEM</h2>
-
 
 
 <div class="deck-container">
@@ -85,7 +120,6 @@ SETTINGS
 <h2>DECK A</h2>
 
 
-
 <div class="jog">
 
 <div class="jog-center">
@@ -93,8 +127,6 @@ A
 </div>
 
 </div>
-
-
 
 
 <div class="waveform">
@@ -113,12 +145,10 @@ NO TRACK
 
 
 
-<input 
+<input
 type="file"
 accept="audio/*"
 onchange="loadTrackA(event)">
-
-
 
 
 
@@ -158,8 +188,6 @@ SYNC
 
 
 
-
-
 <h3>
 BPM:
 <span id="bpmA">
@@ -169,12 +197,12 @@ BPM:
 
 
 
-
 <label>
 PITCH
 </label>
 
-<input 
+
+<input
 type="range"
 min="0.5"
 max="1.5"
@@ -183,13 +211,12 @@ oninput="pitchA(this.value)">
 
 
 
-
-
 <label>
 VOLUME
 </label>
 
-<input 
+
+<input
 type="range"
 min="0"
 max="1"
@@ -199,17 +226,7 @@ oninput="volumeA(this.value)">
 
 
 
-
-
 </div>
-
-
-
-
-
-
-
-
 <!-- MIXER -->
 
 <div class="mixer">
@@ -251,13 +268,22 @@ oninput="setMaster(this.value)">
 
 
 </div>
+
+
+
+
+
+
+
 <!-- DECK B -->
 
 
 <div class="deck">
 
 
-<h2>DECK B</h2>
+<h2>
+DECK B
+</h2>
 
 
 
@@ -268,6 +294,7 @@ B
 </div>
 
 </div>
+
 
 
 
@@ -287,7 +314,8 @@ NO TRACK
 
 
 
-<input 
+
+<input
 type="file"
 accept="audio/*"
 onchange="loadTrackB(event)">
@@ -312,6 +340,7 @@ onchange="loadTrackB(event)">
 <button onclick="stopB()">
 ■
 </button>
+
 
 
 </div>
@@ -343,13 +372,12 @@ BPM:
 
 
 
-
 <label>
 PITCH
 </label>
 
 
-<input 
+<input
 type="range"
 min="0.5"
 max="1.5"
@@ -358,14 +386,12 @@ oninput="pitchB(this.value)">
 
 
 
-
-
 <label>
 VOLUME
 </label>
 
 
-<input 
+<input
 type="range"
 min="0"
 max="1"
@@ -390,6 +416,7 @@ oninput="volumeB(this.value)">
 
 
 
+
 <!-- EFFECTS -->
 
 
@@ -404,16 +431,23 @@ RCF EFFECTS RACK
 
 <div class="effect-unit">
 
+
 <h3>
 HALL REVERB
 </h3>
 
 
-<label>DECAY</label>
+<label>
+DECAY
+</label>
+
 <input type="range">
 
 
-<label>SPACE</label>
+<label>
+SPACE
+</label>
+
 <input type="range">
 
 
@@ -429,17 +463,24 @@ ON
 
 
 <div class="effect-unit">
+
 
 <h3>
 DIGITAL DELAY
 </h3>
 
 
-<label>TIME</label>
+<label>
+TIME
+</label>
+
 <input type="range">
 
 
-<label>FEEDBACK</label>
+<label>
+FEEDBACK
+</label>
+
 <input type="range">
 
 
@@ -455,12 +496,15 @@ ON
 
 
 <div class="effect-unit">
+
 
 <h3>
 VALVE WARMER
 </h3>
 
+
 <input type="range">
+
 
 <button>
 ON
@@ -468,17 +512,16 @@ ON
 
 
 </div>
-
-
-
-
 <div class="effect-unit">
+
 
 <h3>
 XCITER
 </h3>
 
+
 <input type="range">
+
 
 <button>
 ON
@@ -493,11 +536,14 @@ ON
 
 <div class="effect-unit">
 
+
 <h3>
 MAXIMIZER
 </h3>
 
+
 <input type="range">
+
 
 <button>
 ON
@@ -516,7 +562,8 @@ ON
 
 
 
-<!-- EQUALIZER -->
+
+<!-- GRAPHIC EQ -->
 
 
 <section class="panel">
@@ -543,6 +590,7 @@ ON
 <input type="range">
 
 
+
 </div>
 
 
@@ -553,7 +601,9 @@ ON
 
 
 
-<!-- OUTPUT -->
+
+
+<!-- MASTER OUTPUT -->
 
 
 <section class="panel">
@@ -566,13 +616,19 @@ MASTER OUTPUT
 
 <div class="meter">
 
+
 <div class="level"></div>
+
 
 </div>
 
 
+
 <input
 type="range"
+min="0"
+max="1"
+step="0.01"
 oninput="setMaster(this.value)">
 
 
@@ -583,13 +639,19 @@ oninput="setMaster(this.value)">
 
 
 
+
 </main>
 
 
 
+
+
+<script src="ai_dj.js"></script>
+
 <script src="app.js"></script>
+
 
 
 </body>
 
-  </html>
+</html>
