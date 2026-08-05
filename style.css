@@ -1,145 +1,283 @@
+/* IMAN DJ AI STUDIO - RCF STYLE INTERFACE */
+
+*{
+    box-sizing:border-box;
+}
 
 body{
-margin:0;
-background:#050505;
-color:white;
-font-family:Arial, sans-serif;
+    margin:0;
+    background:#050505;
+    color:white;
+    font-family:Arial,Helvetica,sans-serif;
 }
+
+
+/* HEADER */
 
 header{
-text-align:center;
-font-size:35px;
-font-weight:bold;
-padding:30px;
-letter-spacing:5px;
+    text-align:center;
+    padding:35px 10px;
+    background:#101010;
+    border-bottom:2px solid #333;
 }
 
-.container{
-padding:15px;
+header h1{
+    font-size:48px;
+    letter-spacing:6px;
+    margin:0;
+    color:white;
 }
+
+
+/* TOP CONTROL BAR */
+
+nav,
+.menu,
+.controls{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    padding:20px;
+    background:#151515;
+}
+
 
 button{
-background:#202020;
-color:white;
-border:1px solid #444;
-padding:12px 18px;
-border-radius:5px;
-font-weight:bold;
+    background:#222;
+    color:white;
+    border:1px solid #555;
+    border-radius:5px;
+    padding:15px 25px;
+    font-size:16px;
+    cursor:pointer;
 }
+
 
 button:hover{
-background:#00aa55;
+    background:#00aa66;
 }
 
-nav{
-display:flex;
-gap:8px;
-flex-wrap:wrap;
-justify-content:center;
-padding:15px;
-background:#111;
+
+/* MAIN CONSOLE */
+
+main{
+    max-width:1200px;
+    margin:auto;
 }
 
-nav button{
-min-width:100px;
+
+.panel{
+    background:#151515;
+    border:1px solid #333;
+    border-radius:15px;
+    padding:25px;
+    margin:20px;
 }
 
-.decks{
-display:flex;
-gap:20px;
-justify-content:center;
-flex-wrap:wrap;
+
+/* TITLES */
+
+h1,h2,h3{
+    color:#00ff88;
+    text-align:center;
+    letter-spacing:2px;
 }
 
-.deck,
-.mixer,
-.effects,
-.equalizer,
-.output{
-background:#151515;
-border:1px solid #333;
-border-radius:15px;
-padding:20px;
-margin:20px;
-box-shadow:0 0 20px #000;
+
+
+/* DECK AREA */
+
+.deck-container{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
 }
 
-h2{
-text-align:center;
-color:#00ff88;
-letter-spacing:2px;
+
+.deck{
+    background:#111;
+    border:2px solid #333;
+    border-radius:15px;
+    padding:20px;
 }
 
-.screen{
-height:120px;
-background:#000;
-border:2px solid #333;
-display:flex;
-align-items:center;
-justify-content:center;
-color:#00ff88;
-font-size:22px;
-border-radius:10px;
+
+.track-display{
+
+    height:180px;
+    background:#000;
+    border:3px solid #444;
+    border-radius:10px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#00ff88;
+    font-size:25px;
 }
 
-input[type=file]{
-margin:15px 0;
+
+
+/* AUDIO BUTTONS */
+
+.audio-controls{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin:20px;
 }
 
-.slider{
-width:100%;
-accent-color:#0088ff;
+
+.audio-controls button{
+
+    width:60px;
+    height:50px;
+
 }
 
-.meter{
-width:35px;
-height:220px;
-background:#000;
-border:2px solid #333;
-margin:auto;
+
+
+/* SLIDERS */
+
+
+input[type=range]{
+
+    width:100%;
+    accent-color:#008cff;
+
 }
 
-.level{
-height:70%;
-background:#00ff00;
+
+
+/* MIXER */
+
+
+.mixer{
+
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+
 }
 
-.knob{
-width:45px;
-height:45px;
-border-radius:50%;
-background:#222;
-border:3px solid #777;
-display:inline-block;
-margin:10px;
+
+
+.channel{
+
+    background:#111;
+    padding:20px;
+    border-radius:10px;
+
 }
 
-.rack{
-background:#222;
-border:2px solid #555;
-padding:20px;
-margin:15px;
-border-radius:10px;
+
+
+.vertical{
+
+    height:220px;
 }
 
-.effect-title{
-font-size:25px;
-color:#00ff88;
+
+
+/* EFFECT RACK */
+
+.effects{
+
+    background:#101010;
+    border:2px solid #333;
+    border-radius:10px;
+    padding:20px;
+
 }
+
+
+.effect-unit{
+
+    background:#181818;
+    border:1px solid #444;
+    padding:20px;
+    margin:15px 0;
+    border-radius:8px;
+
+}
+
+
+.effect-unit h3{
+
+    color:white;
+
+}
+
+
+
+/* EQ */
 
 .eq{
-display:flex;
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(60px,1fr));
 gap:15px;
-overflow-x:auto;
+
 }
+
 
 .eq input{
-height:180px;
-writing-mode:bt-lr;
-transform:rotate(-90deg);
+
+    height:150px;
+    writing-mode:bt-lr;
+    transform:rotate(-90deg);
+
 }
 
-.master{
-text-align:center;
-font-size:25px;
+
+
+/* METERS */
+
+.meter{
+
+width:40px;
+height:250px;
+background:black;
+border:2px solid #333;
+margin:auto;
+
+}
+
+
+.level{
+
+height:70%;
+background:#00ff00;
+
+}
+
+
+
+/* RCF STYLE MOBILE */
+
+@media(max-width:700px){
+
+header h1{
+
+font-size:32px;
+
+}
+
+
+.deck-container{
+
+grid-template-columns:1fr;
+
+}
+
+
+.mixer{
+
+grid-template-columns:1fr;
+
+}
+
+
 }
