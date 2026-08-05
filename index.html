@@ -11,91 +11,208 @@
 
 </head>
 
+
 <body>
 
 
 <header>
+
 🎧 IMAN DJ AI STUDIO
+
 </header>
+
 
 
 <nav class="top-menu">
 
-<button>FADERS</button>
-<button>EFFECTS</button>
-<button>OUTPUTS</button>
-<button>PHONES</button>
-<button>PLAY/REC</button>
-<button>METERS</button>
-<button>LOAD/SAVE</button>
-<button>SETTINGS</button>
+<button onclick="showPanel('faders')">
+FADERS
+</button>
+
+<button onclick="showPanel('effects')">
+EFFECTS
+</button>
+
+<button onclick="showPanel('outputs')">
+OUTPUTS
+</button>
+
+<button onclick="showPanel('phones')">
+PHONES
+</button>
+
+<button onclick="showPanel('playrec')">
+PLAY/REC
+</button>
+
+<button onclick="showPanel('meters')">
+METERS
+</button>
+
+<button onclick="showPanel('loadsave')">
+LOAD/SAVE
+</button>
+
+<button onclick="showPanel('settings')">
+SETTINGS
+</button>
 
 </nav>
 
 
 
-<main class="console">
+
+
+<!-- CONTROL PANELS -->
+
+
+<section id="faders" class="panel">
+
+<h2>FADERS</h2>
+
+
+<h3>CHANNEL A</h3>
+
+<input class="slider" type="range">
+
+
+<h3>CHANNEL B</h3>
+
+<input class="slider" type="range">
+
+
+<h3>CROSS FADER</h3>
+
+<input class="slider" type="range">
+
+
+</section>
 
 
 
-<!-- DECK A -->
-
-<section class="deck">
-
-<h2>DECK A</h2>
 
 
-<div class="screen" id="trackA">
-NO TRACK
+<section id="effects" class="panel hidden">
+
+
+<h2>RCF EFFECTS RACK</h2>
+
+
+<h3>HALL REVERB</h3>
+
+<label>PRE DELAY</label>
+<input class="slider" type="range">
+
+
+<label>DECAY</label>
+<input class="slider" type="range">
+
+
+<label>DAMPING</label>
+<input class="slider" type="range">
+
+
+<button>
+ON
+</button>
+
+
+
+<h3>DIGITAL DELAY</h3>
+
+<label>TIME</label>
+<input class="slider" type="range">
+
+
+<label>FEEDBACK</label>
+<input class="slider" type="range">
+
+
+<label>WIDTH</label>
+<input class="slider" type="range">
+
+
+<button>
+ON
+</button>
+
+
+
+</section>
+
+  <section id="outputs" class="panel hidden">
+
+<h2>MASTER OUTPUT</h2>
+
+<label>MASTER VOLUME</label>
+
+<input class="slider" type="range">
+
+
+<div class="master-meter">
+
+<div class="level"></div>
+
 </div>
 
-
-<input type="file" accept="audio/*" onchange="loadTrack('A',this)">
-
+</section>
 
 
-<div class="transport">
 
-<button onclick="playTrack('A')">▶</button>
-<button onclick="pauseTrack('A')">⏸</button>
-<button onclick="stopTrack('A')">■</button>
+
+
+<section id="phones" class="panel hidden">
+
+<h2>PHONES</h2>
+
+
+<label>HEADPHONE VOLUME</label>
+
+<input class="slider" type="range">
+
+
+<button>
+CUE
+</button>
+
+
+</section>
+
+
+
+
+
+<section id="playrec" class="panel hidden">
+
+<h2>PLAY / RECORD</h2>
+
+
+<button>
+START RECORDING
+</button>
+
+
+<button>
+STOP RECORDING
+</button>
+
+
+</section>
+
+
+
+
+
+<section id="meters" class="panel hidden">
+
+<h2>METERS</h2>
+
+
+<div class="meter">
+
+<div class="level"></div>
 
 </div>
-
-
-
-<div class="display-box">
-
-BPM
-
-<strong id="bpmA">
-128
-</strong>
-
-</div>
-
-
-
-<label>KEY</label>
-
-<input type="range" min="-12" max="12">
-
-
-
-<label>PITCH</label>
-
-<input type="range" min="-8" max="8">
-
-
-
-<label>CHANNEL VOLUME</label>
-
-<input type="range"
-min="0"
-max="100"
-value="80"
-oninput="setVolume('A',this.value)">
-
 
 
 <div class="meter">
@@ -111,32 +228,163 @@ oninput="setVolume('A',this.value)">
 
 
 
-<!-- CENTER MIXER -->
+<section id="loadsave" class="panel hidden">
+
+<h2>LOAD / SAVE</h2>
+
+
+<button>
+LOAD SETUP
+</button>
+
+
+<button>
+SAVE SETUP
+</button>
+
+
+</section>
+
+
+
+
+
+<section id="settings" class="panel hidden">
+
+<h2>SETTINGS</h2>
+
+
+<label>
+MASTER MODE
+</label>
+
+
+<select>
+
+<option>DJ MODE</option>
+
+<option>LIVE MODE</option>
+
+<option>STUDIO MODE</option>
+
+</select>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- DECK AREA -->
+
+
+<main class="console">
+
+
+
+<section class="deck">
+
+
+<h2>DECK A</h2>
+
+
+<div class="screen" id="trackA">
+
+NO TRACK
+
+</div>
+
+
+<input 
+type="file"
+accept="audio/*"
+onchange="loadTrack('A',this)">
+
+
+
+<button onclick="playTrack('A')">
+▶
+</button>
+
+
+<button onclick="pauseTrack('A')">
+⏸
+</button>
+
+
+<button onclick="stopTrack('A')">
+■
+</button>
+
+
+
+<h3>BPM</h3>
+
+<div>
+128
+</div>
+
+
+
+<h3>KEY</h3>
+
+<input 
+type="range"
+min="-12"
+max="12">
+
+
+
+<h3>PITCH</h3>
+
+<input 
+type="range"
+min="-8"
+max="8">
+
+
+
+<h3>VOLUME</h3>
+
+<input
+class="slider"
+type="range"
+min="0"
+max="100"
+value="80"
+oninput="setVolume('A',this.value)">
+
+
+
+</section>
+
+
+
+
 
 <section class="mixer">
+
 
 <h2>MIXER</h2>
 
 
 <h3>GAIN</h3>
-<input type="range">
+<input class="slider" type="range">
 
 
 <h3>LOW</h3>
-<input type="range">
+<input class="slider" type="range">
 
 
 <h3>MID</h3>
-<input type="range">
+<input class="slider" type="range">
 
 
 <h3>HIGH</h3>
-<input type="range">
-
-
-<h3>CROSS FADER</h3>
-
-<input type="range">
+<input class="slider" type="range">
 
 
 <button onclick="sync()">
@@ -145,7 +393,7 @@ SYNC
 
 
 </section>
-  <!-- DECK B -->
+<!-- DECK B -->
 
 
 <section class="deck">
@@ -161,48 +409,61 @@ NO TRACK
 </div>
 
 
-
-<input type="file" accept="audio/*" onchange="loadTrack('B',this)">
-
-
-
-<div class="transport">
-
-<button onclick="playTrack('B')">▶</button>
-<button onclick="pauseTrack('B')">⏸</button>
-<button onclick="stopTrack('B')">■</button>
-
-</div>
+<input 
+type="file"
+accept="audio/*"
+onchange="loadTrack('B',this)">
 
 
 
-<div class="display-box">
+<button onclick="playTrack('B')">
+▶
+</button>
 
-BPM
 
-<strong id="bpmB">
+<button onclick="pauseTrack('B')">
+⏸
+</button>
+
+
+<button onclick="stopTrack('B')">
+■
+</button>
+
+
+
+<h3>BPM</h3>
+
+<div>
 128
-</strong>
-
 </div>
 
 
 
-<label>KEY</label>
+<h3>KEY</h3>
 
-<input type="range" min="-12" max="12">
-
-
-
-<label>PITCH</label>
-
-<input type="range" min="-8" max="8">
+<input 
+type="range"
+min="-12"
+max="12">
 
 
 
-<label>CHANNEL VOLUME</label>
+<h3>PITCH</h3>
 
-<input type="range"
+<input 
+type="range"
+min="-8"
+max="8">
+
+
+
+<h3>VOLUME</h3>
+
+
+<input
+class="slider"
+type="range"
 min="0"
 max="100"
 value="80"
@@ -210,145 +471,18 @@ oninput="setVolume('B',this.value)">
 
 
 
-<div class="meter">
-
-<div class="level"></div>
-
-</div>
-
-
-
 </section>
 
 
 
+</main>
 
 
 
 
-<!-- EFFECTS RACK -->
 
 
-<section class="effects">
-
-
-<h2>EFFECTS RACK</h2>
-
-
-
-<div class="effect-module">
-
-<h3>HALL REVERB</h3>
-
-
-<label>PRE DELAY</label>
-<input type="range">
-
-
-<label>DECAY</label>
-<input type="range">
-
-
-<label>SPACE</label>
-<input type="range">
-
-
-<button>ON</button>
-
-
-</div>
-
-
-
-
-
-<div class="effect-module">
-
-
-<h3>DIGITAL DELAY</h3>
-
-
-<label>TIME</label>
-<input type="range">
-
-
-<label>FEEDBACK</label>
-<input type="range">
-
-
-<label>FILTER</label>
-<input type="range">
-
-
-<button>ON</button>
-
-
-</div>
-
-
-
-
-
-<div class="effect-module">
-
-
-<h3>VALVE WARMER</h3>
-
-
-<label>DRIVE</label>
-<input type="range">
-
-
-<button>ON</button>
-
-
-</div>
-
-
-
-
-
-<div class="effect-module">
-
-
-<h3>XCITER</h3>
-
-
-<label>PROCESS</label>
-<input type="range">
-
-
-<button>ON</button>
-
-
-</div>
-
-
-
-
-
-<div class="effect-module">
-
-
-<h3>MAXIMIZER</h3>
-
-
-<label>BOOST</label>
-<input type="range">
-
-
-<label>CEILING</label>
-<input type="range">
-
-
-<button>ON</button>
-
-
-</div>
-
-
-  </section>
-  <!-- GRAPHIC EQUALIZER -->
+<!-- GRAPHIC EQ -->
 
 
 <section class="equalizer">
@@ -360,76 +494,47 @@ oninput="setVolume('B',this.value)">
 <div class="eq-container">
 
 
+<script>
+
+let eq=[
+"20",
+"31",
+"63",
+"125",
+"250",
+"500",
+"1K",
+"2K",
+"4K",
+"8K",
+"16K",
+"20K"
+];
+
+
+eq.forEach(function(x){
+
+document.write(
+
+`
 <div class="eq-band">
-<label>20</label>
-<input type="range" min="-12" max="12">
+
+<label>${x}</label>
+
+<input 
+type="range"
+min="-12"
+max="12">
+
 </div>
+`
+
+);
+
+});
 
 
-<div class="eq-band">
-<label>31</label>
-<input type="range" min="-12" max="12">
-</div>
-
-
-<div class="eq-band">
-<label>63</label>
-<input type="range" min="-12" max="12">
-</div>
-
-
-<div class="eq-band">
-<label>125</label>
-<input type="range" min="-12" max="12">
-</div>
-
-
-<div class="eq-band">
-<label>250</label>
-<input type="range" min="-12" max="12">
-</div>
-
-
-<div class="eq-band">
-<label>500</label>
-<input type="range" min="-12" max="12">
-</div>
-
-
-<div class="eq-band">
-<label>1k</label>
-<input type="range" min="-12" max="12">
-</div>
-
-
-<div class="eq-band">
-<label>2k</label>
-<input type="range" min="-12" max="12">
-</div>
-
-
-<div class="eq-band">
-<label>4k</label>
-<input type="range" min="-12" max="12">
-</div>
-
-
-<div class="eq-band">
-<label>8k</label>
-<input type="range" min="-12" max="12">
-</div>
-
-
-<div class="eq-band">
-<label>16k</label>
-<input type="range" min="-12" max="12">
-</div>
-
-
-<div class="eq-band">
-<label>20k</label>
-<input type="range" min="-12" max="12">
-</div>
+</script>
 
 
 
@@ -444,35 +549,54 @@ oninput="setVolume('B',this.value)">
 
 
 
-<!-- MASTER OUTPUT -->
+<!-- EFFECT PROCESSORS -->
 
 
-<section class="master">
+<section class="effects">
 
 
-<h2>MASTER OUTPUT</h2>
+<h2>PROCESSORS</h2>
 
 
-<div class="master-meter">
+<div class="processor">
 
-<div class="level"></div>
-
-</div>
-
-
-
-<label>MASTER VOLUME</label>
+<h3>VALVE WARMER</h3>
 
 <input type="range">
 
+<button>ON</button>
+
+</div>
+
+
+
+<div class="processor">
+
+<h3>XCITER</h3>
+
+<input type="range">
+
+<button>ON</button>
+
+</div>
+
+
+
+<div class="processor">
+
+<h3>MAXIMIZER</h3>
+
+<input type="range">
+
+<button>ON</button>
+
+</div>
+
 
 
 </section>
 
 
-
-
-</main>
 
 
 
@@ -482,4 +606,5 @@ oninput="setVolume('B',this.value)">
 
 </body>
 
-</html>
+
+  </html>
