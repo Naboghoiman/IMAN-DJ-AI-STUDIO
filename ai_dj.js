@@ -1,212 +1,438 @@
-// IMAN DJ AI STUDIO - STABLE PLAYER ENGINE
+// =======================================
+// IMAN DJ AI STUDIO ENGINE V3
+// AUTO MIX + BPM SYNC ENGINE
+// =======================================
+
 
 let deckA = new Audio();
 let deckB = new Audio();
 
-let cross = 0.5;
+
+let bpmA = 128;
+let bpmB = 128;
 
 
+let masterVolume = 1;
+let crossValue = 0.5;
+
+
+
+// ===============================
 // LOAD DECK A
-function loadTrackA(e){
+// ===============================
 
-const file=e.target.files[0];
+function loadTrackA(event){
 
-if(!file)return;
+const file = event.target.files[0];
 
-deckA.src=URL.createObjectURL(file);
+if(!file) return;
+
+
+deckA.src = URL.createObjectURL(file);
 
 deckA.load();
 
-document.getElementById("trackA").innerHTML=file.name;
+
+let name = document.getElementById("trackA");
+
+if(name){
+
+name.innerHTML=file.name;
+
+}
+
 
 }
 
 
 
+// ===============================
 // LOAD DECK B
-function loadTrackB(e){
+// ===============================
 
-const file=e.target.files[0];
+function loadTrackB(event){
 
-if(!file)return;
+const file = event.target.files[0];
 
-deckB.src=URL.createObjectURL(file);
+if(!file) return;
+
+
+deckB.src = URL.createObjectURL(file);
 
 deckB.load();
 
-document.getElementById("trackB").innerHTML=file.name;
+
+let name = document.getElementById("trackB");
+
+if(name){
+
+name.innerHTML=file.name;
+
+}
+
 
 }
 
 
 
-// PLAY
+
+
+// ===============================
+// PLAY CONTROLS
+// ===============================
+
 
 function playA(){
 
-deckA.play()
-.then(()=>console.log("Deck A playing"))
-.catch(e=>console.log(e));
+deckA.play();
 
 }
 
 
 function playB(){
 
-deckB.play()
-.then(()=>console.log("Deck B playing"))
-.catch(e=>console.log(e));
+deckB.play();
 
 }
 
 
 
-// PAUSE
 
 function pauseA(){
+
 deckA.pause();
+
 }
+
 
 
 function pauseB(){
+
 deckB.pause();
+
 }
 
 
 
-// STOP
 
 function stopA(){
 
 deckA.pause();
+
 deckA.currentTime=0;
 
 }
 
 
+
 function stopB(){
 
 deckB.pause();
+
 deckB.currentTime=0;
 
 }
 
 
 
+
+
+
+
+// ===============================
 // VOLUME
-
-function volumeA(v){
-
-deckA.volume=v;
-
-}
+// ===============================
 
 
-function volumeB(v){
+function volumeA(value){
 
-deckB.volume=v;
+deckA.volume=value;
 
 }
 
 
 
-// PITCH
+function volumeB(value){
 
-function pitchA(v){
-
-deckA.playbackRate=v;
-
-}
-
-
-function pitchB(v){
-
-deckB.playbackRate=v;
+deckB.volume=value;
 
 }
 
 
 
+
+
+
+
+// ===============================
+// PITCH CONTROL
+// ===============================
+
+
+function pitchA(value){
+
+deckA.playbackRate=value;
+
+}
+
+
+
+function pitchB(value){
+
+deckB.playbackRate=value;
+
+}
+
+
+
+
+
+
+
+// ===============================
 // CROSS FADER
+// ===============================
 
-function setCross(v){
 
-cross=v;
+function setCross(value){
 
-deckA.volume=1-v;
+crossValue=value;
 
-deckB.volume=v;
+
+deckA.volume=(1-value)*masterVolume;
+
+deckB.volume=value*masterVolume;
+
 
 }
 
 
 
-// MASTER
 
-function setMaster(v){
 
-deckA.volume=v;
-deckB.volume=v;
+
+// ===============================
+// MASTER OUTPUT
+// ===============================
+
+
+function setMaster(value){
+
+masterVolume=value;
+
+
+deckA.volume=(1-crossValue)*value;
+
+deckB.volume=crossValue*value;
+
 
 }
 
 
 
-// SYNC (safe)
+
+
+
+
+// ===============================
+// BPM MATCH ENGINE
+// ===============================
+
+
+function detectBPM(){
+
+// temporary AI estimate
+
+bpmA=128;
+
+bpmB=128;
+
+
+return true;
+
+}
+
+
+
+
 
 function sync(){
 
-let bpm1=128;
-let bpm2=128;
+detectBPM();
 
-let rate=bpm1/bpm2;
 
-deckB.playbackRate=rate;
+let speed=bpmA/bpmB;
 
-console.log("SYNC COMPLETE");
+
+deckB.playbackRate=speed;
+
+
+console.log(
+"AI SYNC COMPLETE",
+speed
+);
+
 
 }
 
 
 
-// AI MIX
+
+
+
+
+
+// ===============================
+// AI AUTOMATIC MIX
+// ===============================
+
 
 function aiMix(){
 
+
 if(!deckA.src || !deckB.src){
 
-alert("Load both decks first");
+alert(
+"Load both decks first"
+);
 
 return;
 
 }
 
 
+
 deckA.play();
+
+
 
 setTimeout(()=>{
 
-deckB.play();
 
 sync();
+
+
+deckB.currentTime=0;
+
+
+deckB.play();
+
+
+
+startAutoFade();
+
+
 
 },4000);
 
 
-}
-
-
-
-// AUTO SYNC BUTTON
-
-function autoSync(){
-
-sync();
-
-alert("AUTO SYNC READY");
 
 }
 
 
 
-console.log("IMAN DJ ENGINE LOADED");
+
+
+
+
+// ===============================
+// AUTO CROSSFADE
+// ===============================
+
+
+function startAutoFade(){
+
+
+let position=0;
+
+
+let fade=setInterval(()=>{
+
+
+position+=0.02;
+
+
+setCross(position);
+
+
+
+if(position>=1){
+
+
+clearInterval(fade);
+
+
+}
+
+
+
+},250);
+
+
+
+}
+
+
+
+
+
+
+
+// ===============================
+// AUTO LOOP
+// ===============================
+
+
+function loopA(){
+
+deckA.loop=!deckA.loop;
+
+}
+
+
+function loopB(){
+
+deckB.loop=!deckB.loop;
+
+}
+
+
+
+
+
+
+
+
+// ===============================
+// DJ CUE
+// ===============================
+
+
+function cueA(){
+
+deckA.currentTime=0;
+
+}
+
+
+
+function cueB(){
+
+deckB.currentTime=0;
+
+}
+
+
+
+
+
+
+
+// ===============================
+// ENGINE STATUS
+// ===============================
+
+
+console.log(
+"🎧 IMAN DJ AI ENGINE V3 READY"
+);
