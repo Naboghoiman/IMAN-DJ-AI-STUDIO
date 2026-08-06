@@ -2,9 +2,9 @@
 <html>
 <head>
 
-<title>IMAN DJ AI STUDIO</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IMAN DJ AI STUDIO</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -39,26 +39,33 @@
 
 
 
-<section class="panel">
+<div class="container">
+
+
+
+<section class="rack">
+
 
 <h2>DUAL DECK SYSTEM</h2>
+
 
 
 <div class="decks">
 
 
-<!-- DECK A -->
 
 <div class="deck">
 
+
 <h2>DECK A</h2>
 
-<div class="jog">
+
+<div class="platter">
 A
 </div>
 
 
-<div class="wave">
+<div class="waveform">
 WAVEFORM A
 </div>
 
@@ -68,13 +75,11 @@ NO TRACK
 </h3>
 
 
-<input 
-type="file"
-accept="audio/*"
-onchange="loadA(this.files[0])">
+<input type="file" id="fileA" accept="audio/*">
 
 
-<div class="buttons">
+<br><br>
+
 
 <button onclick="playA()">▶</button>
 
@@ -82,51 +87,46 @@ onchange="loadA(this.files[0])">
 
 <button onclick="stopA()">■</button>
 
-</div>
 
 
-<h3>
-BPM: <span id="bpmA">128</span>
-</h3>
+<h3>BPM:128</h3>
+
 
 
 <label>PITCH</label>
 
-<input 
-type="range"
-min="0.5"
-max="2"
-step="0.01"
-value="1"
-oninput="pitchA(this.value)">
+<input type="range" min="-10" max="10">
 
 
 
 <label>VOLUME</label>
 
-<input 
-type="range"
-min="0"
-max="1"
-step="0.01"
-value="1"
-oninput="volumeA(this.value)">
+<input type="range" min="0" max="100">
 
 
 
-</div><!-- DECK B -->
+<audio id="audioA"></audio>
+
+
+</div>
+
+
+
+
 
 <div class="deck">
+
 
 <h2>DECK B</h2>
 
 
-<div class="jog">
+<div class="platter">
 B
 </div>
 
 
-<div class="wave">
+
+<div class="waveform">
 WAVEFORM B
 </div>
 
@@ -136,13 +136,11 @@ NO TRACK
 </h3>
 
 
-<input 
-type="file"
-accept="audio/*"
-onchange="loadB(this.files[0])">
+<input type="file" id="fileB" accept="audio/*">
 
 
-<div class="buttons">
+<br><br>
+
 
 <button onclick="playB()">▶</button>
 
@@ -150,196 +148,32 @@ onchange="loadB(this.files[0])">
 
 <button onclick="stopB()">■</button>
 
-</div>
 
 
-<h3>
-BPM: <span id="bpmB">128</span>
-</h3>
+<h3>BPM:128</h3>
+
 
 
 <label>PITCH</label>
 
-<input 
-type="range"
-min="0.5"
-max="2"
-step="0.01"
-value="1"
-oninput="pitchB(this.value)">
+<input type="range" min="-10" max="10">
 
 
 
 <label>VOLUME</label>
 
-<input 
-type="range"
-min="0"
-max="1"
-step="0.01"
-value="1"
-oninput="volumeB(this.value)">
+<input type="range" min="0" max="100">
 
+
+
+<audio id="audioB"></audio>
 
 
 </div>
 
 
-</div>
-
-</section>
-
-
-
-<!-- MIXER -->
-
-<section class="panel">
-
-<h2>MIXER</h2>
-
-
-<label>
-CROSS FADER
-</label>
-
-
-<input 
-type="range"
-min="0"
-max="1"
-step="0.01">
-
-
-
-<label>
-MASTER
-</label>
-
-
-<input 
-type="range"
-min="0"
-max="1"
-step="0.01"
-value="1">
-
-
-</section>
-
-
-
-<!-- EFFECTS -->
-
-<section class="panel">
-
-<h2>RCF EFFECTS RACK</h2>
-
-
-<div class="effect">
-
-<h3>HALL REVERB</h3>
-
-<input type="range">
-
-<button onclick="toggleReverb()">
-POWER
-</button>
-
-</div>
-
-
-<div class="effect">
-
-<h3>DIGITAL DELAY</h3>
-
-<input type="range">
-
-<button onclick="toggleDelay()">
-POWER
-</button>
-
-</div>
-
-
-<div class="effect">
-
-<h3>FILTER</h3>
-
-<input type="range">
-
-<button onclick="toggleFilter()">
-POWER
-</button>
 
 </div>
 
 
 </section>
-  <!-- 31 BAND GRAPHIC EQ -->
-
-<section class="panel">
-
-
-<h2>
-31 BAND GRAPHIC EQ
-</h2>
-
-
-<div class="eq">
-
-
-<input type="range" min="-12" max="12" value="0">
-<input type="range" min="-12" max="12" value="0">
-<input type="range" min="-12" max="12" value="0">
-<input type="range" min="-12" max="12" value="0">
-<input type="range" min="-12" max="12" value="0">
-<input type="range" min="-12" max="12" value="0">
-<input type="range" min="-12" max="12" value="0">
-<input type="range" min="-12" max="12" value="0">
-<input type="range" min="-12" max="12" value="0">
-<input type="range" min="-12" max="12" value="0">
-
-<input type="range" min="-12" max="12" value="0">
-<input type="range" min="-12" max="12" value="0">
-<input type="range" min="-12" max="12" value="0">
-<input type="range" min="-12" max="12" value="0">
-<input type="range" min="-12" max="12" value="0">
-
-</div>
-
-
-</section>
-
-
-
-
-
-<!-- MASTER OUTPUT -->
-
-
-<section class="panel">
-
-
-<h2>
-MASTER OUTPUT
-</h2>
-
-
-<div class="master-meter">
-
-</div>
-
-
-</section>
-
-
-
-
-
-<script src="app.js"></script>
-
-
-</body>
-
-  </html>
-  
