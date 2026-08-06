@@ -1,110 +1,97 @@
-// ======================================
+// =====================================
 // IMAN DJ AI STUDIO
 // RCF AUDIO ENGINE
-// ======================================
+// =====================================
 
 
-const ctx = new AudioContext();
+let deckA = document.getElementById("audioA");
+let deckB = document.getElementById("audioB");
 
 
-let deckA = new Audio();
-let deckB = new Audio();
+let ctx = new AudioContext();
 
 
 let sourceA;
 let sourceB;
 
 
-let masterGain = ctx.createGain();
+let masterA;
+let masterB;
 
 
-// EFFECTS
-
-let reverb = ctx.createConvolver();
-
-let delay = ctx.createDelay();
-
-let filter = ctx.createBiquadFilter();
+let filterA;
+let filterB;
 
 
-
-// EQ
-
-let eqBands=[];
+let delayA;
+let delayB;
 
 
-
-// MASTER
-
-masterGain.connect(ctx.destination);
+let reverbA;
+let reverbB;
 
 
 
+// CREATE AUDIO CHAIN
 
-// CREATE EQ BANDS
-
-for(let i=0;i<31;i++){
-
-let eq = ctx.createBiquadFilter();
-
-eq.type="peaking";
-
-eq.frequency.value =
-20 + (i*250);
-
-eq.gain.value=0;
-
-eq.Q.value=1;
-
-
-eqBands.push(eq);
-
-}
-
-
-
-
-// CONNECT AUDIO
-
-
-function connectDeck(audio,type){
+function setupDeck(audio,type){
 
 
 let source =
 ctx.createMediaElementSource(audio);
 
 
-
-let chain = source;
-
-
-
-eqBands.forEach(eq=>{
-
-chain.connect(eq);
-
-chain=eq;
-
-});
+let gain =
+ctx.createGain();
 
 
+let filter =
+ctx.createBiquadFilter();
 
-chain.connect(filter);
 
-chain.connect(delay);
+let delay =
+ctx.createDelay();
 
-chain.connect(reverb);
 
-chain.connect(masterGain);
+filter.type="lowpass";
+
+filter.frequency.value=20000;
+
+
+delay.delayTime.value=0.25;
+
+
+source
+.connect(filter)
+.connect(delay)
+.connect(gain)
+.connect(ctx.destination);
 
 
 
 if(type==="A"){
+
 sourceA=source;
+
+masterA=gain;
+
+filterA=filter;
+
+delayA=delay;
+
 }
+
 
 else{
+
 sourceB=source;
+
+masterB=gain;
+
+filterB=filter;
+
+delayB=delay;
+
 }
 
 
@@ -113,27 +100,27 @@ sourceB=source;
 
 
 
+// LOAD MUSIC
 
 
-// LOAD A
+document
+.getElementById("fileA")
+.onchange=function(e){
 
 
-function loadA(file){
-
-
-if(!file)return;
-
+let file=e.target.files[0];
 
 deckA.src=
 URL.createObjectURL(file);
 
 
+document.getElementById("trackA")
+.innerHTML=file.name;
+
+
 if(!sourceA)
-connectDeck(deckA,"A");
 
-
-document.getElementById("trackA").innerHTML=
-file.name;
+setupDeck(deckA,"A");
 
 
 }
@@ -141,27 +128,24 @@ file.name;
 
 
 
-
-// LOAD B
-
-
-function loadB(file){
+document
+.getElementById("fileB")
+.onchange=function(e){
 
 
-if(!file)return;
-
+let file=e.target.files[0];
 
 deckB.src=
 URL.createObjectURL(file);
 
 
+document.getElementById("trackB")
+.innerHTML=file.name;
+
 
 if(!sourceB)
-connectDeck(deckB,"B");
 
-
-document.getElementById("trackB").innerHTML=
-file.name;
+setupDeck(deckB,"B");
 
 
 }
@@ -172,7 +156,7 @@ file.name;
 
 
 
-// CONTROLS
+// PLAY
 
 
 function playA(){
@@ -194,6 +178,10 @@ deckB.play();
 
 
 
+
+// PAUSE
+
+
 function pauseA(){
 
 deckA.pause();
@@ -209,6 +197,11 @@ deckB.pause();
 
 
 
+
+
+// STOP
+
+
 function stopA(){
 
 deckA.pause();
@@ -216,7 +209,6 @@ deckA.pause();
 deckA.currentTime=0;
 
 }
-
 
 
 function stopB(){
@@ -230,81 +222,38 @@ deckB.currentTime=0;
 
 
 
-// VOLUME
-
-
-function volumeA(v){
-
-deckA.volume=v;
-
-}
 
 
 
-function volumeB(v){
+// EFFECTS
 
-deckB.volume=v;
+
+function hallReverb(value){
+
+if(reverbA)
+
+reverbA.value=value;
 
 }
 
 
 
+function digitalDelay(value){
 
+if(delayA)
 
-// PITCH
-
-
-function pitchA(v){
-
-deckA.playbackRate=v;
-
-}
-
-
-
-function pitchB(v){
-
-deckB.playbackRate=v;
+delayA.delayTime.value=value;
 
 }
 
 
 
 
+function filterControl(value){
 
+if(filterA)
 
-// EFFECT BUTTONS
-
-
-function toggleReverb(){
-
-reverb.normalize=true;
-
-alert("HALL REVERB ON");
-
-}
-
-
-
-
-function toggleDelay(){
-
-delay.delayTime.value=0.35;
-
-alert("DIGITAL DELAY ON");
-
-}
-
-
-
-
-function toggleFilter(){
-
-filter.type="lowpass";
-
-filter.frequency.value=1000;
-
-alert("FILTER ON");
+filterA.frequency.value=value;
 
 }
 
@@ -312,31 +261,28 @@ alert("FILTER ON");
 
 
 
-// EQ SLIDERS
 
 
-document.querySelectorAll(".eq input")
-.forEach((slider,index)=>{
+// MASTER VOLUME
 
 
-slider.oninput=function(){
+function masterVolume(value){
+
+if(masterA)
+
+masterA.gain.value=value;
 
 
-if(eqBands[index]){
+if(masterB)
 
-eqBands[index].gain.value=
-this.value;
-
-}
-
+masterB.gain.value=value;
 
 }
 
 
-});
 
 
 
 console.log(
-"RCF AUDIO ENGINE READY"
+"RCF AUDIO SYSTEM READY"
 );
